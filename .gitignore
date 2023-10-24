@@ -1,0 +1,37 @@
+/.bundle/
+/.yardoc
+/.ruby-version
+/.python-version
+/Gemfile.lock
+/gems
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/spec/test/
+/spec/openstudio/core/output/*
+/tmp/
+/test/
+/lib/measures/test_results
+/lib/measures/.rubocop*
+/lib/measures/staged
+/lib/measures/staged/*
+.DS_Store
+
+# rspec failure tracking
+.rspec_status
+
+# Ignore IDE files
+/.idea
+*.rubocop-http*
+
+# measures tests
+lib/measures/.rubocop.yml
+lib/measures/test_results/*
+
+# runner conf
+runner.conf
+
+# Sizing run made as part of spec that tests typical_building_from_model method
+SR1
