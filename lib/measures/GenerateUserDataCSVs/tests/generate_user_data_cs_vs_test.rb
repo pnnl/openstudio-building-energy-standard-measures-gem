@@ -7,11 +7,6 @@ require_relative '../measure.rb'
 require 'fileutils'
 
 class GenerateUDCSVsTest < Minitest::Test
-  # def setup
-  # end
-
-  # def teardown
-  # end
 
   def test_number_of_arguments_and_argument_names
     # create an instance of the measure
