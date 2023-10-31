@@ -8,7 +8,7 @@
   <xml_checksum>588DE44B</xml_checksum>
   <class_name>GenerateUserDataCSVs</class_name>
   <display_name>Generate User Data CSVs</display_name>
-  <description>Measure to generate user data from a user model and save the CSVs to a given path. This measure generates one user data CSV based on selection or a full set of user data CSV's if unselected.</description>
+  <description>Measure to generate unpopulated CSV's for user data from a user model and save the CSVs to a given path. This measure generates one user data CSV based on selection or a full set of user data CSV's if unselected.</description>
   <modeler_description></modeler_description>
   <arguments>
     <argument>
