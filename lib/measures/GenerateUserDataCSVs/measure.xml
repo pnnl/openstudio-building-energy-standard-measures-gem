@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<measure>
+  <schema_version>3.1</schema_version>
+  <name>generate_user_data_cs_vs</name>
+  <uid>309cfba7-b7c8-4c3c-8ce3-2736f37a52e3</uid>
+  <version_id>21f5e0bb-ee6d-47a8-82c6-d7c345f0d1ac</version_id>
+  <version_modified>2023-10-31T15:59:53Z</version_modified>
+  <xml_checksum>588DE44B</xml_checksum>
+  <class_name>GenerateUserDataCSVs</class_name>
+  <display_name>Generate User Data CSVs</display_name>
+  <description>Measure to generate user data from a user model and save the CSVs to a given path. This measure generates one user data CSV based on selection or a full set of user data CSV's if unselected.</description>
+  <modeler_description></modeler_description>
+  <arguments>
+    <argument>
+      <name>user_data_path_input</name>
+      <display_name>User Data Path:</display_name>
+      <type>String</type>
+      <required>false</required>
+      <model_dependent>false</model_dependent>
+      <default_value>C:/Users/slan572/OpenStudio/Measures/generate_user_data_cs_vs</default_value>
+    </argument>
+    <argument>
+      <name>csv_choices</name>
+      <display_name>csv_choices</display_name>
+      <type>Choice</type>
+      <required>false</required>
+      <model_dependent>false</model_dependent>
+      <choices>
+        <choice>
+          <value>userdata_airloop_hvac</value>
+          <display_name>userdata_airloop_hvac</display_name>
+        </choice>
+        <choice>
+          <value>userdata_airloop_hvac_doas</value>
+          <display_name>userdata_airloop_hvac_doas</display_name>
+        </choice>
+        <choice>
+          <value>userdata_building</value>
+          <display_name>userdata_building</display_name>
+        </choice>
+        <choice>
+          <value>userdata_design_specification_outdoor_air</value>
+          <display_name>userdata_design_specification_outdoor_air</display_name>
+        </choice>
+        <choice>
+          <value>userdata_electric_equipment</value>
+          <display_name>userdata_electric_equipment</display_name>
+        </choice>
+        <choice>
+          <value>userdata_exterior_lights</value>
+          <display_name>userdata_exterior_lights</display_name>
+        </choice>
+        <choice>
+          <value>userdata_space</value>
+          <display_name>userdata_space</display_name>
+        </choice>
+        <choice>
+          <value>userdata_spacetype</value>
+          <display_name>userdata_spacetype</display_name>
+        </choice>
+        <choice>
+          <value>userdata_thermal_zone</value>
+          <display_name>userdata_thermal_zone</display_name>
+        </choice>
+      </choices>
+    </argument>
+  </arguments>
+  <outputs />
+  <provenances />
+  <tags>
+    <tag>Reporting.QAQC</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Measure Language</name>
+      <value>Ruby</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>Apply Measure Now</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>OpenStudio Application</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>Parametric Analysis Tool</value>
+      <datatype>string</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <filename>LICENSE.md</filename>
+      <filetype>md</filetype>
+      <usage_type>license</usage_type>
+      <checksum>CD7F5672</checksum>
+    </file>
+    <file>
+      <filename>README.md</filename>
+      <filetype>md</filetype>
+      <usage_type>readme</usage_type>
+      <checksum>D64432DA</checksum>
+    </file>
+    <file>
+      <filename>README.md.erb</filename>
+      <filetype>erb</filetype>
+      <usage_type>readmeerb</usage_type>
+      <checksum>F1C26127</checksum>
+    </file>
+    <file>
+      <filename>.gitkeep</filename>
+      <filetype>gitkeep</filetype>
+      <usage_type>doc</usage_type>
+      <checksum>00000000</checksum>
+    </file>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>3.6.1</identifier>
+        <min_compatible>3.6.1</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>E8CCD54F</checksum>
+    </file>
+    <file>
+      <filename>example_model.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>53D14E69</checksum>
+    </file>
+    <file>
+      <filename>generate_user_data_cs_vs_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>7CD7853E</checksum>
+    </file>
+  </files>
+</measure>
