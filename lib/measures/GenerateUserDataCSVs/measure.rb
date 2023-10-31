@@ -5,18 +5,16 @@
 
 # start the measure
 class GenerateUserDataCSVs < OpenStudio::Measure::ModelMeasure
-  # human readable name
+  require 'openstudio-standards'
+  
   def name
-    # Measure name should be the title case of the class name.
     return 'Generate User Data CSVs'
   end
 
-  # human readable description
   def description
     return "Measure to generate unpopulated CSV's for user data from a user model and save the CSVs to a given path. This measure generates one user data CSV based on selection or a full set of user data CSV's if unselected."
   end
 
-  # human readable description of modeling approach
   def modeler_description
     return ''
   end
