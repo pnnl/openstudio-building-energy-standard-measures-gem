@@ -1,0 +1,9 @@
+---
+building_type_wwr: Office 5,000 to 50,000 sq ft
+building_type_swh: Office
+building_type_hvac: other nonresidential
+climate_zone: ASHRAE 169-2013-4A
+exempt_from_rotations: 'TRUE'
+exempt_from_unmet_load_hours_check: 'TRUE'
+user_data: 'FALSE'
+user_data_path: User_Data_Path

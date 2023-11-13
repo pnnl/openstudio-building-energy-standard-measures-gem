@@ -1,0 +1,11 @@
+{
+  "userdata_building": [
+    {
+      "name": "MediumOffice",
+      "building_type_for_hvac": "other nonresidential",
+      "building_type_for_swh": "Office",
+      "building_type_for_wwr": "Office 5,000 to 50,000 sq ft",
+      "is_exempt_from_rotations": "YES"
+    }
+  ]
+}

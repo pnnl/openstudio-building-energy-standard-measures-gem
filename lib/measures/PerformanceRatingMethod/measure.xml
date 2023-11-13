@@ -1,0 +1,836 @@
+<?xml version="1.0"?>
+<measure>
+  <schema_version>3.1</schema_version>
+  <name>create_baseline_building</name>
+  <uid>a984a630-2a41-45fd-80ec-6454777bf253</uid>
+  <version_id>9d4be7d1-e2c2-463c-9cde-8dbbd00b2837</version_id>
+  <version_modified>2023-09-19T20:15:31Z</version_modified>
+  <xml_checksum>057E8D9D</xml_checksum>
+  <class_name>CreateBaselineBuilding</class_name>
+  <display_name>Create ASHRAE 90.1-2019 PRM Model</display_name>
+  <description>Create the &lt;strong&gt;Baseline Building&lt;/strong&gt; per ASHRAE Standard 90.1-2019 Performance Rating Method. User manual for this measure please see &lt;a href='https://pnnl.github.io/BEM-for-PRM/'&gt; https://pnnl.github.io/BEM-for-PRM &lt;/a&gt;.</description>
+  <modeler_description></modeler_description>
+  <arguments>
+    <argument>
+      <name>building_type_wwr</name>
+      <display_name>Default Building Area Type for Window To Wall Ratio:</display_name>
+      <description>Select default building type for WWR assignment based on 90.1 Appendix G table G3.1.1-1.</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>Grocery store</default_value>
+      <choices>
+        <choice>
+          <value>Grocery store</value>
+          <display_name>Grocery store</display_name>
+        </choice>
+        <choice>
+          <value>Healthcare (outpatient)</value>
+          <display_name>Healthcare (outpatient)</display_name>
+        </choice>
+        <choice>
+          <value>Hospital</value>
+          <display_name>Hospital</display_name>
+        </choice>
+        <choice>
+          <value>Hotel/motel &lt;= 75 rooms</value>
+          <display_name>Hotel/motel &lt;= 75 rooms</display_name>
+        </choice>
+        <choice>
+          <value>Hotel/motel &gt; 75 rooms</value>
+          <display_name>Hotel/motel &gt; 75 rooms</display_name>
+        </choice>
+        <choice>
+          <value>Office &lt;= 5,000 sq ft</value>
+          <display_name>Office &lt;= 5,000 sq ft</display_name>
+        </choice>
+        <choice>
+          <value>Office 5,000 to 50,000 sq ft</value>
+          <display_name>Office 5,000 to 50,000 sq ft</display_name>
+        </choice>
+        <choice>
+          <value>Office &gt; 50,000 sq ft</value>
+          <display_name>Office &gt; 50,000 sq ft</display_name>
+        </choice>
+        <choice>
+          <value>Restaurant (quick service)</value>
+          <display_name>Restaurant (quick service)</display_name>
+        </choice>
+        <choice>
+          <value>Restaurant (full service)</value>
+          <display_name>Restaurant (full service)</display_name>
+        </choice>
+        <choice>
+          <value>Retail (stand alone)</value>
+          <display_name>Retail (stand alone)</display_name>
+        </choice>
+        <choice>
+          <value>Retail (strip mall)</value>
+          <display_name>Retail (strip mall)</display_name>
+        </choice>
+        <choice>
+          <value>School (primary)</value>
+          <display_name>School (primary)</display_name>
+        </choice>
+        <choice>
+          <value>School (secondary and university)</value>
+          <display_name>School (secondary and university)</display_name>
+        </choice>
+        <choice>
+          <value>Warehouse (nonrefrigerated)</value>
+          <display_name>Warehouse (nonrefrigerated)</display_name>
+        </choice>
+        <choice>
+          <value>All others</value>
+          <display_name>All others</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>building_type_swh</name>
+      <display_name>Default Building Area Type for Service Water Heating:</display_name>
+      <description>Select default building type for SWH system type assignment based on 90.1 Appendix G table G3.1.1-2.</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>Automotive facility</default_value>
+      <choices>
+        <choice>
+          <value>Automotive facility</value>
+          <display_name>Automotive facility</display_name>
+        </choice>
+        <choice>
+          <value>Performing arts theater</value>
+          <display_name>Performing arts theater</display_name>
+        </choice>
+        <choice>
+          <value>Convenience store</value>
+          <display_name>Convenience store</display_name>
+        </choice>
+        <choice>
+          <value>Police station</value>
+          <display_name>Police station</display_name>
+        </choice>
+        <choice>
+          <value>Convention center</value>
+          <display_name>Convention center</display_name>
+        </choice>
+        <choice>
+          <value>Post office</value>
+          <display_name>Post office</display_name>
+        </choice>
+        <choice>
+          <value>Courthouse</value>
+          <display_name>Courthouse</display_name>
+        </choice>
+        <choice>
+          <value>Religious facility</value>
+          <display_name>Religious facility</display_name>
+        </choice>
+        <choice>
+          <value>Dining: Bar lounge/leisure</value>
+          <display_name>Dining: Bar lounge/leisure</display_name>
+        </choice>
+        <choice>
+          <value>Retail</value>
+          <display_name>Retail</display_name>
+        </choice>
+        <choice>
+          <value>Dining: Cafeteria/fast food</value>
+          <display_name>Dining: Cafeteria/fast food</display_name>
+        </choice>
+        <choice>
+          <value>School/university</value>
+          <display_name>School/university</display_name>
+        </choice>
+        <choice>
+          <value>Dining: Family</value>
+          <display_name>Dining: Family</display_name>
+        </choice>
+        <choice>
+          <value>Sports arena</value>
+          <display_name>Sports arena</display_name>
+        </choice>
+        <choice>
+          <value>Dormitory</value>
+          <display_name>Dormitory</display_name>
+        </choice>
+        <choice>
+          <value>Town hall</value>
+          <display_name>Town hall</display_name>
+        </choice>
+        <choice>
+          <value>Exercise center</value>
+          <display_name>Exercise center</display_name>
+        </choice>
+        <choice>
+          <value>Transportation</value>
+          <display_name>Transportation</display_name>
+        </choice>
+        <choice>
+          <value>Fire station</value>
+          <display_name>Fire station</display_name>
+        </choice>
+        <choice>
+          <value>Warehouse</value>
+          <display_name>Warehouse</display_name>
+        </choice>
+        <choice>
+          <value>Grocery store</value>
+          <display_name>Grocery store</display_name>
+        </choice>
+        <choice>
+          <value>Workshop</value>
+          <display_name>Workshop</display_name>
+        </choice>
+        <choice>
+          <value>Gymnasium</value>
+          <display_name>Gymnasium</display_name>
+        </choice>
+        <choice>
+          <value>Health-care clinic</value>
+          <display_name>Health-care clinic</display_name>
+        </choice>
+        <choice>
+          <value>Hospital and outpatient surgery center</value>
+          <display_name>Hospital and outpatient surgery center</display_name>
+        </choice>
+        <choice>
+          <value>Hotel</value>
+          <display_name>Hotel</display_name>
+        </choice>
+        <choice>
+          <value>Library</value>
+          <display_name>Library</display_name>
+        </choice>
+        <choice>
+          <value>Manufacturing facility</value>
+          <display_name>Manufacturing facility</display_name>
+        </choice>
+        <choice>
+          <value>Motel</value>
+          <display_name>Motel</display_name>
+        </choice>
+        <choice>
+          <value>Motion picture theater</value>
+          <display_name>Motion picture theater</display_name>
+        </choice>
+        <choice>
+          <value>Multifamily</value>
+          <display_name>Multifamily</display_name>
+        </choice>
+        <choice>
+          <value>Museum</value>
+          <display_name>Museum</display_name>
+        </choice>
+        <choice>
+          <value>Office</value>
+          <display_name>Office</display_name>
+        </choice>
+        <choice>
+          <value>Parking garage</value>
+          <display_name>Parking garage</display_name>
+        </choice>
+        <choice>
+          <value>Penitentiary</value>
+          <display_name>Penitentiary</display_name>
+        </choice>
+        <choice>
+          <value>All others</value>
+          <display_name>All others</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>building_type_hvac</name>
+      <display_name>Default Building Type for HVAC:</display_name>
+      <description>Select default building type for HVAC system type assignment based on 90.1 Appendix G table G3.1.1-3.</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>retail</default_value>
+      <choices>
+        <choice>
+          <value>retail</value>
+          <display_name>retail</display_name>
+        </choice>
+        <choice>
+          <value>other nonresidential</value>
+          <display_name>other nonresidential</display_name>
+        </choice>
+        <choice>
+          <value>public assembly</value>
+          <display_name>public assembly</display_name>
+        </choice>
+        <choice>
+          <value>residential</value>
+          <display_name>residential</display_name>
+        </choice>
+        <choice>
+          <value>unconditioned</value>
+          <display_name>unconditioned</display_name>
+        </choice>
+        <choice>
+          <value>heated-only storage</value>
+          <display_name>heated-only storage</display_name>
+        </choice>
+        <choice>
+          <value>hospital</value>
+          <display_name>hospital</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>climate_zone</name>
+      <display_name>Climate Zone:</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>ASHRAE 169-2013-1A</default_value>
+      <choices>
+        <choice>
+          <value>ASHRAE 169-2013-1A</value>
+          <display_name>ASHRAE 169-2013-1A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-1B</value>
+          <display_name>ASHRAE 169-2013-1B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-2A</value>
+          <display_name>ASHRAE 169-2013-2A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-2B</value>
+          <display_name>ASHRAE 169-2013-2B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-3A</value>
+          <display_name>ASHRAE 169-2013-3A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-3B</value>
+          <display_name>ASHRAE 169-2013-3B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-3C</value>
+          <display_name>ASHRAE 169-2013-3C</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-4A</value>
+          <display_name>ASHRAE 169-2013-4A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-4B</value>
+          <display_name>ASHRAE 169-2013-4B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-4C</value>
+          <display_name>ASHRAE 169-2013-4C</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-5A</value>
+          <display_name>ASHRAE 169-2013-5A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-5B</value>
+          <display_name>ASHRAE 169-2013-5B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-5C</value>
+          <display_name>ASHRAE 169-2013-5C</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-6A</value>
+          <display_name>ASHRAE 169-2013-6A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-6B</value>
+          <display_name>ASHRAE 169-2013-6B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-7A</value>
+          <display_name>ASHRAE 169-2013-7A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-7B</value>
+          <display_name>ASHRAE 169-2013-7B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-8A</value>
+          <display_name>ASHRAE 169-2013-8A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-8B</value>
+          <display_name>ASHRAE 169-2013-8B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-1A</value>
+          <display_name>ASHRAE 169-2006-1A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-1B</value>
+          <display_name>ASHRAE 169-2006-1B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-2A</value>
+          <display_name>ASHRAE 169-2006-2A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-2B</value>
+          <display_name>ASHRAE 169-2006-2B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-3A</value>
+          <display_name>ASHRAE 169-2006-3A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-3B</value>
+          <display_name>ASHRAE 169-2006-3B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-3C</value>
+          <display_name>ASHRAE 169-2006-3C</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-4A</value>
+          <display_name>ASHRAE 169-2006-4A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-4B</value>
+          <display_name>ASHRAE 169-2006-4B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-4C</value>
+          <display_name>ASHRAE 169-2006-4C</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-5A</value>
+          <display_name>ASHRAE 169-2006-5A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-5B</value>
+          <display_name>ASHRAE 169-2006-5B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-5C</value>
+          <display_name>ASHRAE 169-2006-5C</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-6A</value>
+          <display_name>ASHRAE 169-2006-6A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-6B</value>
+          <display_name>ASHRAE 169-2006-6B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-7A</value>
+          <display_name>ASHRAE 169-2006-7A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-7B</value>
+          <display_name>ASHRAE 169-2006-7B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-8A</value>
+          <display_name>ASHRAE 169-2006-8A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2006-8B</value>
+          <display_name>ASHRAE 169-2006-8B</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>exempt_from_rotations</name>
+      <display_name>Exempt From Rotations:</display_name>
+      <description>Select TRUE if the building has rating authority approval that orientation is dictated by site considerations. Note: user data could override this selection.</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>FALSE</default_value>
+      <choices>
+        <choice>
+          <value>TRUE</value>
+          <display_name>TRUE</display_name>
+        </choice>
+        <choice>
+          <value>FALSE</value>
+          <display_name>FALSE</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>exempt_from_unmet_load_hours_check</name>
+      <display_name>Exempt From Unmet Load Hours Check:</display_name>
+      <description>Select TRUE if rating authority has approved allowing the models to exceed the specified values in Appendix G.</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>FALSE</default_value>
+      <choices>
+        <choice>
+          <value>TRUE</value>
+          <display_name>TRUE</display_name>
+        </choice>
+        <choice>
+          <value>FALSE</value>
+          <display_name>FALSE</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>user_data</name>
+      <display_name>Use User Data</display_name>
+      <description>Project user compliance data.</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>FALSE</default_value>
+      <choices>
+        <choice>
+          <value>TRUE</value>
+          <display_name>TRUE</display_name>
+        </choice>
+        <choice>
+          <value>FALSE</value>
+          <display_name>FALSE</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>user_data_path</name>
+      <display_name>User Data Path:</display_name>
+      <description>Required if select "TRUE" in "Use User Data". Please input a valid file path which contains the user data files.</description>
+      <type>String</type>
+      <required>false</required>
+      <model_dependent>false</model_dependent>
+      <default_value>User_Data_Path</default_value>
+    </argument>
+    <argument>
+      <name>debug</name>
+      <display_name>Generate logs for debug</display_name>
+      <type>Boolean</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>false</default_value>
+      <choices>
+        <choice>
+          <value>true</value>
+          <display_name>true</display_name>
+        </choice>
+        <choice>
+          <value>false</value>
+          <display_name>false</display_name>
+        </choice>
+      </choices>
+    </argument>
+  </arguments>
+  <outputs />
+  <provenances />
+  <tags>
+    <tag>Whole Building.Space Types</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Uses SketchUp API</name>
+      <value>false</value>
+      <datatype>boolean</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>2.0.0</identifier>
+        <min_compatible>2.0.0</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>D6F8520F</checksum>
+    </file>
+    <file>
+      <filename>ASHRAE9012019PRM_Test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>76739BAF</checksum>
+    </file>
+    <file>
+      <filename>source/demo1/USA_NY_New.York-J.F.Kennedy.Intl.AP.744860_TMY3.epw</filename>
+      <filetype>epw</filetype>
+      <usage_type>test</usage_type>
+      <checksum>76DE1CD4</checksum>
+    </file>
+    <file>
+      <filename>source/demo1/geometry_demo_model.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>22B40451</checksum>
+    </file>
+    <file>
+      <filename>source/demo1/user_data/userdata_building.csv</filename>
+      <filetype>csv</filetype>
+      <usage_type>test</usage_type>
+      <checksum>9D1B6D8F</checksum>
+    </file>
+    <file>
+      <filename>source/demo1/user_data/userdata_spacetype.csv</filename>
+      <filetype>csv</filetype>
+      <usage_type>test</usage_type>
+      <checksum>6E97B246</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/USA_NY_New.York-J.F.Kennedy.Intl.AP.744860_TMY3.epw</filename>
+      <filetype>epw</filetype>
+      <usage_type>test</usage_type>
+      <checksum>76DE1CD4</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/geometry_demo_model.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>8AF7CEF8</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_airloop_hvac.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>B14F3F8A</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_airloop_hvac_doas.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>385D0F2E</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_building.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>BBB8C5BD</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_design_specification_outdoor_air.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>5168FBE8</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_electric_equipment.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>261B6CDA</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_exterior_lights.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>D398AF6F</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_gas_equipment.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>20AA6CA5</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_lights.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>B4EF1E55</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_space.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>09880BB9</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_spacetype.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>D571FECA</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_thermal_zone.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>E49A9AC4</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_wateruse_connections.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>26AF3862</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_wateruse_equipment.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>A758C861</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_wateruse_equipment_definition.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>4ED503FC</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_zone_hvac.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>513B3EE8</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/user_data_json/userdata_zone_infiltration.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>F086049F</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/userdata_building.csv</filename>
+      <filetype>csv</filetype>
+      <usage_type>test</usage_type>
+      <checksum>30D20FCD</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/userdata_space.csv</filename>
+      <filetype>csv</filetype>
+      <usage_type>test</usage_type>
+      <checksum>E91CD6FA</checksum>
+    </file>
+    <file>
+      <filename>source/demo2/user_data/userdata_spacetype.csv</filename>
+      <filetype>csv</filetype>
+      <usage_type>test</usage_type>
+      <checksum>6E97B246</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/USA_NY_New.York-J.F.Kennedy.Intl.AP.744860_TMY3.epw</filename>
+      <filetype>epw</filetype>
+      <usage_type>test</usage_type>
+      <checksum>76DE1CD4</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/hvac_demo_model.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>196CC5B1</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_airloop_hvac.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>B14F3F8A</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_airloop_hvac_doas.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>385D0F2E</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_building.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>BBB8C5BD</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_design_specification_outdoor_air.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>5168FBE8</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_electric_equipment.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>261B6CDA</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_exterior_lights.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>D398AF6F</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_gas_equipment.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>20AA6CA5</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_lights.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>B4EF1E55</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_space.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>155D11DD</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_spacetype.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>D571FECA</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_thermal_zone.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>E49A9AC4</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_wateruse_connections.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>26AF3862</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_wateruse_equipment.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>A758C861</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_wateruse_equipment_definition.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>4ED503FC</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_zone_hvac.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>513B3EE8</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/user_data_json/userdata_zone_infiltration.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>F086049F</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/userdata_building.csv</filename>
+      <filetype>csv</filetype>
+      <usage_type>test</usage_type>
+      <checksum>30D20FCD</checksum>
+    </file>
+    <file>
+      <filename>source/demo3/user_data/userdata_spacetype.csv</filename>
+      <filetype>csv</filetype>
+      <usage_type>test</usage_type>
+      <checksum>6E97B246</checksum>
+    </file>
+  </files>
+</measure>
