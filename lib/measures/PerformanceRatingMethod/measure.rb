@@ -378,20 +378,16 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
         end
       end
 
-
-
-
       # puts "After Standard.Build"
       runner.registerInfo("Generating Baseline Model...")
-      # std.model_create_prm_stable_baseline_building(model, climate_zone, building_type_hvac, building_type_wwr, building_type_swh, build_dir, unmet_load_hours_check=unmet_load_hours_check, debug)
       std.model_create_prm_any_baseline_building(model, '', climate_zone, building_type_hvac, building_type_wwr, building_type_swh,
                                                  model_deep_copy=true,
+                                                 create_proposed_model=true,
                                                  custom=false,
                                                  sizing_run_dir=build_dir,
                                                  run_all_orients=run_all_orients,
                                                  unmet_load_hours_check=unmet_load_hours_check,
                                                  debug=debug)
-      # std.model_create_prm_any_baseline_building(model, '', climate_zone, building_type_hvac, building_type_wwr, building_type_swh, true, false, build_dir, run_all_orients, unmet_load_hours_check, false)
     end
     runner.registerInfo("Total Time = #{(Time.new - @start_time).round}sec.")
     log_msgs(true, runner)
