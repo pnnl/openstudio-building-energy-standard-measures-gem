@@ -362,8 +362,8 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
     # Versions of OpenStudio greater than 2.4.0 use a modified version of
     # openstudio-standards with different method calls.
 
-    if OpenStudio::VersionString.new(OpenStudio.openStudioVersion) < OpenStudio::VersionString.new('3.6.0')
-      runner.registerError("PRM method can only run on OpenStudio 3.6.0 or higher.")
+    if OpenStudio::VersionString.new(OpenStudio.openStudioVersion) < OpenStudio::VersionString.new('3.7.0')
+      runner.registerError("PRM method can only run on OpenStudio 3.7.0 or higher.")
       #success = model.create_prm_stable_baseline_building(model, building_type_swh, climate_zone, building_type_hvac, building_type_wwr, building_type_swh, build_dir, run_all_orients, unmet_load_hours_check)
     else
       if evaluation_package == 'FALSE'
