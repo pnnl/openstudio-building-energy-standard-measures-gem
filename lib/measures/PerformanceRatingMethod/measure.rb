@@ -1,5 +1,5 @@
 # require_relative 'resources/config_loader'
-require 'openstudio-standards'
+# require 'openstudio-standards'
 require 'yaml'
 # Start the measure
 class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
@@ -33,6 +33,8 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
       exempt_from_unmet_load_hours_check_default = config_data['exempt_from_unmet_load_hours_check']
       user_data_default = config_data['user_data']
       user_data_path_default = config_data['user_data_path']
+      evaluation_package_default = config_data['evaluation_package']
+      evaluation_package_path_default = config_data['evaluation_package_path']
     else
       building_type_wwr_default = 'Grocery store'
       building_type_swh_default = 'Automotive facility'
@@ -42,6 +44,8 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
       exempt_from_unmet_load_hours_check_default = 'FALSE'
       user_data_default = 'FALSE'
       user_data_path_default = 'User_Data_Path'
+      evaluation_package_default = 'FALSE'
+      evaluation_package_path_default = 'Evaluation_Package_Path'
     end
 
 
@@ -203,13 +207,28 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
     user_data.setDisplayName('Use User Data')
     user_data.setDescription('Project user compliance data.')
     user_data.setDefaultValue(user_data_default)
-
     args << user_data
+
     user_data_path = OpenStudio::Measure::OSArgument::makeStringArgument('user_data_path', false)
     user_data_path.setDisplayName('User Data Path:')
     user_data_path.setDescription('Required if select "TRUE" in "Use User Data". Please input a valid file path which contains the user data files.')
     user_data_path.setDefaultValue(user_data_path_default)
     args << user_data_path
+
+    evaluation_package_chs = OpenStudio::StringVector.new
+    evaluation_package_chs << 'TRUE'
+    evaluation_package_chs << 'FALSE'
+    evaluation_package = OpenStudio::Measure::OSArgument.makeChoiceArgument('evaluation_package', evaluation_package_chs, true)
+    evaluation_package.setDisplayName('Use PRM evaluation package')
+    evaluation_package.setDescription('Set to True the measure will search the local copy of OpenStudio-Standards to perform PRM')
+    evaluation_package.setDefaultValue(evaluation_package_default)
+    args << evaluation_package
+
+    evaluation_package_path = OpenStudio::Measure::OSArgument::makeStringArgument('evaluation_package_path', false)
+    evaluation_package_path.setDisplayName('Evaluation Package Path:')
+    evaluation_package_path.setDescription('Required if select "TRUE" in "Use PRM evaluation package". Please input a valid file path which contains the evaluation package.')
+    evaluation_package_path.setDefaultValue(evaluation_package_path_default)
+    args << evaluation_package_path
 
     # Make an argument for enabling debug messages
     debug = OpenStudio::Measure::OSArgument.makeBoolArgument('debug', true)
@@ -247,6 +266,8 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
     runner.registerInfo("Debug: #{debug}")
     user_data = runner.getStringArgumentValue('user_data', user_arguments)
     user_data_path = runner.getStringArgumentValue('user_data_path', user_arguments)
+    evaluation_package = runner.getStringArgumentValue('evaluation_package', user_arguments)
+    evaluation_package_path = runner.getStringArgumentValue('evaluation_package_path', user_arguments)
 
     data = {'building_type_wwr'=> building_type_wwr,
             'building_type_swh'=> building_type_swh,
@@ -255,7 +276,9 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
             'exempt_from_rotations'=> exempt_from_rotations,
             'exempt_from_unmet_load_hours_check'=> exempt_from_unmet_load_hours_check,
             'user_data'=> user_data,
-            'user_data_path'=> user_data_path}
+            'user_data_path'=> user_data_path,
+            'evaluation_package'=> evaluation_package,
+            'evaluation_package_path'=> evaluation_package_path}
 
     yaml_path = "#{File.dirname(__FILE__)}/../../files"
     yaml_file_name = 'config.yml'
@@ -336,7 +359,6 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
       Dir.mkdir(build_dir)
     end
 
-
     # Versions of OpenStudio greater than 2.4.0 use a modified version of
     # openstudio-standards with different method calls.
 
@@ -344,6 +366,25 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
       runner.registerError("PRM method can only run on OpenStudio 3.6.0 or higher.")
       #success = model.create_prm_stable_baseline_building(model, building_type_swh, climate_zone, building_type_hvac, building_type_wwr, building_type_swh, build_dir, run_all_orients, unmet_load_hours_check)
     else
+      if evaluation_package == 'FALSE'
+        runner.registerInfo("Use openstudio standard release version.")
+        require 'openstudio-standards'
+      else
+        runner.registerInfo("Use openstudio standard local evaluation version.")
+        if !Dir.exist?(evaluation_package_path)
+          runner.registerError("The input evaluation package path #{evaluation_package_path} is not a valid file path! Please provide a valid file path.")
+          return False
+        else
+          full_path = File.join(evaluation_package_path, '/lib/openstudio-standards.rb')
+          if !File.exist?(full_path)
+            runner.registerError("The evaluation package does not contain openstudio-standards.rb, failed to load the package")
+          else
+            runner.registerInfo("Importing the openstudio standards evaluation version from #{full_path}")
+            require full_path
+          end          
+        end
+      end
+
       # puts "Before Standard.build"
       std = Standard.build('90.1-PRM-2019')
       unless unmet_load_hours_check
@@ -368,7 +409,7 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
 
         # if user data path not valid
         if !Dir.exist?(user_data_path)
-          runner.registerError("The input user data path #{user_data_path} is not a valid file path! Please input a valid file path.")
+          runner.registerError("The input user data path #{user_data_path} is not a valid file path! Please provide a valid file path.")
           return false
           # if the user data path is valid
         else
