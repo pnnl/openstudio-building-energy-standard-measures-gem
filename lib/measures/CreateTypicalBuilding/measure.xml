@@ -1,0 +1,878 @@
+<?xml version="1.0"?>
+<measure>
+  <schema_version>3.1</schema_version>
+  <name>create_typical_building</name>
+  <uid>8dea6660-7268-4f1e-817f-02ddf64e64c5</uid>
+  <version_id>2cc41b90-f9c2-4144-8ffc-5039d052775f</version_id>
+  <version_modified>2023-11-29T15:07:46Z</version_modified>
+  <xml_checksum>DE3258BC</xml_checksum>
+  <class_name>CreateTypicalBuilding</class_name>
+  <display_name>Create Typical Building</display_name>
+  <description>The "Create Typical Building" OpenStudio measures empowers users to effortlessly generate OpenStudio and EnergyPlus models by making a few select choices. Users can input preferences such as the building energy code year (e.g., ASHRAE 90.1-2013), climate zone, and desired heating, ventilation, and air conditioning (HVAC) system.</description>
+  <modeler_description>TODO: Add description for professionals</modeler_description>
+  <arguments>
+    <argument>
+      <name>geometry_file</name>
+      <display_name>Geometry File</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <choices>
+        <choice>
+          <value>Existing Geometry</value>
+          <display_name>Existing Geometry</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAESmallOffice.osm</value>
+          <display_name>ASHRAESmallOffice.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAESmallHotel.osm</value>
+          <display_name>ASHRAESmallHotel.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAESecondarySchool.osm</value>
+          <display_name>ASHRAESecondarySchool.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAERetailStripmall.osm</value>
+          <display_name>ASHRAERetailStripmall.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAEQuickServiceRestaurant.osm</value>
+          <display_name>ASHRAEQuickServiceRestaurant.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAEPrimarySchool.osm</value>
+          <display_name>ASHRAEPrimarySchool.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAEOutpatient.osm</value>
+          <display_name>ASHRAEOutpatient.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAEMidriseApartment.osm</value>
+          <display_name>ASHRAEMidriseApartment.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAEMediumOffice.osm</value>
+          <display_name>ASHRAEMediumOffice.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAELargeOffice.osm</value>
+          <display_name>ASHRAELargeOffice.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAELargeHotel.osm</value>
+          <display_name>ASHRAELargeHotel.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAELaboratory.osm</value>
+          <display_name>ASHRAELaboratory.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAEHospital.osm</value>
+          <display_name>ASHRAEHospital.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAEHighriseApartment.osm</value>
+          <display_name>ASHRAEHighriseApartment.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAEFullServiceRestaurant.osm</value>
+          <display_name>ASHRAEFullServiceRestaurant.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAECourthouse.osm</value>
+          <display_name>ASHRAECourthouse.osm</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAECollege.osm</value>
+          <display_name>ASHRAECollege.osm</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>climate_zone</name>
+      <display_name>Climate Zone</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <choices>
+        <choice>
+          <value>ASHRAE 169-2013-1A</value>
+          <display_name>ASHRAE 169-2013-1A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-2A</value>
+          <display_name>ASHRAE 169-2013-2A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-2B</value>
+          <display_name>ASHRAE 169-2013-2B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-3A</value>
+          <display_name>ASHRAE 169-2013-3A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-3B</value>
+          <display_name>ASHRAE 169-2013-3B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-3C</value>
+          <display_name>ASHRAE 169-2013-3C</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-4A</value>
+          <display_name>ASHRAE 169-2013-4A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-4B</value>
+          <display_name>ASHRAE 169-2013-4B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-4C</value>
+          <display_name>ASHRAE 169-2013-4C</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-5A</value>
+          <display_name>ASHRAE 169-2013-5A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-5B</value>
+          <display_name>ASHRAE 169-2013-5B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-6A</value>
+          <display_name>ASHRAE 169-2013-6A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-6B</value>
+          <display_name>ASHRAE 169-2013-6B</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-7A</value>
+          <display_name>ASHRAE 169-2013-7A</display_name>
+        </choice>
+        <choice>
+          <value>ASHRAE 169-2013-8A</value>
+          <display_name>ASHRAE 169-2013-8A</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>template</name>
+      <display_name>Building Energy Code</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <choices>
+        <choice>
+          <value>DOE Ref 1980-2004</value>
+          <display_name>DOE Ref 1980-2004</display_name>
+        </choice>
+        <choice>
+          <value>DOE Ref Pre-1980</value>
+          <display_name>DOE Ref Pre-1980</display_name>
+        </choice>
+        <choice>
+          <value>90.1-2004</value>
+          <display_name>90.1-2004</display_name>
+        </choice>
+        <choice>
+          <value>90.1-2007</value>
+          <display_name>90.1-2007</display_name>
+        </choice>
+        <choice>
+          <value>90.1-2010</value>
+          <display_name>90.1-2010</display_name>
+        </choice>
+        <choice>
+          <value>90.1-2013</value>
+          <display_name>90.1-2013</display_name>
+        </choice>
+        <choice>
+          <value>90.1-2016</value>
+          <display_name>90.1-2016</display_name>
+        </choice>
+        <choice>
+          <value>90.1-2019</value>
+          <display_name>90.1-2019</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>hvac_type</name>
+      <display_name>HVAC Type</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <choices>
+        <choice>
+          <value>Inferred</value>
+          <display_name>Inferred</display_name>
+        </choice>
+        <choice>
+          <value>Baseboard central air source heat pump</value>
+          <display_name>Baseboard central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>Baseboard district hot water</value>
+          <display_name>Baseboard district hot water</display_name>
+        </choice>
+        <choice>
+          <value>Baseboard electric</value>
+          <display_name>Baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>Baseboard gas boiler</value>
+          <display_name>Baseboard gas boiler</display_name>
+        </choice>
+        <choice>
+          <value>Direct evap coolers with baseboard central air source heat pump</value>
+          <display_name>Direct evap coolers with baseboard central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>Direct evap coolers with baseboard district hot water</value>
+          <display_name>Direct evap coolers with baseboard district hot water</display_name>
+        </choice>
+        <choice>
+          <value>Direct evap coolers with baseboard electric</value>
+          <display_name>Direct evap coolers with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>Direct evap coolers with baseboard gas boiler</value>
+          <display_name>Direct evap coolers with baseboard gas boiler</display_name>
+        </choice>
+        <choice>
+          <value>Direct evap coolers with forced air furnace</value>
+          <display_name>Direct evap coolers with forced air furnace</display_name>
+        </choice>
+        <choice>
+          <value>Direct evap coolers with gas unit heaters</value>
+          <display_name>Direct evap coolers with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>Direct evap coolers with no heat</value>
+          <display_name>Direct evap coolers with no heat</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil air-cooled chiller with baseboard electric</value>
+          <display_name>DOAS with fan coil air-cooled chiller with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil air-cooled chiller with boiler</value>
+          <display_name>DOAS with fan coil air-cooled chiller with boiler</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil air-cooled chiller with central air source heat pump</value>
+          <display_name>DOAS with fan coil air-cooled chiller with central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil air-cooled chiller with district hot water</value>
+          <display_name>DOAS with fan coil air-cooled chiller with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil air-cooled chiller with gas unit heaters</value>
+          <display_name>DOAS with fan coil air-cooled chiller with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil air-cooled chiller with no heat</value>
+          <display_name>DOAS with fan coil air-cooled chiller with no heat</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil chiller with baseboard electric</value>
+          <display_name>DOAS with fan coil chiller with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil chiller with boiler</value>
+          <display_name>DOAS with fan coil chiller with boiler</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil chiller with central air source heat pump</value>
+          <display_name>DOAS with fan coil chiller with central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil chiller with district hot water</value>
+          <display_name>DOAS with fan coil chiller with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil chiller with gas unit heaters</value>
+          <display_name>DOAS with fan coil chiller with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil chiller with no heat</value>
+          <display_name>DOAS with fan coil chiller with no heat</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil district chilled water with baseboard electric</value>
+          <display_name>DOAS with fan coil district chilled water with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil district chilled water with boiler</value>
+          <display_name>DOAS with fan coil district chilled water with boiler</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil district chilled water with central air source heat pump</value>
+          <display_name>DOAS with fan coil district chilled water with central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil district chilled water with district hot water</value>
+          <display_name>DOAS with fan coil district chilled water with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil district chilled water with gas unit heaters</value>
+          <display_name>DOAS with fan coil district chilled water with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with fan coil district chilled water with no heat</value>
+          <display_name>DOAS with fan coil district chilled water with no heat</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with VRF</value>
+          <display_name>DOAS with VRF</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with water source heat pumps cooling tower with boiler</value>
+          <display_name>DOAS with water source heat pumps cooling tower with boiler</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with water source heat pumps district chilled water with district hot water</value>
+          <display_name>DOAS with water source heat pumps district chilled water with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with water source heat pumps fluid cooler with boiler</value>
+          <display_name>DOAS with water source heat pumps fluid cooler with boiler</display_name>
+        </choice>
+        <choice>
+          <value>DOAS with water source heat pumps with ground source heat pump</value>
+          <display_name>DOAS with water source heat pumps with ground source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil air-cooled chiller with boiler</value>
+          <display_name>Fan coil air-cooled chiller with boiler</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil air-cooled chiller with baseboard electric</value>
+          <display_name>Fan coil air-cooled chiller with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil air-cooled chiller with central air source heat pump</value>
+          <display_name>Fan coil air-cooled chiller with central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil air-cooled chiller with district hot water</value>
+          <display_name>Fan coil air-cooled chiller with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil air-cooled chiller with gas unit heaters</value>
+          <display_name>Fan coil air-cooled chiller with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil air-cooled chiller with no heat</value>
+          <display_name>Fan coil air-cooled chiller with no heat</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil chiller with baseboard electric</value>
+          <display_name>Fan coil chiller with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil chiller with boiler</value>
+          <display_name>Fan coil chiller with boiler</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil chiller with central air source heat pump</value>
+          <display_name>Fan coil chiller with central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil chiller with district hot water</value>
+          <display_name>Fan coil chiller with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil chiller with gas unit heaters</value>
+          <display_name>Fan coil chiller with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil chiller with no heat</value>
+          <display_name>Fan coil chiller with no heat</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil district chilled water with baseboard electric</value>
+          <display_name>Fan coil district chilled water with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil district chilled water with boiler</value>
+          <display_name>Fan coil district chilled water with boiler</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil district chilled water with central air source heat pump</value>
+          <display_name>Fan coil district chilled water with central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil district chilled water with district hot water</value>
+          <display_name>Fan coil district chilled water with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil district chilled water with gas unit heaters</value>
+          <display_name>Fan coil district chilled water with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>Fan coil district chilled water with no heat</value>
+          <display_name>Fan coil district chilled water with no heat</display_name>
+        </choice>
+        <choice>
+          <value>Forced air furnace</value>
+          <display_name>Forced air furnace</display_name>
+        </choice>
+        <choice>
+          <value>Gas unit heaters</value>
+          <display_name>Gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>Packaged VAV Air Loop with Boiler</value>
+          <display_name>Packaged VAV Air Loop with Boiler</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC district chilled water with baseboard district hot water</value>
+          <display_name>PSZ-AC district chilled water with baseboard district hot water</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC district chilled water with baseboard electric</value>
+          <display_name>PSZ-AC district chilled water with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC district chilled water with baseboard gas boiler</value>
+          <display_name>PSZ-AC district chilled water with baseboard gas boiler</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC district chilled water with central air source heat pump</value>
+          <display_name>PSZ-AC district chilled water with central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC district chilled water with district hot water</value>
+          <display_name>PSZ-AC district chilled water with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC district chilled water with electric coil</value>
+          <display_name>PSZ-AC district chilled water with electric coil</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC district chilled water with gas boiler</value>
+          <display_name>PSZ-AC district chilled water with gas boiler</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC district chilled water with gas coil</value>
+          <display_name>PSZ-AC district chilled water with gas coil</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC district chilled water with gas unit heaters</value>
+          <display_name>PSZ-AC district chilled water with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC district chilled water with no heat</value>
+          <display_name>PSZ-AC district chilled water with no heat</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC with baseboard district hot water</value>
+          <display_name>PSZ-AC with baseboard district hot water</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC with baseboard electric</value>
+          <display_name>PSZ-AC with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC with baseboard gas boiler</value>
+          <display_name>PSZ-AC with baseboard gas boiler</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC with central air source heat pump</value>
+          <display_name>PSZ-AC with central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC with district hot water</value>
+          <display_name>PSZ-AC with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC with electric coil</value>
+          <display_name>PSZ-AC with electric coil</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC with gas boiler</value>
+          <display_name>PSZ-AC with gas boiler</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC with gas coil</value>
+          <display_name>PSZ-AC with gas coil</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC with gas unit heaters</value>
+          <display_name>PSZ-AC with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-AC with no heat</value>
+          <display_name>PSZ-AC with no heat</display_name>
+        </choice>
+        <choice>
+          <value>PSZ-HP</value>
+          <display_name>PSZ-HP</display_name>
+        </choice>
+        <choice>
+          <value>PTAC with baseboard district hot water</value>
+          <display_name>PTAC with baseboard district hot water</display_name>
+        </choice>
+        <choice>
+          <value>PTAC with baseboard electric</value>
+          <display_name>PTAC with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>PTAC with baseboard gas boiler</value>
+          <display_name>PTAC with baseboard gas boiler</display_name>
+        </choice>
+        <choice>
+          <value>PTAC with central air source heat pump</value>
+          <display_name>PTAC with central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>PTAC with district hot water</value>
+          <display_name>PTAC with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>PTAC with electric coil</value>
+          <display_name>PTAC with electric coil</display_name>
+        </choice>
+        <choice>
+          <value>PTAC with gas boiler</value>
+          <display_name>PTAC with gas boiler</display_name>
+        </choice>
+        <choice>
+          <value>PTAC with gas coil</value>
+          <display_name>PTAC with gas coil</display_name>
+        </choice>
+        <choice>
+          <value>PTAC with gas unit heaters</value>
+          <display_name>PTAC with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>PTAC with no heat</value>
+          <display_name>PTAC with no heat</display_name>
+        </choice>
+        <choice>
+          <value>PTHP</value>
+          <display_name>PTHP</display_name>
+        </choice>
+        <choice>
+          <value>PVAV with central air source heat pump reheat</value>
+          <display_name>PVAV with central air source heat pump reheat</display_name>
+        </choice>
+        <choice>
+          <value>PVAV with district hot water reheat</value>
+          <display_name>PVAV with district hot water reheat</display_name>
+        </choice>
+        <choice>
+          <value>PVAV with gas boiler reheat</value>
+          <display_name>PVAV with gas boiler reheat</display_name>
+        </choice>
+        <choice>
+          <value>PVAV with gas heat with electric reheat</value>
+          <display_name>PVAV with gas heat with electric reheat</display_name>
+        </choice>
+        <choice>
+          <value>PVAV with PFP boxes</value>
+          <display_name>PVAV with PFP boxes</display_name>
+        </choice>
+        <choice>
+          <value>Residential AC with baseboard central air source heat pump</value>
+          <display_name>Residential AC with baseboard central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>Residential AC with baseboard district hot water</value>
+          <display_name>Residential AC with baseboard district hot water</display_name>
+        </choice>
+        <choice>
+          <value>Residential AC with baseboard electric</value>
+          <display_name>Residential AC with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>Residential AC with baseboard gas boiler</value>
+          <display_name>Residential AC with baseboard gas boiler</display_name>
+        </choice>
+        <choice>
+          <value>Residential AC with no heat</value>
+          <display_name>Residential AC with no heat</display_name>
+        </choice>
+        <choice>
+          <value>Residential AC with residential forced air furnace</value>
+          <display_name>Residential AC with residential forced air furnace</display_name>
+        </choice>
+        <choice>
+          <value>Residential forced air furnace</value>
+          <display_name>Residential forced air furnace</display_name>
+        </choice>
+        <choice>
+          <value>Residential heat pump</value>
+          <display_name>Residential heat pump</display_name>
+        </choice>
+        <choice>
+          <value>Residential heat pump with no cooling</value>
+          <display_name>Residential heat pump with no cooling</display_name>
+        </choice>
+        <choice>
+          <value>VAV air-cooled chiller with central air source heat pump reheat</value>
+          <display_name>VAV air-cooled chiller with central air source heat pump reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV air-cooled chiller with district hot water reheat</value>
+          <display_name>VAV air-cooled chiller with district hot water reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV air-cooled chiller with gas boiler reheat</value>
+          <display_name>VAV air-cooled chiller with gas boiler reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV air-cooled chiller with gas coil reheat</value>
+          <display_name>VAV air-cooled chiller with gas coil reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV air-cooled chiller with no reheat with baseboard electric</value>
+          <display_name>VAV air-cooled chiller with no reheat with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>VAV air-cooled chiller with no reheat with gas unit heaters</value>
+          <display_name>VAV air-cooled chiller with no reheat with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>VAV air-cooled chiller with no reheat with zone heat pump</value>
+          <display_name>VAV air-cooled chiller with no reheat with zone heat pump</display_name>
+        </choice>
+        <choice>
+          <value>VAV air-cooled chiller with PFP boxes</value>
+          <display_name>VAV air-cooled chiller with PFP boxes</display_name>
+        </choice>
+        <choice>
+          <value>VAV chiller with central air source heat pump reheat</value>
+          <display_name>VAV chiller with central air source heat pump reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV chiller with district hot water reheat</value>
+          <display_name>VAV chiller with district hot water reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV chiller with gas boiler reheat</value>
+          <display_name>VAV chiller with gas boiler reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV chiller with gas coil reheat</value>
+          <display_name>VAV chiller with gas coil reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV chiller with no reheat with baseboard electric</value>
+          <display_name>VAV chiller with no reheat with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>VAV chiller with no reheat with gas unit heaters</value>
+          <display_name>VAV chiller with no reheat with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>VAV chiller with no reheat with zone heat pump</value>
+          <display_name>VAV chiller with no reheat with zone heat pump</display_name>
+        </choice>
+        <choice>
+          <value>VAV chiller with PFP boxes</value>
+          <display_name>VAV chiller with PFP boxes</display_name>
+        </choice>
+        <choice>
+          <value>VAV district chilled water with central air source heat pump reheat</value>
+          <display_name>VAV district chilled water with central air source heat pump reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV district chilled water with district hot water reheat</value>
+          <display_name>VAV district chilled water with district hot water reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV district chilled water with gas boiler reheat</value>
+          <display_name>VAV district chilled water with gas boiler reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV district chilled water with gas coil reheat</value>
+          <display_name>VAV district chilled water with gas coil reheat</display_name>
+        </choice>
+        <choice>
+          <value>VAV district chilled water with no reheat with baseboard electric</value>
+          <display_name>VAV district chilled water with no reheat with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>VAV district chilled water with no reheat with gas unit heaters</value>
+          <display_name>VAV district chilled water with no reheat with gas unit heaters</display_name>
+        </choice>
+        <choice>
+          <value>VAV district chilled water with no reheat with zone heat pump</value>
+          <display_name>VAV district chilled water with no reheat with zone heat pump</display_name>
+        </choice>
+        <choice>
+          <value>VAV district chilled water with PFP boxes</value>
+          <display_name>VAV district chilled water with PFP boxes</display_name>
+        </choice>
+        <choice>
+          <value>VRF</value>
+          <display_name>VRF</display_name>
+        </choice>
+        <choice>
+          <value>Water source heat pumps cooling tower with boiler</value>
+          <display_name>Water source heat pumps cooling tower with boiler</display_name>
+        </choice>
+        <choice>
+          <value>Water source heat pumps district chilled water with district hot water</value>
+          <display_name>Water source heat pumps district chilled water with district hot water</display_name>
+        </choice>
+        <choice>
+          <value>Water source heat pumps fluid cooler with boiler</value>
+          <display_name>Water source heat pumps fluid cooler with boiler</display_name>
+        </choice>
+        <choice>
+          <value>Water source heat pumps with ground source heat pump</value>
+          <display_name>Water source heat pumps with ground source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>Window AC with baseboard central air source heat pump</value>
+          <display_name>Window AC with baseboard central air source heat pump</display_name>
+        </choice>
+        <choice>
+          <value>Window AC with baseboard district hot water</value>
+          <display_name>Window AC with baseboard district hot water</display_name>
+        </choice>
+        <choice>
+          <value>Window AC with baseboard electric</value>
+          <display_name>Window AC with baseboard electric</display_name>
+        </choice>
+        <choice>
+          <value>Window AC with baseboard gas boiler</value>
+          <display_name>Window AC with baseboard gas boiler</display_name>
+        </choice>
+        <choice>
+          <value>Window AC with forced air furnace</value>
+          <display_name>Window AC with forced air furnace</display_name>
+        </choice>
+        <choice>
+          <value>Window AC with no heat</value>
+          <display_name>Window AC with no heat</display_name>
+        </choice>
+        <choice>
+          <value>Window AC with unit heaters</value>
+          <display_name>Window AC with unit heaters</display_name>
+        </choice>
+      </choices>
+    </argument>
+  </arguments>
+  <outputs />
+  <provenances />
+  <tags>
+    <tag>Whole Building.Whole Building Schedules</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Measure Language</name>
+      <value>Ruby</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>Apply Measure Now</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>OpenStudio Application</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>Parametric Analysis Tool</value>
+      <datatype>string</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <filename>LICENSE.md</filename>
+      <filetype>md</filetype>
+      <usage_type>license</usage_type>
+      <checksum>CD7F5672</checksum>
+    </file>
+    <file>
+      <filename>README.md</filename>
+      <filetype>md</filetype>
+      <usage_type>readme</usage_type>
+      <checksum>3E9F69AA</checksum>
+    </file>
+    <file>
+      <filename>README.md.erb</filename>
+      <filetype>erb</filetype>
+      <usage_type>readmeerb</usage_type>
+      <checksum>F1C26127</checksum>
+    </file>
+    <file>
+      <filename>.gitkeep</filename>
+      <filetype>gitkeep</filetype>
+      <usage_type>doc</usage_type>
+      <checksum>00000000</checksum>
+    </file>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>3.6.1</identifier>
+        <min_compatible>3.6.1</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>6349191B</checksum>
+    </file>
+    <file>
+      <filename>.idea/misc.xml</filename>
+      <filetype>xml</filetype>
+      <usage_type>test</usage_type>
+      <checksum>06D47DC1</checksum>
+    </file>
+    <file>
+      <filename>.idea/modules.xml</filename>
+      <filetype>xml</filetype>
+      <usage_type>test</usage_type>
+      <checksum>065992AF</checksum>
+    </file>
+    <file>
+      <filename>.idea/tests.iml</filename>
+      <filetype>iml</filetype>
+      <usage_type>test</usage_type>
+      <checksum>7508AF60</checksum>
+    </file>
+    <file>
+      <filename>.idea/workspace.xml</filename>
+      <filetype>xml</filetype>
+      <usage_type>test</usage_type>
+      <checksum>544A0FD9</checksum>
+    </file>
+    <file>
+      <filename>ASHRAESmallOffice.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>25B71CE2</checksum>
+    </file>
+    <file>
+      <filename>create_typical_building_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>0CEE8CD1</checksum>
+    </file>
+    <file>
+      <filename>tester.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>1CBA7B32</checksum>
+    </file>
+  </files>
+</measure>
