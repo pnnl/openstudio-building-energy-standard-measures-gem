@@ -8,7 +8,7 @@
 The "Create Typical Building" OpenStudio measures empowers users to effortlessly generate OpenStudio and EnergyPlus models by making a few select choices. Users can input preferences such as the building energy code year (e.g., ASHRAE 90.1-2013), climate zone, and desired heating, ventilation, and air conditioning (HVAC) system.
 
 ## Modeler Description
-TODO: Add description for professionals
+This OpenStudio Measure analyzes and generates a standard building model using either the current geometry or a pre-established geometry file. It considers the selected building energy standard, the HVAC system, and the specific climate zone to create a standardized building model within OpenStudio. Please note that choosing any option other than "Existing Geometry" will replace the current OSM file.
 
 ## Measure Type
 ModelMeasure
