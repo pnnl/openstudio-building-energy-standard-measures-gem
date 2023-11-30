@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<measure>
+  <schema_version>3.1</schema_version>
+  <name>generate_iplv_specific_chiller_performance_curves_for_chillers</name>
+  <uid>5cd98b4e-ddfe-44ab-9dca-d9885f57a216</uid>
+  <version_modified>2023-11-29T12:00:00Z</version_modified>
+  <class_name>GenerateIPLVChillerElectricEIRPerformanceCurves</class_name>
+  <display_name>Generate IPLV-specific Chiller Performance Curves for Chillers (Chiller:Electric:EIR).</display_name>
+  <description>This measure generates and assigns a set of performance curves to a chiller object that matches a target description including the chiller's integrated part load value (IPLV) for the Chiller:Electric:EIR model.</description>
+  <modeler_description></modeler_description>
+  <arguments>
+    <argument>
+      <name>chiller_name</name>
+      <display_name>Chiller object name</display_name>
+      <description>Select the name of a chiller object</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>true</model_dependent>
+    </argument>
+    <argument>
+      <name>chiller_compressor_type</name>
+      <display_name>Chiller compressor type</display_name>
+      <description>Select the type of compressor</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <choices>
+        <choice>
+          <value>positive_displacement</value>
+          <display_name>Positive Displacement</display_name>
+        </choice>
+        <choice>
+          <value>centrifugal</value>
+          <display_name>Centrifugal</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>chiller_compressor_speed_control</name>
+      <display_name>Chiller compressor speed control</display_name>
+      <description>Select the type of compressor speed control</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <choices>
+        <choice>
+          <value>constant</value>
+          <display_name>Constant</display_name>
+        </choice>
+        <choice>
+          <value>variable</value>
+          <display_name>Variable</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>chiller_condenser_type</name>
+      <display_name>Chiller condenser type</display_name>
+      <description>Select the type of condenser</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <choices>
+        <choice>
+          <value>water</value>
+          <display_name>Water-cooled</display_name>
+        </choice>
+        <choice>
+          <value>air</value>
+          <display_name>Air-cooled</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>chiller_capacity_unit</name>
+      <display_name>Chiller capacity unit</display_name>
+      <description>Select the chiller capacity unit</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <choices>
+        <choice>
+          <value>ton</value>
+          <display_name>tons</display_name>
+        </choice>
+        <choice>
+          <value>kW</value>
+          <display_name>Kilo Watts</display_name>
+        </choice>
+        <choice>
+          <value>W</value>
+          <display_name>Watts</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>chiller_efficiency_unit</name>
+      <display_name>Chiller efficiency unit</display_name>
+      <description>Provide the capacity of the chiller</description>
+      <type>Double</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+    </argument>
+    <argument>
+      <name>chiller_capacity_unit</name>
+      <display_name>Chiller capacity unit</display_name>
+      <description>Select the chiller efficiency unit</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <choices>
+        <choice>
+          <value>kW/ton</value>
+          <display_name>kW/ton</display_name>
+        </choice>
+        <choice>
+          <value>cop</value>
+          <display_name>COP</display_name>
+        </choice>
+        <choice>
+          <value>eer</value>
+          <display_name>EER</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>chiller_full_load_efficiency</name>
+      <display_name>Chiller full load efficiency</display_name>
+      <description>Provide the full load efficiency of the chiller</description>
+      <type>Double</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+    </argument>
+    <argument>
+      <name>chiller_part_load_efficiency</name>
+      <display_name>Chiller part load efficiency</display_name>
+      <description>Provide the part load efficiency of the chiller</description>
+      <type>Double</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+    </argument>
+  </arguments>
+  <outputs />
+  <provenances />
+  <tags>
+    <tag>HVAC.Cooling</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ModelMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Uses SketchUp API</name>
+      <value>false</value>
+      <datatype>boolean</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>2.0.0</identifier>
+        <min_compatible>2.0.0</min_compatible>
+      </version>
+      <filename>measure.py</filename>
+      <filetype>py</filetype>
+      <usage_type>script</usage_type>
+    </file>
+    <file>
+      <filename>test_measure.py</filename>
+      <filetype>py</filetype>
+      <usage_type>test</usage_type>
+    </file>
+  </files>
+</measure>
