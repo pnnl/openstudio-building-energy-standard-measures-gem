@@ -211,7 +211,7 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
 
     user_data_path = OpenStudio::Measure::OSArgument::makeStringArgument('user_data_path', false)
     user_data_path.setDisplayName('User Data Path:')
-    user_data_path.setDescription('Required if select "TRUE" in "Use User Data". Please input a valid file path which contains the user data files.')
+    user_data_path.setDescription('Required if select "TRUE" in "Use User Data". Please input a valid folder path which contains the user data files.')
     user_data_path.setDefaultValue(user_data_path_default)
     args << user_data_path
 
@@ -226,7 +226,7 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
 
     evaluation_package_path = OpenStudio::Measure::OSArgument::makeStringArgument('evaluation_package_path', false)
     evaluation_package_path.setDisplayName('Evaluation Package Path:')
-    evaluation_package_path.setDescription('Required if select "TRUE" in "Use PRM evaluation package". Please input a valid file path which contains the evaluation package.')
+    evaluation_package_path.setDescription('Required if select "TRUE" in "Use PRM evaluation package". Please input a valid folder path which contains the evaluation package.')
     evaluation_package_path.setDefaultValue(evaluation_package_path_default)
     args << evaluation_package_path
 
