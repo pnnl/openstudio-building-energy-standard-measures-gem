@@ -3,13 +3,13 @@
   <schema_version>3.1</schema_version>
   <name>create_typical_building</name>
   <uid>8dea6660-7268-4f1e-817f-02ddf64e64c5</uid>
-  <version_id>2cc41b90-f9c2-4144-8ffc-5039d052775f</version_id>
-  <version_modified>2023-11-29T15:07:46Z</version_modified>
+  <version_id>2bd528b4-ca8f-4daf-a053-b1133f4ea741</version_id>
+  <version_modified>2023-12-07T14:34:29Z</version_modified>
   <xml_checksum>DE3258BC</xml_checksum>
   <class_name>CreateTypicalBuilding</class_name>
   <display_name>Create Typical Building</display_name>
   <description>The "Create Typical Building" OpenStudio measures empowers users to effortlessly generate OpenStudio and EnergyPlus models by making a few select choices. Users can input preferences such as the building energy code year (e.g., ASHRAE 90.1-2013), climate zone, and desired heating, ventilation, and air conditioning (HVAC) system.</description>
-  <modeler_description>TODO: Add description for professionals</modeler_description>
+  <modeler_description>This OpenStudio Measure analyzes and generates a standard building model using either the current geometry or a pre-established geometry file. It considers the selected building energy standard, the HVAC system, and the specific climate zone to create a standardized building model within OpenStudio. Please note that choosing any option other than "Existing Geometry" will replace the current OSM file.</modeler_description>
   <arguments>
     <argument>
       <name>geometry_file</name>
@@ -17,6 +17,7 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
+      <default_value>Existing Geometry</default_value>
       <choices>
         <choice>
           <value>Existing Geometry</value>
@@ -98,7 +99,12 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
+      <default_value>Lookup From Model</default_value>
       <choices>
+        <choice>
+          <value>Lookup From Model</value>
+          <display_name>Lookup From Model</display_name>
+        </choice>
         <choice>
           <value>ASHRAE 169-2013-1A</value>
           <display_name>ASHRAE 169-2013-1A</display_name>
@@ -167,6 +173,7 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
+      <default_value>90.1-2004</default_value>
       <choices>
         <choice>
           <value>DOE Ref 1980-2004</value>
@@ -208,6 +215,7 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
+      <default_value>Inferred</default_value>
       <choices>
         <choice>
           <value>Inferred</value>

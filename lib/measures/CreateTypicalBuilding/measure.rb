@@ -67,18 +67,22 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     # Add input elements
     geometry_file_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('geometry_file', geom_types, true)
     geometry_file_choice.setDisplayName("Geometry File")
+    geometry_file_choice.setDefaultValue("Existing Geometry")
     args << geometry_file_choice
 
     climate_zone_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('climate_zone', climate_zones, true)
     climate_zone_choice.setDisplayName("Climate Zone")
+    climate_zone_choice.setDefaultValue("Lookup From Model")
     args << climate_zone_choice
 
     template_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('template', templates, true)
     template_choice.setDisplayName("Building Energy Code")
+    template_choice.setDefaultValue("90.1-2004")
     args << template_choice
 
     hvac_type_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('hvac_type', hvac_types, true)
     hvac_type_choice.setDisplayName("HVAC Type")
+    hvac_type_choice.setDefaultValue("Inferred")
     args << hvac_type_choice
 
     return args
@@ -120,7 +124,37 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
 
     @create = OpenstudioStandards::CreateTypical
     runner.registerInfo("Begin typical model generation...")
+
+    # If "Lookup From Model" is used, check that a climate zone was found in model. If not, return Error
+    if climate_zone == 'Lookup From Model'
+      climate_zone = standard.model_standards_climate_zone(model)
+      if climate_zone == '' or climate_zone.nil?
+        error_message = "Error when looking up climate zone from model. Ensure the model has a valid ClimateZone"\
+        " or ClimateZones objects with climate zone information present. \n**NOTE**: Geometry files typically do not"\
+        " have this information"
+        runner.registerError(error_message)
+        return false
+      end
+
+    end
+
     @create.create_typical_building_from_model(model, template, climate_zone: climate_zone, hvac_system_type: hvac_type)
+
+    # If no weather file assigned, assign it based on the climate zone
+    if model.weatherFile.empty?
+
+      # Assign design days and weather file to model
+      runner.registerInfo("No weather file assigned to this model. Assigning default for climate zone: '#{climate_zone}'")
+      standard = Standard.new()
+
+      climate_zone = standard.model_get_building_properties(model)['climate_zone'] if climate_zone == 'Lookup From Model'
+      standard.model_add_design_days_and_weather_file(model, climate_zone)
+
+      # Get weather file name for reporting purposes
+      location_name = model.weatherFile.get.site.get.name.to_s
+      runner.registerInfo("Weather file and design days for #{climate_zone} assigned to '#{location_name}'")
+
+    end
 
     # report final condition of model
     runner.registerFinalCondition("Typical building generation complete.")
@@ -145,7 +179,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
 
   module CreateTypicalBldgConstants
 
-    CLIMATE_ZONES = ['ASHRAE 169-2013-1A', 'ASHRAE 169-2013-2A', 'ASHRAE 169-2013-2B',
+    CLIMATE_ZONES = ['Lookup From Model',  'ASHRAE 169-2013-1A', 'ASHRAE 169-2013-2A', 'ASHRAE 169-2013-2B',
                      'ASHRAE 169-2013-3A', 'ASHRAE 169-2013-3B', 'ASHRAE 169-2013-3C', 'ASHRAE 169-2013-4A',
                      'ASHRAE 169-2013-4B', 'ASHRAE 169-2013-4C', 'ASHRAE 169-2013-5A', 'ASHRAE 169-2013-5B',
                      'ASHRAE 169-2013-6A', 'ASHRAE 169-2013-6B', 'ASHRAE 169-2013-7A', 'ASHRAE 169-2013-8A']
