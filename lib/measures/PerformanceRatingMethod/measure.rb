@@ -211,7 +211,7 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
 
     user_data_path = OpenStudio::Measure::OSArgument::makeStringArgument('user_data_path', false)
     user_data_path.setDisplayName('User Data Path:')
-    user_data_path.setDescription('Required if select "TRUE" in "Use User Data". Please input a valid file path which contains the user data files.')
+    user_data_path.setDescription('Required if select "TRUE" in "Use User Data". Please input a valid folder path which contains the user data files.')
     user_data_path.setDefaultValue(user_data_path_default)
     args << user_data_path
 
@@ -226,7 +226,7 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
 
     evaluation_package_path = OpenStudio::Measure::OSArgument::makeStringArgument('evaluation_package_path', false)
     evaluation_package_path.setDisplayName('Evaluation Package Path:')
-    evaluation_package_path.setDescription('Required if select "TRUE" in "Use PRM evaluation package". Please input a valid file path which contains the evaluation package.')
+    evaluation_package_path.setDescription('Required if select "TRUE" in "Use PRM evaluation package". Please input a valid folder path which contains the evaluation package.')
     evaluation_package_path.setDefaultValue(evaluation_package_path_default)
     args << evaluation_package_path
 
@@ -362,8 +362,8 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
     # Versions of OpenStudio greater than 2.4.0 use a modified version of
     # openstudio-standards with different method calls.
 
-    if OpenStudio::VersionString.new(OpenStudio.openStudioVersion) < OpenStudio::VersionString.new('3.6.0')
-      runner.registerError("PRM method can only run on OpenStudio 3.6.0 or higher.")
+    if OpenStudio::VersionString.new(OpenStudio.openStudioVersion) < OpenStudio::VersionString.new('3.7.0')
+      runner.registerError("PRM method can only run on OpenStudio 3.7.0 or higher.")
       #success = model.create_prm_stable_baseline_building(model, building_type_swh, climate_zone, building_type_hvac, building_type_wwr, building_type_swh, build_dir, run_all_orients, unmet_load_hours_check)
     else
       if evaluation_package == 'FALSE'

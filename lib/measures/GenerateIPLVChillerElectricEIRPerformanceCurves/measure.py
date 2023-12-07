@@ -9,7 +9,7 @@ class GenerateIPLVChillerElectricEIRPerformanceCurves(openstudio.measure.ModelMe
         Return the human readable name.
         Measure name should be the title case of the class name.
         """
-        return "Generate IPLV-specific Chiller Performance Curves for Chillers (Chiller:Electric:EIR)."
+        return "Generate IPLV-specific Chiller Performance Curves for Chillers (Chiller:Electric:EIR)"
 
     def description(self):
         """

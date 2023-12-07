@@ -1,6 +1,7 @@
 # Openstudio Building Energy Standard Measures Gem
 
-TODO: Add a description of this gem
+The OpenStudio Building Energy Standard Measures Rep is a comprehensive collection of innovative OpenStudio measures designed to facilitate energy code analysis. OpenStudio is a cutting-edge platform brings together physics-based building energy modeling (BEM), BEM process automation, and large-scale computing capabilities. The platform empowers a wide array of applications for building energy analysis. An OpenStudio measure comprises a set of programmatic instructions, typically in Ruby scripts, engineered to automate energy model queries and transformations. The measures in this repository expand and customize the OpenStudio framework to support diverse energy code related workflows. These workflows encompass, but are not limited to, exploratory design analysis on typical buildings, data acquisition for energy code compliance, and the streamlined automation of energy code modeling.
+
 
 ## Installation
 
@@ -20,13 +21,15 @@ Or install it yourself as:
 
 ## Usage
 
-To be filled out later. 
+1. [OSSTD-PRM](./lib/measures/PerformanceRatingMethod/README.md): Performance Rating Method Measure
+2. [Copper](./lib/measures/GenerateIPLVChillerElectricEIRPerformanceCurves/README.md): Copper Measure
+
+
 
 ## TODO
 
-- [ ] Remove measures from OpenStudio-Measures to standardize on this location
-- [ ] Update measures to code standards
-- [ ] Review and fill out the gemspec file with author and gem description
+- [] Add new measure to generate user data csv files to support OSSTD-PRM.
+- [] Add new measure to support workflows for retrieving building standard database.
 
 # Releasing
 
