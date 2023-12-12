@@ -3,6 +3,7 @@
   <schema_version>3.1</schema_version>
   <name>generate_iplv_specific_chiller_performance_curves_for_chillers</name>
   <uid>5cd98b4e-ddfe-44ab-9dca-d9885f57a216</uid>
+  <version_id>54887132-3434-4b10-9302-e4167c5b7c3b</version_id>
   <version_modified>2023-11-29T12:00:00Z</version_modified>
   <class_name>GenerateIPLVChillerElectricEIRPerformanceCurves</class_name>
   <display_name>Generate IPLV-specific Chiller Performance Curves for Chillers (Chiller:Electric:EIR).</display_name>
