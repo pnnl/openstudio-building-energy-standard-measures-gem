@@ -24,12 +24,16 @@ Or install it yourself as:
 1. [OSSTD-PRM](./lib/measures/PerformanceRatingMethod/README.md): Performance Rating Method Measure
 2. [Copper](./lib/measures/GenerateIPLVChillerElectricEIRPerformanceCurves/README.md): Copper Measure
 
-
-
 ## TODO
 
-- [] Add new measure to generate user data csv files to support OSSTD-PRM.
-- [] Add new measure to support workflows for retrieving building standard database.
+- [ ] Add new measure to generate user data csv files to support OSSTD-PRM.
+- [ ] Add new measure to support workflows for retrieving building standard database.
+- [ ] Add test
+
+# Compatibility Matrix
+|OpenStudio Building Energy Standard Measures Gem|  OpenStudio  | Ruby    |
+|:----------------------------------------------:|:------------:|:-------:|
+|                   0.1.0                        |     3.7      | 2.7.2   |
 
 # Releasing
 
