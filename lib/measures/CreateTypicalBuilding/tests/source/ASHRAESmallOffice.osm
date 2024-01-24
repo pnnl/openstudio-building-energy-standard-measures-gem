@@ -1,15 +1,29 @@
 
 OS:Version,
-  {3f518396-9b5a-4293-8082-3b5babf0212a}, !- Handle
-  2.2.1;                                  !- Version Identifier
+  {7c0c7305-85dc-4cb0-b80d-39b8a91695eb}, !- Handle
+  3.6.1;                                  !- Version Identifier
+
+OS:Schedule:Constant,
+  {880041b6-6a29-42f1-bc2a-b096ec29124c}, !- Handle
+  Always On Discrete,                     !- Name
+  {74d9e77c-7e87-4f78-84c2-f1a1ee60b536}, !- Schedule Type Limits Name
+  1;                                      !- Value
+
+OS:ScheduleTypeLimits,
+  {74d9e77c-7e87-4f78-84c2-f1a1ee60b536}, !- Handle
+  Always On Discrete Limits,              !- Name
+  0,                                      !- Lower Limit Value
+  1,                                      !- Upper Limit Value
+  Discrete,                               !- Numeric Type
+  Availability;                           !- Unit Type
 
 OS:Site,
   {e4e0cf83-aa67-462b-ac86-dd69d24de0d1}, !- Handle
-  Houston Bush Intercontinental_TX_USA Design_Conditions, !- Name
-  30,                                     !- Latitude {deg}
-  -95.37,                                 !- Longitude {deg}
+  Chicago Midway Ap,                      !- Name
+  41.78,                                  !- Latitude {deg}
+  -87.75,                                 !- Longitude {deg}
   -6,                                     !- Time Zone {hr}
-  29,                                     !- Elevation {m}
+  186,                                    !- Elevation {m}
   City;                                   !- Terrain
 
 OS:SimulationControl,
@@ -19,7 +33,7 @@ OS:SimulationControl,
   Yes,                                    !- Do Plant Sizing Calculation
   Yes,                                    !- Run Simulation for Sizing Periods
   Yes,                                    !- Run Simulation for Weather File Run Periods
-  0.04,                                   !- Loads Convergence Tolerance Value
+  0.04,                                   !- Loads Convergence Tolerance Value {W}
   0.2,                                    !- Temperature Convergence Tolerance Value {deltaC}
   FullInteriorAndExterior,                !- Solar Distribution
   25,                                     !- Maximum Number of Warmup Days
@@ -44,7 +58,6 @@ OS:Surface,
 
 OS:Connection,
   {d367abd9-ef96-4df2-a4a5-60b4b9f5779f}, !- Handle
-  {fca4d4d3-2721-42a9-a76c-f4b74826d7aa}, !- Name
   ,                                       !- Source Object
   11,                                     !- Outlet Port
   ,                                       !- Target Object
@@ -73,7 +86,6 @@ OS:SubSurface,
   {67ca62ce-e572-4957-8e6a-efb74825f170}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -100,7 +112,6 @@ OS:Surface,
 
 OS:Connection,
   {b76c9257-2ba1-41ca-b928-7e4cece1fb38}, !- Handle
-  {8ddc6125-8508-4ec6-bdad-ad6cfff54633}, !- Name
   ,                                       !- Source Object
   11,                                     !- Outlet Port
   ,                                       !- Target Object
@@ -156,7 +167,6 @@ OS:Surface,
 
 OS:Connection,
   {3e98f27d-1e5c-47bf-b1dd-320cc71dc280}, !- Handle
-  {14e56078-538e-4195-bf4d-564485d8013c}, !- Name
   ,                                       !- Source Object
   11,                                     !- Outlet Port
   ,                                       !- Target Object
@@ -213,7 +223,6 @@ OS:Surface,
 
 OS:Connection,
   {4d957a31-f699-4eae-93e7-35cb0402bdc3}, !- Handle
-  {556b787e-14ea-444a-8f28-da77ff85692d}, !- Name
   ,                                       !- Source Object
   11,                                     !- Outlet Port
   ,                                       !- Target Object
@@ -235,7 +244,6 @@ OS:Space,
 
 OS:Connection,
   {99cfc414-45c1-4be7-8757-3ae36bc2af42}, !- Handle
-  {96671398-0007-4bc0-8470-144aceb20b70}, !- Name
   ,                                       !- Source Object
   11,                                     !- Outlet Port
   ,                                       !- Target Object
@@ -291,7 +299,7 @@ OS:Surface,
 
 OS:Output:Meter,
   {abc5d571-df7f-47b1-bf8b-892a6dadede3}, !- Handle
-  Gas:Facility,                           !- Name
+  NaturalGas:Facility,                    !- Name
   Hourly,                                 !- Reporting Frequency
   True,                                   !- Meter File Only
   False;                                  !- Cumulative
@@ -315,7 +323,6 @@ OS:Surface,
 
 OS:Connection,
   {3cc89c32-b209-45a8-aee8-40997f52820c}, !- Handle
-  {3266c372-df06-4762-8ade-3366935e0120}, !- Name
   ,                                       !- Source Object
   11,                                     !- Outlet Port
   ,                                       !- Target Object
@@ -428,7 +435,6 @@ OS:SubSurface,
   {17c4f45d-4218-45b0-b696-893c60c109f8}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -552,7 +558,6 @@ OS:SubSurface,
   {17c4f45d-4218-45b0-b696-893c60c109f8}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -569,7 +574,6 @@ OS:SubSurface,
   {67ca62ce-e572-4957-8e6a-efb74825f170}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -608,7 +612,6 @@ OS:SubSurface,
   {67ca62ce-e572-4957-8e6a-efb74825f170}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -727,7 +730,6 @@ OS:SubSurface,
   {17c4f45d-4218-45b0-b696-893c60c109f8}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -744,7 +746,6 @@ OS:SubSurface,
   {67ca62ce-e572-4957-8e6a-efb74825f170}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -794,7 +795,6 @@ OS:SubSurface,
   {67ca62ce-e572-4957-8e6a-efb74825f170}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -811,7 +811,6 @@ OS:SubSurface,
   {17c4f45d-4218-45b0-b696-893c60c109f8}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -872,7 +871,6 @@ OS:SubSurface,
   {67ca62ce-e572-4957-8e6a-efb74825f170}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -889,7 +887,6 @@ OS:SubSurface,
   {b6ff9519-a9c1-41bb-a9a2-a8a38ed021e1}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -906,7 +903,6 @@ OS:SubSurface,
   {b6ff9519-a9c1-41bb-a9a2-a8a38ed021e1}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -930,7 +926,6 @@ OS:SubSurface,
   {3977972e-c38f-4caf-ac22-02109f4eaee3}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -981,7 +976,6 @@ OS:SubSurface,
   {3977972e-c38f-4caf-ac22-02109f4eaee3}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -1124,7 +1118,6 @@ OS:SubSurface,
   {b6ff9519-a9c1-41bb-a9a2-a8a38ed021e1}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -1141,7 +1134,6 @@ OS:SubSurface,
   {b6ff9519-a9c1-41bb-a9a2-a8a38ed021e1}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -1188,8 +1180,16 @@ OS:Surface,
 
 OS:ShadowCalculation,
   {208066fd-3337-431a-92af-1b641ddb4c8e}, !- Handle
-  30,                                     !- Calculation Frequency
-  15000;                                  !- Maximum Figures in Shadow Overlap Calculations
+  PolygonClipping,                        !- Shading Calculation Method
+  ,                                       !- Shading Calculation Update Frequency Method
+  30,                                     !- Shading Calculation Update Frequency
+  15000,                                  !- Maximum Figures in Shadow Overlap Calculations
+  ,                                       !- Polygon Clipping Algorithm
+  512,                                    !- Pixel Counting Resolution
+  ,                                       !- Sky Diffuse Modeling Algorithm
+  No,                                     !- Output External Shading Calculation Results
+  No,                                     !- Disable Self-Shading Within Shading Zone Groups
+  No;                                     !- Disable Self-Shading From Shading Zone Groups to Other Zones
 
 OS:SubSurface,
   {7601ac5c-8c78-486c-8a6b-46d19f4aef2f}, !- Handle
@@ -1199,7 +1199,6 @@ OS:SubSurface,
   {3977972e-c38f-4caf-ac22-02109f4eaee3}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -1219,6 +1218,7 @@ OS:Building,
   ,                                       !- Default Schedule Set Name
   1,                                      !- Standards Number of Stories
   1,                                      !- Standards Number of Above Ground Stories
+  ,                                       !- Standards Template
   SmallOffice;                            !- Standards Building Type
 
 OS:Surface,
@@ -1246,7 +1246,6 @@ OS:SubSurface,
   {3977972e-c38f-4caf-ac22-02109f4eaee3}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -1280,7 +1279,6 @@ OS:SubSurface,
   {17c4f45d-4218-45b0-b696-893c60c109f8}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -1297,7 +1295,6 @@ OS:SubSurface,
   {17c4f45d-4218-45b0-b696-893c60c109f8}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -1314,7 +1311,6 @@ OS:SubSurface,
   {67ca62ce-e572-4957-8e6a-efb74825f170}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -1348,7 +1344,7 @@ OS:ThermalZone,
   {20eadebe-8e38-4fd0-af1f-90d4d0c7c6ea}, !- Zone Air Inlet Port List
   {0ba9e3fa-6cb9-455b-a69b-96c32ec24bb9}, !- Zone Air Exhaust Port List
   {a71f7cb0-95ee-4813-b882-c7530b6640eb}, !- Zone Air Node Name
-  ,                                       !- Zone Return Air Node Name
+  {86a2b8c5-8bde-4601-a72f-555a3140277a}, !- Zone Return Air Port List
   ,                                       !- Primary Daylighting Control Name
   ,                                       !- Fraction of Zone Controlled by Primary Daylighting Control
   ,                                       !- Secondary Daylighting Control Name
@@ -1358,6 +1354,11 @@ OS:ThermalZone,
   ,                                       !- Thermostat Name
   No;                                     !- Use Ideal Air Loads
 
+OS:PortList,
+  {86a2b8c5-8bde-4601-a72f-555a3140277a}, !- Handle
+  {f04090b6-7fdb-43e8-bd39-d18e80d33e23}, !- HVAC Component
+  ;                                       !- Port 1
+
 OS:Node,
   {8c640121-2207-44f5-b2a6-101a522733f2}, !- Handle
   Node 1,                                 !- Name
@@ -1366,7 +1367,6 @@ OS:Node,
 
 OS:Connection,
   {a71f7cb0-95ee-4813-b882-c7530b6640eb}, !- Handle
-  {80c952e0-d9dd-4974-941a-43d29843c18b}, !- Name
   {f04090b6-7fdb-43e8-bd39-d18e80d33e23}, !- Source Object
   11,                                     !- Outlet Port
   {8c640121-2207-44f5-b2a6-101a522733f2}, !- Target Object
@@ -1374,12 +1374,10 @@ OS:Connection,
 
 OS:PortList,
   {20eadebe-8e38-4fd0-af1f-90d4d0c7c6ea}, !- Handle
-  {f8783345-572e-4eb2-bbcd-4c9a76a2d4d8}, !- Name
   {f04090b6-7fdb-43e8-bd39-d18e80d33e23}; !- HVAC Component
 
 OS:PortList,
   {0ba9e3fa-6cb9-455b-a69b-96c32ec24bb9}, !- Handle
-  {52124fca-3ada-41ce-8bee-4986974cd740}, !- Name
   {f04090b6-7fdb-43e8-bd39-d18e80d33e23}; !- HVAC Component
 
 OS:Sizing:Zone,
@@ -1405,12 +1403,17 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
-  autosize;                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  autosize,                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  Sensible Load Only No Latent Load,      !- Zone Load Sizing Method
+  HumidityRatioDifference,                !- Zone Latent Cooling Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Dehumidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005,                                  !- Zone Cooling Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
+  HumidityRatioDifference,                !- Zone Latent Heating Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Humidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005;                                  !- Zone Humidification Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
 
 OS:ZoneHVAC:EquipmentList,
   {6f75fb4b-7e35-4d47-9210-68580cc65e77}, !- Handle
@@ -1430,7 +1433,7 @@ OS:ThermalZone,
   {4f606b97-6c2a-42b1-8f52-977b8535d8dd}, !- Zone Air Inlet Port List
   {acfc3697-4315-4fab-9800-550db87d1a54}, !- Zone Air Exhaust Port List
   {e7fae72c-d150-47cd-9b12-060efff138bf}, !- Zone Air Node Name
-  ,                                       !- Zone Return Air Node Name
+  {6095d3e3-8a2f-439b-b433-4ab2c06d2c94}, !- Zone Return Air Port List
   ,                                       !- Primary Daylighting Control Name
   ,                                       !- Fraction of Zone Controlled by Primary Daylighting Control
   ,                                       !- Secondary Daylighting Control Name
@@ -1440,6 +1443,11 @@ OS:ThermalZone,
   ,                                       !- Thermostat Name
   No;                                     !- Use Ideal Air Loads
 
+OS:PortList,
+  {6095d3e3-8a2f-439b-b433-4ab2c06d2c94}, !- Handle
+  {19042014-9326-4e22-a410-67a6cb645b98}, !- HVAC Component
+  ;                                       !- Port 1
+
 OS:Node,
   {12695d78-e36a-47b6-8892-8d1670de6ef2}, !- Handle
   Node 2,                                 !- Name
@@ -1448,7 +1456,6 @@ OS:Node,
 
 OS:Connection,
   {e7fae72c-d150-47cd-9b12-060efff138bf}, !- Handle
-  {e89c9d42-8ad1-4fa3-9a89-e5801bf2e9af}, !- Name
   {19042014-9326-4e22-a410-67a6cb645b98}, !- Source Object
   11,                                     !- Outlet Port
   {12695d78-e36a-47b6-8892-8d1670de6ef2}, !- Target Object
@@ -1456,12 +1463,10 @@ OS:Connection,
 
 OS:PortList,
   {4f606b97-6c2a-42b1-8f52-977b8535d8dd}, !- Handle
-  {5f9561ed-01e2-40bd-a4d4-6b384d4ddc5d}, !- Name
   {19042014-9326-4e22-a410-67a6cb645b98}; !- HVAC Component
 
 OS:PortList,
   {acfc3697-4315-4fab-9800-550db87d1a54}, !- Handle
-  {df5e8d9c-d17e-4c4e-b4ae-79ba66639e5a}, !- Name
   {19042014-9326-4e22-a410-67a6cb645b98}; !- HVAC Component
 
 OS:Sizing:Zone,
@@ -1487,12 +1492,17 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
-  autosize;                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  autosize,                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  Sensible Load Only No Latent Load,      !- Zone Load Sizing Method
+  HumidityRatioDifference,                !- Zone Latent Cooling Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Dehumidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005,                                  !- Zone Cooling Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
+  HumidityRatioDifference,                !- Zone Latent Heating Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Humidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005;                                  !- Zone Humidification Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
 
 OS:ZoneHVAC:EquipmentList,
   {0425e6b8-9b8e-4669-8574-92500441f515}, !- Handle
@@ -1512,7 +1522,7 @@ OS:ThermalZone,
   {b357887f-4549-4cf4-8705-d81780d9d9c8}, !- Zone Air Inlet Port List
   {1e879167-035b-4253-8e3a-efe369da9b23}, !- Zone Air Exhaust Port List
   {e513f711-fbd7-4f54-9c31-f67171e214d2}, !- Zone Air Node Name
-  ,                                       !- Zone Return Air Node Name
+  {9f27ad86-af33-47ea-b8f3-a86722f6975d}, !- Zone Return Air Port List
   ,                                       !- Primary Daylighting Control Name
   ,                                       !- Fraction of Zone Controlled by Primary Daylighting Control
   ,                                       !- Secondary Daylighting Control Name
@@ -1522,6 +1532,11 @@ OS:ThermalZone,
   ,                                       !- Thermostat Name
   No;                                     !- Use Ideal Air Loads
 
+OS:PortList,
+  {9f27ad86-af33-47ea-b8f3-a86722f6975d}, !- Handle
+  {af6d41b5-e232-4f51-a8ee-f1e1cd046c49}, !- HVAC Component
+  ;                                       !- Port 1
+
 OS:Node,
   {099717e8-7ecb-4fe6-b428-4df719e66e48}, !- Handle
   Node 3,                                 !- Name
@@ -1530,7 +1545,6 @@ OS:Node,
 
 OS:Connection,
   {e513f711-fbd7-4f54-9c31-f67171e214d2}, !- Handle
-  {c4f6c8b1-7f8f-4a2d-92e6-3e73a713d85b}, !- Name
   {af6d41b5-e232-4f51-a8ee-f1e1cd046c49}, !- Source Object
   11,                                     !- Outlet Port
   {099717e8-7ecb-4fe6-b428-4df719e66e48}, !- Target Object
@@ -1538,12 +1552,10 @@ OS:Connection,
 
 OS:PortList,
   {b357887f-4549-4cf4-8705-d81780d9d9c8}, !- Handle
-  {98caff1a-2480-4c28-b6de-c456780e2b1a}, !- Name
   {af6d41b5-e232-4f51-a8ee-f1e1cd046c49}; !- HVAC Component
 
 OS:PortList,
   {1e879167-035b-4253-8e3a-efe369da9b23}, !- Handle
-  {1e7e23cc-f288-4ccd-8db3-d067a56e1bf9}, !- Name
   {af6d41b5-e232-4f51-a8ee-f1e1cd046c49}; !- HVAC Component
 
 OS:Sizing:Zone,
@@ -1569,12 +1581,17 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
-  autosize;                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  autosize,                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  Sensible Load Only No Latent Load,      !- Zone Load Sizing Method
+  HumidityRatioDifference,                !- Zone Latent Cooling Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Dehumidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005,                                  !- Zone Cooling Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
+  HumidityRatioDifference,                !- Zone Latent Heating Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Humidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005;                                  !- Zone Humidification Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
 
 OS:ZoneHVAC:EquipmentList,
   {74a0f049-a701-4bce-984f-1cb1d254b3ea}, !- Handle
@@ -1594,7 +1611,7 @@ OS:ThermalZone,
   {48b058d5-68af-407f-94b5-0c5ece824fb8}, !- Zone Air Inlet Port List
   {f0f7a236-72cc-4db7-9ff6-73773142cfff}, !- Zone Air Exhaust Port List
   {a6614cb3-887a-43ac-a75a-648f9202d848}, !- Zone Air Node Name
-  ,                                       !- Zone Return Air Node Name
+  {2044b5ee-7066-4bca-af7b-7762f5eeae65}, !- Zone Return Air Port List
   ,                                       !- Primary Daylighting Control Name
   ,                                       !- Fraction of Zone Controlled by Primary Daylighting Control
   ,                                       !- Secondary Daylighting Control Name
@@ -1604,6 +1621,11 @@ OS:ThermalZone,
   ,                                       !- Thermostat Name
   No;                                     !- Use Ideal Air Loads
 
+OS:PortList,
+  {2044b5ee-7066-4bca-af7b-7762f5eeae65}, !- Handle
+  {24c365fe-faec-4943-9daa-0bcc46b46cb2}, !- HVAC Component
+  ;                                       !- Port 1
+
 OS:Node,
   {a5b34470-194e-4e02-ac47-e3d97c72c53f}, !- Handle
   Node 4,                                 !- Name
@@ -1612,7 +1634,6 @@ OS:Node,
 
 OS:Connection,
   {a6614cb3-887a-43ac-a75a-648f9202d848}, !- Handle
-  {870330e3-4830-43ac-905d-19b1fda81528}, !- Name
   {24c365fe-faec-4943-9daa-0bcc46b46cb2}, !- Source Object
   11,                                     !- Outlet Port
   {a5b34470-194e-4e02-ac47-e3d97c72c53f}, !- Target Object
@@ -1620,12 +1641,10 @@ OS:Connection,
 
 OS:PortList,
   {48b058d5-68af-407f-94b5-0c5ece824fb8}, !- Handle
-  {6677958a-b2df-4677-aaac-f079bdb53689}, !- Name
   {24c365fe-faec-4943-9daa-0bcc46b46cb2}; !- HVAC Component
 
 OS:PortList,
   {f0f7a236-72cc-4db7-9ff6-73773142cfff}, !- Handle
-  {66211c54-6c2e-419e-aa9c-6b2a5c6ad6a6}, !- Name
   {24c365fe-faec-4943-9daa-0bcc46b46cb2}; !- HVAC Component
 
 OS:Sizing:Zone,
@@ -1651,12 +1670,17 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
-  autosize;                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  autosize,                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  Sensible Load Only No Latent Load,      !- Zone Load Sizing Method
+  HumidityRatioDifference,                !- Zone Latent Cooling Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Dehumidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005,                                  !- Zone Cooling Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
+  HumidityRatioDifference,                !- Zone Latent Heating Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Humidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005;                                  !- Zone Humidification Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
 
 OS:ZoneHVAC:EquipmentList,
   {b98749a7-f537-467e-9c06-9a24a3b5d140}, !- Handle
@@ -1676,7 +1700,7 @@ OS:ThermalZone,
   {3e0df06d-6c9a-4952-8bab-5de529828bde}, !- Zone Air Inlet Port List
   {a5a050fe-1f02-4c0a-a5f2-725dc7f66c01}, !- Zone Air Exhaust Port List
   {1c594418-abdd-4e4d-a866-591a26d04bd5}, !- Zone Air Node Name
-  ,                                       !- Zone Return Air Node Name
+  {0cf4781f-ac9b-4957-a6c9-a0f4d2ddb0c9}, !- Zone Return Air Port List
   ,                                       !- Primary Daylighting Control Name
   ,                                       !- Fraction of Zone Controlled by Primary Daylighting Control
   ,                                       !- Secondary Daylighting Control Name
@@ -1686,6 +1710,11 @@ OS:ThermalZone,
   ,                                       !- Thermostat Name
   No;                                     !- Use Ideal Air Loads
 
+OS:PortList,
+  {0cf4781f-ac9b-4957-a6c9-a0f4d2ddb0c9}, !- Handle
+  {285ee403-ae9d-4109-a22c-d7ccc9d3d85b}, !- HVAC Component
+  ;                                       !- Port 1
+
 OS:Node,
   {81d7f0c4-3966-4714-9c70-100b1d344aaf}, !- Handle
   Node 5,                                 !- Name
@@ -1694,7 +1723,6 @@ OS:Node,
 
 OS:Connection,
   {1c594418-abdd-4e4d-a866-591a26d04bd5}, !- Handle
-  {62fcb9d0-2dd2-4db7-9958-94901ada67b6}, !- Name
   {285ee403-ae9d-4109-a22c-d7ccc9d3d85b}, !- Source Object
   11,                                     !- Outlet Port
   {81d7f0c4-3966-4714-9c70-100b1d344aaf}, !- Target Object
@@ -1702,12 +1730,10 @@ OS:Connection,
 
 OS:PortList,
   {3e0df06d-6c9a-4952-8bab-5de529828bde}, !- Handle
-  {a5a7bc4e-6d7c-4914-b737-867fad771a8a}, !- Name
   {285ee403-ae9d-4109-a22c-d7ccc9d3d85b}; !- HVAC Component
 
 OS:PortList,
   {a5a050fe-1f02-4c0a-a5f2-725dc7f66c01}, !- Handle
-  {e8b94cb2-aa89-48ee-bb68-4c23f58dccba}, !- Name
   {285ee403-ae9d-4109-a22c-d7ccc9d3d85b}; !- HVAC Component
 
 OS:Sizing:Zone,
@@ -1733,12 +1759,17 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
-  autosize;                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  autosize,                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  Sensible Load Only No Latent Load,      !- Zone Load Sizing Method
+  HumidityRatioDifference,                !- Zone Latent Cooling Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Dehumidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005,                                  !- Zone Cooling Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
+  HumidityRatioDifference,                !- Zone Latent Heating Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Humidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005;                                  !- Zone Humidification Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
 
 OS:ZoneHVAC:EquipmentList,
   {59e90d19-cdc8-4b51-a7c8-8f18f642ad00}, !- Handle
@@ -1758,7 +1789,7 @@ OS:ThermalZone,
   {526e0389-958a-4658-bca0-2097808c97e9}, !- Zone Air Inlet Port List
   {816277af-ef0d-488f-a877-ac5bf7247711}, !- Zone Air Exhaust Port List
   {7e9dcbe3-948c-464e-a850-583e4cae0282}, !- Zone Air Node Name
-  ,                                       !- Zone Return Air Node Name
+  {789f2a80-90ec-4d75-b5f6-fef5a4ddbc35}, !- Zone Return Air Port List
   ,                                       !- Primary Daylighting Control Name
   ,                                       !- Fraction of Zone Controlled by Primary Daylighting Control
   ,                                       !- Secondary Daylighting Control Name
@@ -1768,6 +1799,11 @@ OS:ThermalZone,
   ,                                       !- Thermostat Name
   No;                                     !- Use Ideal Air Loads
 
+OS:PortList,
+  {789f2a80-90ec-4d75-b5f6-fef5a4ddbc35}, !- Handle
+  {761af5ec-0e7c-4fea-81cc-7d7860391e92}, !- HVAC Component
+  ;                                       !- Port 1
+
 OS:Node,
   {bdb87aa1-c349-4845-afa2-28ce98f3e94d}, !- Handle
   Node 6,                                 !- Name
@@ -1776,7 +1812,6 @@ OS:Node,
 
 OS:Connection,
   {7e9dcbe3-948c-464e-a850-583e4cae0282}, !- Handle
-  {b4dc9464-6a83-4a94-a8cc-2dd5684f25ca}, !- Name
   {761af5ec-0e7c-4fea-81cc-7d7860391e92}, !- Source Object
   11,                                     !- Outlet Port
   {bdb87aa1-c349-4845-afa2-28ce98f3e94d}, !- Target Object
@@ -1784,12 +1819,10 @@ OS:Connection,
 
 OS:PortList,
   {526e0389-958a-4658-bca0-2097808c97e9}, !- Handle
-  {041a3901-57af-4f6e-a902-365358d7e56d}, !- Name
   {761af5ec-0e7c-4fea-81cc-7d7860391e92}; !- HVAC Component
 
 OS:PortList,
   {816277af-ef0d-488f-a877-ac5bf7247711}, !- Handle
-  {823ef39b-a3f8-417f-938e-f768f2d8b3d5}, !- Name
   {761af5ec-0e7c-4fea-81cc-7d7860391e92}; !- HVAC Component
 
 OS:Sizing:Zone,
@@ -1815,12 +1848,17 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
-  autosize;                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  autosize,                               !- Dedicated Outdoor Air High Setpoint Temperature for Design {C}
+  Sensible Load Only No Latent Load,      !- Zone Load Sizing Method
+  HumidityRatioDifference,                !- Zone Latent Cooling Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Dehumidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005,                                  !- Zone Cooling Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
+  HumidityRatioDifference,                !- Zone Latent Heating Design Supply Air Humidity Ratio Input Method
+  ,                                       !- Zone Humidification Design Supply Air Humidity Ratio {kgWater/kgDryAir}
+  0.005;                                  !- Zone Humidification Design Supply Air Humidity Ratio Difference {kgWater/kgDryAir}
 
 OS:ZoneHVAC:EquipmentList,
   {474770d8-36d1-4ff2-a34b-7c93d81db149}, !- Handle
@@ -1834,6 +1872,7 @@ OS:SpaceType,
   ,                                       !- Default Schedule Set Name
   {75385b6d-b97f-430d-8c39-23fe5b927d8a}, !- Group Rendering Name
   ,                                       !- Design Specification Outdoor Air Object Name
+  ,                                       !- Standards Template
   Office,                                 !- Standards Building Type
   WholeBuilding - Sm Office;              !- Standards Space Type
 
@@ -1851,6 +1890,7 @@ OS:SpaceType,
   ,                                       !- Default Schedule Set Name
   {996c5881-2074-43c3-865a-a3c1283bbb9c}, !- Group Rendering Name
   ,                                       !- Design Specification Outdoor Air Object Name
+  ,                                       !- Standards Template
   Office,                                 !- Standards Building Type
   Attic;                                  !- Standards Space Type
 
@@ -1869,7 +1909,6 @@ OS:SubSurface,
   {17c4f45d-4218-45b0-b696-893c60c109f8}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -1886,7 +1925,6 @@ OS:SubSurface,
   {17c4f45d-4218-45b0-b696-893c60c109f8}, !- Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
-  ,                                       !- Shading Control Name
   ,                                       !- Frame and Divider Name
   1,                                      !- Multiplier
   ,                                       !- Number of Vertices
@@ -1894,3 +1932,273 @@ OS:SubSurface,
   19.131920148775, 18.46, 0,              !- X,Y,Z Vertex 2 {m}
   18.217520148775, 18.46, 0,              !- X,Y,Z Vertex 3 {m}
   18.217520148775, 18.46, 2.1336;         !- X,Y,Z Vertex 4 {m}
+
+OS:ClimateZones,
+  {876ffb9a-921b-458f-ad10-3e3982d0a95b}, !- Handle
+  ASHRAE,                                 !- Climate Zone Institution Name 1
+  ANSI/ASHRAE Standard 169,               !- Climate Zone Document Name 1
+  2006,                                   !- Climate Zone Document Year 1
+  ,                                       !- Climate Zone Value 1
+  CEC,                                    !- Climate Zone Institution Name 2
+  California Climate Zone Descriptions,   !- Climate Zone Document Name 2
+  1995,                                   !- Climate Zone Document Year 2
+  ;                                       !- Climate Zone Value 2
+
+OS:LifeCycleCost:Parameters,
+  {96a4e472-23b6-4a35-9e1d-62f9cb9c0259}, !- Handle
+  ,                                       !- Analysis Type
+  ,                                       !- Discounting Convention
+  ,                                       !- Inflation Approach
+  ,                                       !- Real Discount Rate
+  ,                                       !- Nominal Discount Rate
+  ,                                       !- Inflation
+  ,                                       !- Base Date Month
+  ,                                       !- Base Date Year
+  ,                                       !- Service Date Month
+  ,                                       !- Service Date Year
+  ;                                       !- Length of Study Period in Years
+
+OS:RadianceParameters,
+  {4db366bb-d8ed-4030-b84d-9b9c29c0ccb8}, !- Handle
+  1,                                      !- Accumulated Rays per Record
+  0,                                      !- Direct Threshold
+  1,                                      !- Direct Certainty
+  1,                                      !- Direct Jitter
+  1,                                      !- Direct Pretest
+  6,                                      !- Ambient Bounces VMX
+  2,                                      !- Ambient Bounces DMX
+  4050,                                   !- Ambient Divisions VMX
+  512,                                    !- Ambient Divisions DMX
+  256,                                    !- Ambient Supersamples
+  0.001,                                  !- Limit Weight VMX
+  0.001,                                  !- Limit Weight DMX
+  500,                                    !- Klems Sampling Density
+  146;                                    !- Sky Discretization Resolution
+
+OS:ProgramControl,
+  {15093df2-ade3-4cce-9133-aae848c6489b}; !- Handle
+
+OS:OutputControl:ReportingTolerances,
+  {a5146697-d013-496d-9ee2-6872eaf7bc37}; !- Handle
+
+OS:SurfaceConvectionAlgorithm:Inside,
+  {25f52f26-4242-49e1-a51e-7e602d39672d}, !- Handle
+  TARP;                                   !- Algorithm
+
+OS:SurfaceConvectionAlgorithm:Outside,
+  {6257fe60-6726-4630-8fea-103884f551e8}, !- Handle
+  DOE-2;                                  !- Algorithm
+
+OS:ZoneAirHeatBalanceAlgorithm,
+  {3c65db64-429f-48e4-8004-58411e66fc8a}, !- Handle
+  ,                                       !- Algorithm
+  ,                                       !- Do Space Heat Balance for Sizing
+  ;                                       !- Do Space Heat Balance for Simulation
+
+OS:ZoneAirContaminantBalance,
+  {f9f8946f-c6a9-4af4-a592-9c0a4823f7ed}; !- Handle
+
+OS:ZoneCapacitanceMultiplier:ResearchSpecial,
+  {cf1ea00c-f59a-4261-a63b-c18de0f8993e}, !- Handle
+  ,                                       !- Temperature Capacity Multiplier
+  ,                                       !- Humidity Capacity Multiplier
+  ;                                       !- Carbon Dioxide Capacity Multiplier
+
+OS:Output:JSON,
+  {9a2bd9c5-5546-486e-98e9-2856c51a2f17}, !- Handle
+  TimeSeriesAndTabular,                   !- Option Type
+  No,                                     !- Output JSON
+  No,                                     !- Output CBOR
+  No;                                     !- Output MessagePack
+
+OS:Output:Table:SummaryReports,
+  {57bcc1fb-f69b-4af8-b853-dd4b3cae17a3}, !- Handle
+  AllSummary;                             !- Report Name 1
+
+OS:Output:Diagnostics,
+  {c650ec7a-7bfa-4ded-85f2-9178a8248827}; !- Handle
+
+OS:SizingPeriod:DesignDay,
+  {10865a60-aa46-4fea-9575-5b9b28257802}, !- Handle
+  Chicago Midway Ap Ann Htg 99.6% Condns DB, !- Name
+  -18.7,                                  !- Maximum Dry-Bulb Temperature {C}
+  0,                                      !- Daily Dry-Bulb Temperature Range {deltaC}
+  99110,                                  !- Barometric Pressure {Pa}
+  5.3,                                    !- Wind Speed {m/s}
+  300,                                    !- Wind Direction {deg}
+  0,                                      !- Sky Clearness
+  No,                                     !- Rain Indicator
+  No,                                     !- Snow Indicator
+  21,                                     !- Day of Month
+  1,                                      !- Month
+  WinterDesignDay,                        !- Day Type
+  No,                                     !- Daylight Saving Time Indicator
+  Wetbulb,                                !- Humidity Condition Type
+  ,                                       !- Humidity Condition Day Schedule Name
+  -18.7,                                  !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
+  ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
+  DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
+  ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
+  ASHRAEClearSky;                         !- Solar Model Indicator
+
+OS:SizingPeriod:DesignDay,
+  {bf726d92-c240-4a03-bdf1-f7e61b18ff6e}, !- Handle
+  Chicago Midway Ap Ann Hum_n 99.6% Condns DP=>MCDB, !- Name
+  -18,                                    !- Maximum Dry-Bulb Temperature {C}
+  0,                                      !- Daily Dry-Bulb Temperature Range {deltaC}
+  99110,                                  !- Barometric Pressure {Pa}
+  5.3,                                    !- Wind Speed {m/s}
+  300,                                    !- Wind Direction {deg}
+  0,                                      !- Sky Clearness
+  No,                                     !- Rain Indicator
+  No,                                     !- Snow Indicator
+  21,                                     !- Day of Month
+  1,                                      !- Month
+  WinterDesignDay,                        !- Day Type
+  No,                                     !- Daylight Saving Time Indicator
+  Dewpoint,                               !- Humidity Condition Type
+  ,                                       !- Humidity Condition Day Schedule Name
+  -24.5,                                  !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
+  ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
+  DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
+  ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
+  ASHRAEClearSky;                         !- Solar Model Indicator
+
+OS:SizingPeriod:DesignDay,
+  {c990d6c0-1cd2-4925-99a4-1ed5235ba4a4}, !- Handle
+  Chicago Midway Ap Ann Htg Wind 99.6% Condns WS=>MCDB, !- Name
+  -3.6,                                   !- Maximum Dry-Bulb Temperature {C}
+  0,                                      !- Daily Dry-Bulb Temperature Range {deltaC}
+  99110,                                  !- Barometric Pressure {Pa}
+  12.3,                                   !- Wind Speed {m/s}
+  300,                                    !- Wind Direction {deg}
+  0,                                      !- Sky Clearness
+  No,                                     !- Rain Indicator
+  No,                                     !- Snow Indicator
+  21,                                     !- Day of Month
+  1,                                      !- Month
+  WinterDesignDay,                        !- Day Type
+  No,                                     !- Daylight Saving Time Indicator
+  Wetbulb,                                !- Humidity Condition Type
+  ,                                       !- Humidity Condition Day Schedule Name
+  -3.6,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
+  ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
+  DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
+  ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
+  ASHRAEClearSky;                         !- Solar Model Indicator
+
+OS:SizingPeriod:DesignDay,
+  {a4da111e-1673-431c-aa43-3d7ec1adcf33}, !- Handle
+  Chicago Midway Ap Ann Clg .4% Condns DB=>MWB, !- Name
+  33.4,                                   !- Maximum Dry-Bulb Temperature {C}
+  8.8,                                    !- Daily Dry-Bulb Temperature Range {deltaC}
+  99110,                                  !- Barometric Pressure {Pa}
+  5.6,                                    !- Wind Speed {m/s}
+  220,                                    !- Wind Direction {deg}
+  ,                                       !- Sky Clearness
+  No,                                     !- Rain Indicator
+  No,                                     !- Snow Indicator
+  21,                                     !- Day of Month
+  7,                                      !- Month
+  SummerDesignDay,                        !- Day Type
+  No,                                     !- Daylight Saving Time Indicator
+  Wetbulb,                                !- Humidity Condition Type
+  ,                                       !- Humidity Condition Day Schedule Name
+  23.8,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
+  ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
+  DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
+  ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
+  ASHRAETau,                              !- Solar Model Indicator
+  ,                                       !- Beam Solar Day Schedule Name
+  ,                                       !- Diffuse Solar Day Schedule Name
+  0.457,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance {dimensionless}
+  2.043;                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance {dimensionless}
+
+OS:SizingPeriod:DesignDay,
+  {48a9ebd4-2386-4b22-bffb-aa97ad59e87a}, !- Handle
+  Chicago Midway Ap Ann Clg .4% Condns WB=>MDB, !- Name
+  31.3,                                   !- Maximum Dry-Bulb Temperature {C}
+  8.8,                                    !- Daily Dry-Bulb Temperature Range {deltaC}
+  99110,                                  !- Barometric Pressure {Pa}
+  5.6,                                    !- Wind Speed {m/s}
+  220,                                    !- Wind Direction {deg}
+  ,                                       !- Sky Clearness
+  No,                                     !- Rain Indicator
+  No,                                     !- Snow Indicator
+  21,                                     !- Day of Month
+  7,                                      !- Month
+  SummerDesignDay,                        !- Day Type
+  No,                                     !- Daylight Saving Time Indicator
+  Wetbulb,                                !- Humidity Condition Type
+  ,                                       !- Humidity Condition Day Schedule Name
+  25.6,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
+  ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
+  DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
+  ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
+  ASHRAETau,                              !- Solar Model Indicator
+  ,                                       !- Beam Solar Day Schedule Name
+  ,                                       !- Diffuse Solar Day Schedule Name
+  0.457,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance {dimensionless}
+  2.043;                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance {dimensionless}
+
+OS:SizingPeriod:DesignDay,
+  {694bc82c-1e76-4fb5-8cbb-49bab94339ff}, !- Handle
+  Chicago Midway Ap Ann Clg .4% Condns DP=>MDB, !- Name
+  29,                                     !- Maximum Dry-Bulb Temperature {C}
+  8.8,                                    !- Daily Dry-Bulb Temperature Range {deltaC}
+  99110,                                  !- Barometric Pressure {Pa}
+  5.6,                                    !- Wind Speed {m/s}
+  220,                                    !- Wind Direction {deg}
+  ,                                       !- Sky Clearness
+  No,                                     !- Rain Indicator
+  No,                                     !- Snow Indicator
+  21,                                     !- Day of Month
+  7,                                      !- Month
+  SummerDesignDay,                        !- Day Type
+  No,                                     !- Daylight Saving Time Indicator
+  Dewpoint,                               !- Humidity Condition Type
+  ,                                       !- Humidity Condition Day Schedule Name
+  23.9,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
+  ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
+  DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
+  ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
+  ASHRAETau,                              !- Solar Model Indicator
+  ,                                       !- Beam Solar Day Schedule Name
+  ,                                       !- Diffuse Solar Day Schedule Name
+  0.457,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance {dimensionless}
+  2.043;                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance {dimensionless}
+
+OS:SizingPeriod:DesignDay,
+  {26036694-c591-4ba2-a8a8-28eada6c0011}, !- Handle
+  Chicago Midway Ap Ann Clg .4% Condns Enth=>MDB, !- Name
+  31.7,                                   !- Maximum Dry-Bulb Temperature {C}
+  8.8,                                    !- Daily Dry-Bulb Temperature Range {deltaC}
+  99110,                                  !- Barometric Pressure {Pa}
+  5.6,                                    !- Wind Speed {m/s}
+  220,                                    !- Wind Direction {deg}
+  ,                                       !- Sky Clearness
+  No,                                     !- Rain Indicator
+  No,                                     !- Snow Indicator
+  21,                                     !- Day of Month
+  7,                                      !- Month
+  SummerDesignDay,                        !- Day Type
+  No,                                     !- Daylight Saving Time Indicator
+  Enthalpy,                               !- Humidity Condition Type
+  ,                                       !- Humidity Condition Day Schedule Name
+  23,                                     !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
+  79600,                                  !- Enthalpy at Maximum Dry-Bulb {J/kg}
+  DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
+  ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
+  ASHRAETau,                              !- Solar Model Indicator
+  ,                                       !- Beam Solar Day Schedule Name
+  ,                                       !- Diffuse Solar Day Schedule Name
+  0.457,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance {dimensionless}
+  2.043;                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance {dimensionless}
+
