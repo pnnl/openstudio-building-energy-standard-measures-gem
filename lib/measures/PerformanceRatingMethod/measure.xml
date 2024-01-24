@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <measure>
   <schema_version>3.1</schema_version>
-  <name>create_baseline_building</name>
+  <name>create_ashrae_prm_model</name>
   <uid>a984a630-2a41-45fd-80ec-6454777bf253</uid>
   <version_id>9d4be7d1-e2c2-463c-9cde-8dbbd00b2837</version_id>
   <version_modified>2023-09-19T20:15:31Z</version_modified>
@@ -543,13 +543,33 @@
       <value>false</value>
       <datatype>boolean</datatype>
     </attribute>
+    <attribute>
+      <name>Requires EnergyPlus Results</name>
+      <value>true</value>
+      <datatype>boolean</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool </name>
+      <value>OpenStudio Application</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool </name>
+      <value>OpenStudio CLI</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Use Case </name>
+      <value>Generate ASHRAE Appx G baseline</value>
+      <datatype>string</datatype>
+    </attribute>
   </attributes>
   <files>
     <file>
       <version>
         <software_program>OpenStudio</software_program>
-        <identifier>2.0.0</identifier>
-        <min_compatible>2.0.0</min_compatible>
+        <identifier>3.7.0</identifier>
+        <min_compatible>3.7.0</min_compatible>
       </version>
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
