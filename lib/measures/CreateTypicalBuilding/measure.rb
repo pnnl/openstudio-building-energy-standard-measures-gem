@@ -1,4 +1,5 @@
 require "openstudio-standards"
+require_relative "./resources/create_typical_resources.rb"
 
 # start the measure
 class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
