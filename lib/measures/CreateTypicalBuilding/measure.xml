@@ -2,14 +2,14 @@
 <measure>
   <schema_version>3.1</schema_version>
   <name>create_typical_building</name>
-  <uid>8dea6660-7268-4f1e-817f-02ddf64e64c5</uid>
-  <version_id>2bd528b4-ca8f-4daf-a053-b1133f4ea741</version_id>
-  <version_modified>2023-12-07T14:34:29Z</version_modified>
-  <xml_checksum>DE3258BC</xml_checksum>
+  <uid>c65fdaf3-0a94-4ba4-889c-1e5b5cc8586f</uid>
+  <version_id>2f8ede77-f443-48df-bca7-5c5bdfe252a5</version_id>
+  <version_modified>2024-01-31T15:40:03Z</version_modified>
+  <xml_checksum>6CE0A70A</xml_checksum>
   <class_name>CreateTypicalBuilding</class_name>
   <display_name>Create Typical Building</display_name>
   <description>The "Create Typical Building" OpenStudio measures empowers users to effortlessly generate OpenStudio and EnergyPlus models by making a few select choices. Users can input preferences such as the building energy code year (e.g., ASHRAE 90.1-2013), climate zone, and desired heating, ventilation, and air conditioning (HVAC) system.</description>
-  <modeler_description>This OpenStudio Measure analyzes and generates a standard building model using either the current geometry or a pre-established geometry file. It considers the selected building energy standard, the HVAC system, and the specific climate zone to create a standardized building model within OpenStudio. Please note that choosing any option other than "Existing Geometry" will replace the current OSM file.</modeler_description>
+  <modeler_description>This OpenStudio Measure analyzes and generates a standard building model using either the current geometry or a pre-established geometry file. It considers the selected building energy standard, the HVAC system, and the specific climate zone to create a standardized building model within OpenStudio. Please note that choosing any option other than "Existing Geometry" will replace the current OSM file. Selecting "JSON-specified" under "HVAC Type" allows users to map CBECS HVAC Systems to specific zones in the OSM model. An example file can be found at under this measure's tests at .\tests\source\hvac_mapping_path\hvac_zone_mapping.json</modeler_description>
   <arguments>
     <argument>
       <name>geometry_file</name>
@@ -220,6 +220,10 @@
         <choice>
           <value>Inferred</value>
           <display_name>Inferred</display_name>
+        </choice>
+        <choice>
+          <value>JSON specified</value>
+          <display_name>JSON specified</display_name>
         </choice>
         <choice>
           <value>Baseboard central air source heat pump</value>
@@ -771,11 +775,20 @@
         </choice>
       </choices>
     </argument>
+    <argument>
+      <name>user_hvac_json_path</name>
+      <display_name>HVAC Zone Mapping JSON Path:</display_name>
+      <description>Required if "JSON specified" is selected for "HVAC Type". Please enter a valid absolute path to a HVAC-to-Zone mapping JSON.</description>
+      <type>String</type>
+      <required>false</required>
+      <model_dependent>false</model_dependent>
+      <default_value>path/to/my/hvac_mapping.json</default_value>
+    </argument>
   </arguments>
   <outputs />
   <provenances />
   <tags>
-    <tag>Whole Building.Whole Building Schedules</tag>
+    <tag>Whole Building.Space Types</tag>
   </tags>
   <attributes>
     <attribute>
@@ -798,24 +811,19 @@
       <value>OpenStudio Application</value>
       <datatype>string</datatype>
     </attribute>
-    <attribute>
-      <name>Intended Software Tool</name>
-      <value>Parametric Analysis Tool</value>
-      <datatype>string</datatype>
-    </attribute>
   </attributes>
   <files>
     <file>
       <filename>LICENSE.md</filename>
       <filetype>md</filetype>
       <usage_type>license</usage_type>
-      <checksum>CD7F5672</checksum>
+      <checksum>7C2CADD0</checksum>
     </file>
     <file>
       <filename>README.md</filename>
       <filetype>md</filetype>
       <usage_type>readme</usage_type>
-      <checksum>3E9F69AA</checksum>
+      <checksum>2F312298</checksum>
     </file>
     <file>
       <filename>README.md.erb</filename>
@@ -832,55 +840,79 @@
     <file>
       <version>
         <software_program>OpenStudio</software_program>
-        <identifier>3.6.1</identifier>
-        <min_compatible>3.6.1</min_compatible>
+        <identifier>3.7.0</identifier>
+        <min_compatible>3.7.0</min_compatible>
       </version>
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>6349191B</checksum>
+      <checksum>0F91B3B7</checksum>
     </file>
     <file>
-      <filename>.idea/misc.xml</filename>
-      <filetype>xml</filetype>
-      <usage_type>test</usage_type>
-      <checksum>06D47DC1</checksum>
-    </file>
-    <file>
-      <filename>.idea/modules.xml</filename>
-      <filetype>xml</filetype>
-      <usage_type>test</usage_type>
-      <checksum>065992AF</checksum>
-    </file>
-    <file>
-      <filename>.idea/tests.iml</filename>
-      <filetype>iml</filetype>
-      <usage_type>test</usage_type>
-      <checksum>7508AF60</checksum>
-    </file>
-    <file>
-      <filename>.idea/workspace.xml</filename>
-      <filetype>xml</filetype>
-      <usage_type>test</usage_type>
-      <checksum>544A0FD9</checksum>
-    </file>
-    <file>
-      <filename>ASHRAESmallOffice.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>25B71CE2</checksum>
+      <filename>create_typical_resources.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>E0EEFDC9</checksum>
     </file>
     <file>
       <filename>create_typical_building_test.rb</filename>
       <filetype>rb</filetype>
       <usage_type>test</usage_type>
-      <checksum>0CEE8CD1</checksum>
+      <checksum>C288438F</checksum>
     </file>
     <file>
-      <filename>tester.osm</filename>
+      <filename>example_model.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
-      <checksum>1CBA7B32</checksum>
+      <checksum>53D14E69</checksum>
+    </file>
+    <file>
+      <filename>source/ASHRAERetailStripmall.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>E1E3360A</checksum>
+    </file>
+    <file>
+      <filename>source/ASHRAESmallOffice.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>5ECE7EF1</checksum>
+    </file>
+    <file>
+      <filename>source/hvac_mapping_path/hvac_zone_mapping.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>D6F1ACD5</checksum>
+    </file>
+    <file>
+      <filename>source/hvac_mapping_path/hvac_zone_mapping_2_psz_ac.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>D6F1ACD5</checksum>
+    </file>
+    <file>
+      <filename>source/hvac_mapping_path/hvac_zone_mapping_2_vav_hw_rh.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>613A67E9</checksum>
+    </file>
+    <file>
+      <filename>source/hvac_mapping_path/hvac_zone_mapping_broken.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>248D1DD6</checksum>
+    </file>
+    <file>
+      <filename>source/hvac_mapping_path/hvac_zone_mapping_invalid_json.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>19D41864</checksum>
+    </file>
+    <file>
+      <filename>source/hvac_mapping_path/hvac_zone_mapping_psz_ac_ptac.json</filename>
+      <filetype>json</filetype>
+      <usage_type>test</usage_type>
+      <checksum>E50F2DCF</checksum>
     </file>
   </files>
 </measure>
