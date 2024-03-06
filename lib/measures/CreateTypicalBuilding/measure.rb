@@ -170,7 +170,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
       standard = Standard.new()
 
       climate_zone = standard.model_get_building_properties(model)['climate_zone'] if climate_zone == 'Lookup From Model'
-      standard.model_add_design_days_and_weather_file(model, climate_zone)
+      OpenstudioStandards::Weather.model_set_building_location(model, climate_zone: climate_zone)
 
       # Get weather file name for reporting purposes
       location_name = model.weatherFile.get.site.get.name.to_s
