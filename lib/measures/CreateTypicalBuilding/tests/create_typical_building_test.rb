@@ -8,6 +8,7 @@ require 'fileutils'
 
 class CreateTypicalBuildingTest < Minitest::Test
 
+
   def test_existing_geometry_w_conventional_values
     # create an instance of the measure
     measure = CreateTypicalBuilding.new
@@ -34,7 +35,7 @@ class CreateTypicalBuildingTest < Minitest::Test
     # create hash of argument values.
     # If the argument has a default that you want to use, you don't need it in the hash
     args_hash = {}
-    args_hash['geometry_file'] = 'Existing Geometry'
+    args_hash['geometry'] = 'Existing Geometry'
     args_hash['climate_zone'] = 'ASHRAE 169-2013-4A'
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'PSZ-AC with gas coil'
@@ -92,7 +93,7 @@ class CreateTypicalBuildingTest < Minitest::Test
     # create hash of argument values.
     # If the argument has a default that you want to use, you don't need it in the hash
     args_hash = {}
-    args_hash['geometry_file'] = 'ASHRAERetailStripmall.osm'
+    args_hash['geometry'] = 'Retail Stripmall'
     args_hash['climate_zone'] = 'ASHRAE 169-2013-4A'
     args_hash['template'] = '90.1-2019'
     args_hash['user_hvac_mapping'] = 'FALSE'
@@ -150,7 +151,7 @@ class CreateTypicalBuildingTest < Minitest::Test
     # create hash of argument values.
     # If the argument has a default that you want to use, you don't need it in the hash
     args_hash = {}
-    args_hash['geometry_file'] = 'Existing Geometry'
+    args_hash['geometry'] = 'Existing Geometry'
     args_hash['climate_zone'] = 'ASHRAE 169-2013-4A'
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
@@ -209,7 +210,7 @@ class CreateTypicalBuildingTest < Minitest::Test
     # create hash of argument values.
     # If the argument has a default that you want to use, you don't need it in the hash
     args_hash = {}
-    args_hash['geometry_file'] = 'Existing Geometry'
+    args_hash['geometry'] = 'Existing Geometry'
     args_hash['climate_zone'] = 'ASHRAE 169-2013-4A'
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
@@ -272,7 +273,7 @@ class CreateTypicalBuildingTest < Minitest::Test
     # create hash of argument values.
     # If the argument has a default that you want to use, you don't need it in the hash
     args_hash = {}
-    args_hash['geometry_file'] = 'Existing Geometry'
+    args_hash['geometry'] = 'Existing Geometry'
     args_hash['climate_zone'] = 'ASHRAE 169-2013-4A'
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
@@ -310,7 +311,7 @@ class CreateTypicalBuildingTest < Minitest::Test
   end
 
 
-  def test_invalid_user_hvac_mapping_json
+  def test_invalid_user_hvac_mapping_json_parser_error
     # create an instance of the measure
     measure = CreateTypicalBuilding.new
 
@@ -337,7 +338,7 @@ class CreateTypicalBuildingTest < Minitest::Test
     # create hash of argument values.
     # If the argument has a default that you want to use, you don't need it in the hash
     args_hash = {}
-    args_hash['geometry_file'] = 'Existing Geometry'
+    args_hash['geometry'] = 'Existing Geometry'
     args_hash['climate_zone'] = 'ASHRAE 169-2013-4A'
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
@@ -394,7 +395,7 @@ class CreateTypicalBuildingTest < Minitest::Test
     # create hash of argument values.
     # If the argument has a default that you want to use, you don't need it in the hash
     args_hash = {}
-    args_hash['geometry_file'] = 'Existing Geometry'
+    args_hash['geometry'] = 'Existing Geometry'
     args_hash['climate_zone'] = 'ASHRAE 169-2013-4A'
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
@@ -451,7 +452,7 @@ class CreateTypicalBuildingTest < Minitest::Test
     # create hash of argument values.
     # If the argument has a default that you want to use, you don't need it in the hash
     args_hash = {}
-    args_hash['geometry_file'] = 'Existing Geometry'
+    args_hash['geometry'] = 'Existing Geometry'
     args_hash['climate_zone'] = 'ASHRAE 169-2013-4A'
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'

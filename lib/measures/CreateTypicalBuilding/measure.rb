@@ -37,9 +37,9 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
 
     #--------- Assign enumerations for inputs from constants
     geom_types = OpenStudio::StringVector.new
-    geom_list = CreateTypicalBldgConstants::GEOMETRY_FILES
-    geom_list.each do |geom_file|
-      geom_types << geom_file
+    geom_list = CreateTypicalBldgConstants::GEOMETRY_SELECTIONS
+    geom_list.each do |geom_selection|
+      geom_types << geom_selection
     end
 
     climate_zones = OpenStudio::StringVector.new
@@ -63,8 +63,8 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     #END--------- Assign enumerations for inputs
 
     # Add input elements
-    geometry_file_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('geometry_file', geom_types, true)
-    geometry_file_choice.setDisplayName("Geometry File")
+    geometry_file_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('geometry', geom_types, true)
+    geometry_file_choice.setDisplayName("Geometry")
     geometry_file_choice.setDefaultValue("Existing Geometry")
     args << geometry_file_choice
 
@@ -106,14 +106,17 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     end
 
     # assign the user inputs to variables
-    geometry_file = runner.getStringArgumentValue('geometry_file', user_arguments)
+    geometry = runner.getStringArgumentValue('geometry', user_arguments)
     climate_zone = runner.getStringArgumentValue('climate_zone', user_arguments)
     template = runner.getStringArgumentValue('template', user_arguments)
     hvac_type = runner.getStringArgumentValue('hvac_type', user_arguments)
     user_hvac_json_path = runner.getStringArgumentValue('user_hvac_json_path', user_arguments)
 
     # Load geometry file, if specified. NOTE, this will overwrite the existing OS model object
-    if geometry_file != 'Existing Geometry'
+    if geometry != 'Existing Geometry'
+
+      geometry_file = CreateTypicalBldgConstants::GEOMETRY_FILES_HASH[geometry]
+
       standard = Standard.new()
       #TODO This seems like a very sketchy way to call the private method load_geometry_osm
       new_model = standard.send(:load_geometry_osm,"geometry/#{geometry_file}")
@@ -124,7 +127,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     end
 
     runner.registerInfo("Model loaded, attempting Create Typical Building from model with parameters:")
-    runner.registerInfo("Geometry Selection: #{geometry_file}")
+    runner.registerInfo("Geometry Selection: #{geometry}")
     runner.registerInfo("Building Code: #{template}")
     runner.registerInfo("Climate Zone: #{climate_zone}")
     runner.registerInfo("HVAC System Type: #{hvac_type}")
