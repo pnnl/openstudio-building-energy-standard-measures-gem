@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <measure>
   <schema_version>3.1</schema_version>
-  <name>create_ashrae_prm_model</name>
+  <name>create_baseline_building</name>
   <uid>a984a630-2a41-45fd-80ec-6454777bf253</uid>
-  <version_id>9d4be7d1-e2c2-463c-9cde-8dbbd00b2837</version_id>
-  <version_modified>2023-09-19T20:15:31Z</version_modified>
-  <xml_checksum>057E8D9D</xml_checksum>
+  <version_id>83f665ea-19f6-4a53-a78a-4be20afbc3e6</version_id>
+  <version_modified>2024-04-30T16:15:46Z</version_modified>
+  <xml_checksum>8FF2A4FA</xml_checksum>
   <class_name>CreateBaselineBuilding</class_name>
   <display_name>Create ASHRAE 90.1-2019 PRM Model</display_name>
   <description>Create the &lt;strong&gt;Baseline Building&lt;/strong&gt; per ASHRAE Standard 90.1-2019 Performance Rating Method. User manual for this measure please see &lt;a href='https://pnnl.github.io/BEM-for-PRM/'&gt; https://pnnl.github.io/BEM-for-PRM &lt;/a&gt;.</description>
@@ -18,7 +18,7 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>Grocery store</default_value>
+      <default_value>Office 5,000 to 50,000 sq ft</default_value>
       <choices>
         <choice>
           <value>Grocery store</value>
@@ -93,7 +93,7 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>Automotive facility</default_value>
+      <default_value>Office</default_value>
       <choices>
         <choice>
           <value>Automotive facility</value>
@@ -248,7 +248,7 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>retail</default_value>
+      <default_value>other nonresidential</default_value>
       <choices>
         <choice>
           <value>retail</value>
@@ -286,7 +286,7 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>ASHRAE 169-2013-1A</default_value>
+      <default_value>ASHRAE 169-2013-4A</default_value>
       <choices>
         <choice>
           <value>ASHRAE 169-2013-1A</value>
@@ -449,7 +449,7 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>FALSE</default_value>
+      <default_value>TRUE</default_value>
       <choices>
         <choice>
           <value>TRUE</value>
@@ -468,7 +468,7 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>FALSE</default_value>
+      <default_value>TRUE</default_value>
       <choices>
         <choice>
           <value>TRUE</value>
@@ -502,11 +502,39 @@
     <argument>
       <name>user_data_path</name>
       <display_name>User Data Path:</display_name>
-      <description>Required if select "TRUE" in "Use User Data". Please input a valid file path which contains the user data files.</description>
+      <description>Required if select "TRUE" in "Use User Data". Please input a valid folder path which contains the user data files.</description>
       <type>String</type>
       <required>false</required>
       <model_dependent>false</model_dependent>
       <default_value>User_Data_Path</default_value>
+    </argument>
+    <argument>
+      <name>evaluation_package</name>
+      <display_name>Use PRM evaluation package</display_name>
+      <description>Set to True the measure will search the local copy of OpenStudio-Standards to perform PRM</description>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>FALSE</default_value>
+      <choices>
+        <choice>
+          <value>TRUE</value>
+          <display_name>TRUE</display_name>
+        </choice>
+        <choice>
+          <value>FALSE</value>
+          <display_name>FALSE</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>evaluation_package_path</name>
+      <display_name>Evaluation Package Path:</display_name>
+      <description>Required if select "TRUE" in "Use PRM evaluation package". Please input a valid folder path which contains the evaluation package.</description>
+      <type>String</type>
+      <required>false</required>
+      <model_dependent>false</model_dependent>
+      <default_value></default_value>
     </argument>
     <argument>
       <name>debug</name>
@@ -566,6 +594,18 @@
   </attributes>
   <files>
     <file>
+      <filename>README.md</filename>
+      <filetype>md</filetype>
+      <usage_type>readme</usage_type>
+      <checksum>36A8C8E2</checksum>
+    </file>
+    <file>
+      <filename>README.md.erb</filename>
+      <filetype>erb</filetype>
+      <usage_type>readmeerb</usage_type>
+      <checksum>F1C26127</checksum>
+    </file>
+    <file>
       <version>
         <software_program>OpenStudio</software_program>
         <identifier>3.7.0</identifier>
@@ -574,13 +614,13 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>D6F8520F</checksum>
+      <checksum>8CE5E48D</checksum>
     </file>
     <file>
       <filename>ASHRAE9012019PRM_Test.rb</filename>
       <filetype>rb</filetype>
       <usage_type>test</usage_type>
-      <checksum>76739BAF</checksum>
+      <checksum>262FAC4C</checksum>
     </file>
     <file>
       <filename>source/demo1/USA_NY_New.York-J.F.Kennedy.Intl.AP.744860_TMY3.epw</filename>
@@ -592,7 +632,7 @@
       <filename>source/demo1/geometry_demo_model.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
-      <checksum>22B40451</checksum>
+      <checksum>7DD0A1B7</checksum>
     </file>
     <file>
       <filename>source/demo1/user_data/userdata_building.csv</filename>
@@ -616,7 +656,7 @@
       <filename>source/demo2/geometry_demo_model.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
-      <checksum>8AF7CEF8</checksum>
+      <checksum>347297AD</checksum>
     </file>
     <file>
       <filename>source/demo2/user_data/user_data_json/userdata_airloop_hvac.json</filename>
@@ -742,7 +782,7 @@
       <filename>source/demo3/hvac_demo_model.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
-      <checksum>196CC5B1</checksum>
+      <checksum>78E29977</checksum>
     </file>
     <file>
       <filename>source/demo3/user_data/user_data_json/userdata_airloop_hvac.json</filename>

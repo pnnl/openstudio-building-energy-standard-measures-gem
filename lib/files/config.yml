@@ -7,3 +7,5 @@ exempt_from_rotations: 'TRUE'
 exempt_from_unmet_load_hours_check: 'TRUE'
 user_data: 'FALSE'
 user_data_path: User_Data_Path
+evaluation_package: 'FALSE'
+evaluation_package_path: ''
