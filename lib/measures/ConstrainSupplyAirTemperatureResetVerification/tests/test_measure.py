@@ -26,9 +26,12 @@ class TestConstrainSupplyAirTemperatureResetVerification:
 
         # get arguments and test that they are what we are expecting
         arguments = measure.arguments(model)
-        assert arguments.size() == 2
+        assert arguments.size() == 5
         assert arguments[0].name() == "air_loop_name"
         assert arguments[1].name() == "design_zone_cooling_air_temp"
+        assert arguments[2].name() == "idf_path"
+        assert arguments[3].name() == "output_dataset_path"
+        assert arguments[4].name() == "output_dir"
 
     def test_good_argument_values(self):
         """
@@ -52,9 +55,13 @@ class TestConstrainSupplyAirTemperatureResetVerification:
         arguments = measure.arguments(model)
         argument_map = openstudio.measure.convertOSArgumentVectorToMap(arguments)
 
-        args_dict = {}
-        args_dict["air_loop_name"] = "Test Air Loop"
-        args_dict["design_zone_cooling_air_temp"] = 40
+        args_dict = {
+            "air_loop_name": "Test Air Loop",
+            "design_zone_cooling_air_temp": 40,
+            "idf_path": "./lib/measures/ConstrainSupplyAirTemperatureResetVerification/tests/input/test.idf",
+            "output_dataset_path": "./lib/measures/ConstrainSupplyAirTemperatureResetVerification/tests/input/test.csv",
+            "output_dir": "./lib/measures/ConstrainSupplyAirTemperatureResetVerification/tests/output"
+        }
 
         for arg in arguments:
             temp_arg_var = arg.clone()
