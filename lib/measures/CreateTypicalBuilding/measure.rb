@@ -60,27 +60,37 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
       hvac_types << hvac_type
     end
 
+    wall_constructions = OpenStudio::StringVector.new
+    wall_type_list = CreateTypicalBldgConstants::WALL_CONSTRUCTIONS
+    wall_type_list.each do |wall_construction|
+      wall_constructions << wall_construction
+    end
+
+    true_false_os_vector = OpenStudio::StringVector.new
+    true_false_os_vector << 'TRUE'
+    true_false_os_vector << 'FALSE'
+
     #END--------- Assign enumerations for inputs
 
     # Add input elements
     geometry_file_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('geometry', geom_types, true)
-    geometry_file_choice.setDisplayName("Geometry")
-    geometry_file_choice.setDefaultValue("Existing Geometry")
+    geometry_file_choice.setDisplayName('Geometry')
+    geometry_file_choice.setDefaultValue('Existing Geometry')
     args << geometry_file_choice
 
     climate_zone_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('climate_zone', climate_zones, true)
-    climate_zone_choice.setDisplayName("Climate Zone")
-    climate_zone_choice.setDefaultValue("Lookup From Model")
+    climate_zone_choice.setDisplayName('Climate Zone')
+    climate_zone_choice.setDefaultValue('Lookup From Model')
     args << climate_zone_choice
 
     template_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('template', templates, true)
-    template_choice.setDisplayName("Building Energy Code")
-    template_choice.setDefaultValue("90.1-2004")
+    template_choice.setDisplayName('Building Energy Code')
+    template_choice.setDefaultValue('90.1-2004')
     args << template_choice
 
     hvac_type_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('hvac_type', hvac_types, true)
-    hvac_type_choice.setDisplayName("HVAC Type")
-    hvac_type_choice.setDefaultValue("Inferred")
+    hvac_type_choice.setDisplayName('HVAC Type')
+    hvac_type_choice.setDefaultValue('Existing HVAC')
     args << hvac_type_choice
 
     # Path to HVAC-to-Zone mapping
@@ -91,6 +101,33 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     hvac_json_path.setDefaultValue('path/to/my/hvac_mapping.json')
     args << hvac_json_path
 
+    add_constructions_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_constructions', true_false_os_vector, true)
+    add_constructions_choice.setDisplayName('Add Constructions')
+    add_constructions_choice.setDefaultValue('TRUE')
+    args << add_constructions_choice
+
+    wall_constructions_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('wall_construction', wall_constructions, true)
+    wall_constructions_choice.setDisplayName('Wall Construction')
+    wall_constructions_choice.setDefaultValue('Inferred')
+    args << wall_constructions_choice
+
+    add_space_types_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_space_type_loads', true_false_os_vector, true)
+    add_space_types_choice.setDisplayName('Add Space Type Loads')
+    add_space_types_choice.setDescription('Utlilize Space Type objects StandardSpaceType to inform modeling'\
+                                          ' for equipment and lighting.')
+    add_space_types_choice.setDefaultValue('TRUE')
+    args << add_space_types_choice
+
+    add_daylighting_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_daylighting', true_false_os_vector, true)
+    add_daylighting_choice.setDisplayName('Add Daylighting')
+    add_daylighting_choice.setDefaultValue('FALSE')
+    args << add_daylighting_choice
+
+    add_service_hot_water_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_shw', true_false_os_vector, true)
+    add_service_hot_water_choice.setDisplayName('Add Service Hot Water')
+    add_service_hot_water_choice.setDefaultValue('FALSE')
+    args << add_service_hot_water_choice
+
     return args
   end
 
@@ -98,7 +135,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
   def run(model, runner, user_arguments)
     super(model, runner, user_arguments)  # Do **NOT** remove this line
 
-    runner.registerInfo("Starting create typical")
+    runner.registerInfo('Starting create typical')
 
     # use the built-in error checking
     if !runner.validateUserArguments(arguments(model), user_arguments)
@@ -111,6 +148,21 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     template = runner.getStringArgumentValue('template', user_arguments)
     hvac_type = runner.getStringArgumentValue('hvac_type', user_arguments)
     user_hvac_json_path = runner.getStringArgumentValue('user_hvac_json_path', user_arguments)
+    add_constructions = runner.getStringArgumentValue('add_constructions', user_arguments)
+    wall_construction = runner.getStringArgumentValue('wall_construction', user_arguments)
+    add_space_type_loads = runner.getStringArgumentValue('add_space_type_loads', user_arguments)
+    add_daylighting = runner.getStringArgumentValue('add_daylighting', user_arguments)
+    add_shw = runner.getStringArgumentValue('add_shw', user_arguments)
+
+    # Convert strings to booleans
+    add_constructions = add_constructions == 'TRUE'
+    add_space_type_loads = add_space_type_loads == 'TRUE'
+    add_daylighting = add_daylighting == 'TRUE'
+    add_shw = add_shw == 'TRUE'
+	
+    # Convert CZ7 and CZ8 to values that OSSTD will understand (dropdown and OSSTD are different)
+    climate_zone = 'ASHRAE 169-2013-7A' if climate_zone == 'ASHRAE 169-2013-7' 
+    climate_zone = 'ASHRAE 169-2013-8A' if climate_zone == 'ASHRAE 169-2013-8'
 
     # Load geometry file, if specified. NOTE, this will overwrite the existing OS model object
     if geometry != 'Existing Geometry'
@@ -126,11 +178,19 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
       runner.registerInfo("Model geometry overwritten with #{geometry_file}.")
     end
 
-    runner.registerInfo("Model loaded, attempting Create Typical Building from model with parameters:")
+    runner.registerInfo('Model loaded, attempting Create Typical Building from model with parameters:')
     runner.registerInfo("Geometry Selection: #{geometry}")
     runner.registerInfo("Building Code: #{template}")
     runner.registerInfo("Climate Zone: #{climate_zone}")
     runner.registerInfo("HVAC System Type: #{hvac_type}")
+    runner.registerInfo("Add Constructions?: #{add_constructions}")
+    runner.registerInfo("Wall Construction: #{wall_construction}")
+    runner.registerInfo("Add Space Type Loads?: #{add_space_type_loads}")
+    runner.registerInfo("Add Daylighting?: #{add_daylighting}")
+    runner.registerInfo("Add Service Hot Water?: #{add_shw}")
+
+    # Toggle whether or not to add hvac
+    add_hvac = hvac_type != 'Existing HVAC'
 
     # If using an HVAC-to-Zone mapping defined in a user's JSON
     if hvac_type == 'JSON specified'
@@ -143,15 +203,15 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     end
 
     @create = OpenstudioStandards::CreateTypical
-    runner.registerInfo("Begin typical model generation...")
+    runner.registerInfo('Begin typical model generation...')
 
     # If "Lookup From Model" is used, check that a climate zone was found in model. If not, return Error
     if climate_zone == 'Lookup From Model'
       climate_zone = standard.model_standards_climate_zone(model)
       if climate_zone == '' or climate_zone.nil?
-        error_message = "Error when looking up climate zone from model. Ensure the model has a valid ClimateZone"\
+        error_message = 'Error when looking up climate zone from model. Ensure the model has a valid ClimateZone'\
         " or ClimateZones objects with climate zone information present. \n**NOTE**: Geometry files typically do not"\
-        " have this information"
+        ' have this information'
         runner.registerError(error_message)
         return false
       end
@@ -159,8 +219,13 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     end
 
     # Fire off CreateTypical method
-    @create.create_typical_building_from_model(model, template, climate_zone: climate_zone,
-                                               hvac_system_type: hvac_type, user_hvac_mapping: hvac_mapping_hash)
+    @create.create_typical_building_from_model(model, template, climate_zone: climate_zone, add_hvac: add_hvac,
+                                               add_constructions: add_constructions,
+                                               wall_construction_type: wall_construction,
+                                               add_space_type_loads: add_space_type_loads,
+                                               add_daylighting_controls: add_daylighting,
+                                               hvac_system_type: hvac_type,
+                                               user_hvac_mapping: hvac_mapping_hash)
 
     # If no weather file assigned, assign it based on the climate zone
     if model.weatherFile.empty?
@@ -179,7 +244,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     end
 
     # report final condition of model
-    runner.registerFinalCondition("Typical building generation complete.")
+    runner.registerFinalCondition('Typical building generation complete.')
 
     return true
   end
@@ -225,7 +290,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
 
     # Try to extract and aggregate thermal_zones from JSON
     begin
-      zone_names_json = hvac_mapping_hash["systems"].flat_map { |system| system["thermal_zones"] }
+      zone_names_json = hvac_mapping_hash['systems'].flat_map { |system| system['thermal_zones'] }
     rescue NoMethodError
       runner.registerError("Error in ''#{user_hvac_json_path}''. Ensure JSON follows the format specified under"\
                            " 'systems'.[].'thermal_zones'")
@@ -260,7 +325,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     unless nonexistant_zones.empty?
       runner.registerError("Error in the #{user_hvac_json_path}. The following zones don't exist in building "\
                            "'#{model.building.get.name.to_s}': #{nonexistant_zones.join(', ')}. NOTE, zone names are "\
-                           "case sensitive.")
+                           'case sensitive.')
       return {}
     end
 
@@ -269,6 +334,179 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
 
   end
 
+  # module CreateTypicalBldgConstants
+  #
+  #   CLIMATE_ZONES = ['Lookup From Model',  'ASHRAE 169-2013-1A', 'ASHRAE 169-2013-2A', 'ASHRAE 169-2013-2B',
+  #                    'ASHRAE 169-2013-3A', 'ASHRAE 169-2013-3B', 'ASHRAE 169-2013-3C', 'ASHRAE 169-2013-4A',
+  #                    'ASHRAE 169-2013-4B', 'ASHRAE 169-2013-4C', 'ASHRAE 169-2013-5A', 'ASHRAE 169-2013-5B',
+  #                    'ASHRAE 169-2013-6A', 'ASHRAE 169-2013-6B', 'ASHRAE 169-2013-7A', 'ASHRAE 169-2013-8A']
+  #
+  #   GEOMETRY_FILES = ['Existing Geometry',
+  #                     'ASHRAESmallOffice.osm',
+  #                     'ASHRAESmallHotel.osm',
+  #                     'ASHRAESecondarySchool.osm',
+  #                     'ASHRAERetailStripmall.osm',
+  #                     'ASHRAEQuickServiceRestaurant.osm',
+  #                     'ASHRAEPrimarySchool.osm',
+  #                     'ASHRAEOutpatient.osm',
+  #                     'ASHRAEMidriseApartment.osm',
+  #                     'ASHRAEMediumOffice.osm',
+  #                     'ASHRAELargeOffice.osm',
+  #                     'ASHRAELargeHotel.osm',
+  #                     'ASHRAELaboratory.osm',
+  #                     'ASHRAEHospital.osm',
+  #                     'ASHRAEHighriseApartment.osm',
+  #                     'ASHRAEFullServiceRestaurant.osm',
+  #                     'ASHRAECourthouse.osm',
+  #                     'ASHRAECollege.osm',
+  #
+  #   ]
+  #
+  #   HVAC_TYPES = ['Inferred',
+  #                 'JSON specified',
+  #                 'Baseboard central air source heat pump',
+  #                 'Baseboard district hot water',
+  #                 'Baseboard electric',
+  #                 'Baseboard gas boiler',
+  #                 'Direct evap coolers with baseboard central air source heat pump',
+  #                 'Direct evap coolers with baseboard district hot water',
+  #                 'Direct evap coolers with baseboard electric',
+  #                 'Direct evap coolers with baseboard gas boiler',
+  #                 'Direct evap coolers with forced air furnace',
+  #                 'Direct evap coolers with gas unit heaters',
+  #                 'Direct evap coolers with no heat',
+  #                 'DOAS with fan coil air-cooled chiller with baseboard electric',
+  #                 'DOAS with fan coil air-cooled chiller with boiler',
+  #                 'DOAS with fan coil air-cooled chiller with central air source heat pump',
+  #                 'DOAS with fan coil air-cooled chiller with district hot water',
+  #                 'DOAS with fan coil air-cooled chiller with gas unit heaters',
+  #                 'DOAS with fan coil air-cooled chiller with no heat',
+  #                 'DOAS with fan coil chiller with baseboard electric',
+  #                 'DOAS with fan coil chiller with boiler',
+  #                 'DOAS with fan coil chiller with central air source heat pump',
+  #                 'DOAS with fan coil chiller with district hot water',
+  #                 'DOAS with fan coil chiller with gas unit heaters',
+  #                 'DOAS with fan coil chiller with no heat',
+  #                 'DOAS with fan coil district chilled water with baseboard electric',
+  #                 'DOAS with fan coil district chilled water with boiler',
+  #                 'DOAS with fan coil district chilled water with central air source heat pump',
+  #                 'DOAS with fan coil district chilled water with district hot water',
+  #                 'DOAS with fan coil district chilled water with gas unit heaters',
+  #                 'DOAS with fan coil district chilled water with no heat',
+  #                 'DOAS with VRF',
+  #                 'DOAS with water source heat pumps cooling tower with boiler',
+  #                 'DOAS with water source heat pumps district chilled water with district hot water',
+  #                 'DOAS with water source heat pumps fluid cooler with boiler',
+  #                 'DOAS with water source heat pumps with ground source heat pump',
+  #                 'Fan coil air-cooled chiller with boiler',
+  #                 'Fan coil air-cooled chiller with baseboard electric',
+  #                 'Fan coil air-cooled chiller with central air source heat pump',
+  #                 'Fan coil air-cooled chiller with district hot water',
+  #                 'Fan coil air-cooled chiller with gas unit heaters',
+  #                 'Fan coil air-cooled chiller with no heat',
+  #                 'Fan coil chiller with baseboard electric',
+  #                 'Fan coil chiller with boiler',
+  #                 'Fan coil chiller with central air source heat pump',
+  #                 'Fan coil chiller with district hot water',
+  #                 'Fan coil chiller with gas unit heaters',
+  #                 'Fan coil chiller with no heat',
+  #                 'Fan coil district chilled water with baseboard electric',
+  #                 'Fan coil district chilled water with boiler',
+  #                 'Fan coil district chilled water with central air source heat pump',
+  #                 'Fan coil district chilled water with district hot water',
+  #                 'Fan coil district chilled water with gas unit heaters',
+  #                 'Fan coil district chilled water with no heat',
+  #                 'Forced air furnace',
+  #                 'Gas unit heaters',
+  #                 'Packaged VAV Air Loop with Boiler', # second enumeration for backwards compatibility with Tenant Star project
+  #                 'PSZ-AC district chilled water with baseboard district hot water',
+  #                 'PSZ-AC district chilled water with baseboard electric',
+  #                 'PSZ-AC district chilled water with baseboard gas boiler',
+  #                 'PSZ-AC district chilled water with central air source heat pump',
+  #                 'PSZ-AC district chilled water with district hot water',
+  #                 'PSZ-AC district chilled water with electric coil',
+  #                 'PSZ-AC district chilled water with gas boiler',
+  #                 'PSZ-AC district chilled water with gas coil',
+  #                 'PSZ-AC district chilled water with gas unit heaters',
+  #                 'PSZ-AC district chilled water with no heat',
+  #                 'PSZ-AC with baseboard district hot water',
+  #                 'PSZ-AC with baseboard electric',
+  #                 'PSZ-AC with baseboard gas boiler',
+  #                 'PSZ-AC with central air source heat pump',
+  #                 'PSZ-AC with district hot water',
+  #                 'PSZ-AC with electric coil',
+  #                 'PSZ-AC with gas boiler',
+  #                 'PSZ-AC with gas coil',
+  #                 'PSZ-AC with gas unit heaters',
+  #                 'PSZ-AC with no heat',
+  #                 'PSZ-HP',
+  #                 'PTAC with baseboard district hot water',
+  #                 'PTAC with baseboard electric',
+  #                 'PTAC with baseboard gas boiler',
+  #                 'PTAC with central air source heat pump',
+  #                 'PTAC with district hot water',
+  #                 'PTAC with electric coil',
+  #                 'PTAC with gas boiler',
+  #                 'PTAC with gas coil',
+  #                 'PTAC with gas unit heaters',
+  #                 'PTAC with no heat',
+  #                 'PTHP',
+  #                 'PVAV with central air source heat pump reheat',
+  #                 'PVAV with district hot water reheat',
+  #                 'PVAV with gas boiler reheat',
+  #                 'PVAV with gas heat with electric reheat',
+  #                 'PVAV with PFP boxes',
+  #                 'Residential AC with baseboard central air source heat pump',
+  #                 'Residential AC with baseboard district hot water',
+  #                 'Residential AC with baseboard electric',
+  #                 'Residential AC with baseboard gas boiler',
+  #                 'Residential AC with no heat',
+  #                 'Residential AC with residential forced air furnace',
+  #                 'Residential forced air furnace',
+  #                 'Residential heat pump',
+  #                 'Residential heat pump with no cooling',
+  #                 'VAV air-cooled chiller with central air source heat pump reheat',
+  #                 'VAV air-cooled chiller with district hot water reheat',
+  #                 'VAV air-cooled chiller with gas boiler reheat',
+  #                 'VAV air-cooled chiller with gas coil reheat',
+  #                 'VAV air-cooled chiller with no reheat with baseboard electric',
+  #                 'VAV air-cooled chiller with no reheat with gas unit heaters',
+  #                 'VAV air-cooled chiller with no reheat with zone heat pump',
+  #                 'VAV air-cooled chiller with PFP boxes',
+  #                 'VAV chiller with central air source heat pump reheat',
+  #                 'VAV chiller with district hot water reheat',
+  #                 'VAV chiller with gas boiler reheat',
+  #                 'VAV chiller with gas coil reheat',
+  #                 'VAV chiller with no reheat with baseboard electric',
+  #                 'VAV chiller with no reheat with gas unit heaters',
+  #                 'VAV chiller with no reheat with zone heat pump',
+  #                 'VAV chiller with PFP boxes',
+  #                 'VAV district chilled water with central air source heat pump reheat',
+  #                 'VAV district chilled water with district hot water reheat',
+  #                 'VAV district chilled water with gas boiler reheat',
+  #                 'VAV district chilled water with gas coil reheat',
+  #                 'VAV district chilled water with no reheat with baseboard electric',
+  #                 'VAV district chilled water with no reheat with gas unit heaters',
+  #                 'VAV district chilled water with no reheat with zone heat pump',
+  #                 'VAV district chilled water with PFP boxes',
+  #                 'VRF',
+  #                 'Water source heat pumps cooling tower with boiler',
+  #                 'Water source heat pumps district chilled water with district hot water',
+  #                 'Water source heat pumps fluid cooler with boiler',
+  #                 'Water source heat pumps with ground source heat pump',
+  #                 'Window AC with baseboard central air source heat pump',
+  #                 'Window AC with baseboard district hot water',
+  #                 'Window AC with baseboard electric',
+  #                 'Window AC with baseboard gas boiler',
+  #                 'Window AC with forced air furnace',
+  #                 'Window AC with no heat',
+  #                 'Window AC with unit heaters']
+  #
+  #   STANDARD_ENERGY_CODES = ['DOE Ref 1980-2004', 'DOE Ref Pre-1980',
+  #                            '90.1-2004', '90.1-2007', '90.1-2010',
+  #                            '90.1-2013', '90.1-2016', '90.1-2019']
+  #
+  # end
 
 end
 
