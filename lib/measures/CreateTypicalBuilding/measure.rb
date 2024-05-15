@@ -161,7 +161,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     add_shw = add_shw == 'TRUE'
 	
     # Convert CZ7 and CZ8 to values that OSSTD will understand (dropdown and OSSTD are different)
-    climate_zone = 'ASHRAE 169-2013-7A' if climate_zone == 'ASHRAE 169-2013-7' 
+    climate_zone = 'ASHRAE 169-2013-7A' if climate_zone == 'ASHRAE 169-2013-7'
     climate_zone = 'ASHRAE 169-2013-8A' if climate_zone == 'ASHRAE 169-2013-8'
 
     # Load geometry file, if specified. NOTE, this will overwrite the existing OS model object
@@ -224,7 +224,12 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
                                                wall_construction_type: wall_construction,
                                                add_space_type_loads: add_space_type_loads,
                                                add_daylighting_controls: add_daylighting,
+											   add_swh: add_shw,
                                                hvac_system_type: hvac_type,
+											   add_elevators: false,
+											   add_exterior_lights: false,
+											   add_exhaust: false,
+											   add_refrigeration: false,
                                                user_hvac_mapping: hvac_mapping_hash)
 
     # If no weather file assigned, assign it based on the climate zone
