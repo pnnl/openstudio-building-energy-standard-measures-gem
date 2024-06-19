@@ -3,26 +3,27 @@ module CreateTypicalBldgConstants
   CLIMATE_ZONES = ['Lookup From Model',  'ASHRAE 169-2013-1A', 'ASHRAE 169-2013-2A', 'ASHRAE 169-2013-2B',
                    'ASHRAE 169-2013-3A', 'ASHRAE 169-2013-3B', 'ASHRAE 169-2013-3C', 'ASHRAE 169-2013-4A',
                    'ASHRAE 169-2013-4B', 'ASHRAE 169-2013-4C', 'ASHRAE 169-2013-5A', 'ASHRAE 169-2013-5B',
-                   'ASHRAE 169-2013-6A', 'ASHRAE 169-2013-6B', 'ASHRAE 169-2013-7A', 'ASHRAE 169-2013-8A']
+                   'ASHRAE 169-2013-6A', 'ASHRAE 169-2013-6B', 'ASHRAE 169-2013-7', 'ASHRAE 169-2013-8']
 
   GEOMETRY_SELECTIONS = ['Existing Geometry',
-                         'Small Office',
-                         'Small Hotel',
-                         'Secondary School',
-                         'Retail Stripmall',
-                         'Quick Service Restaurant',
-                         'Primary School',
-                         'Outpatient Medical Office',
-                         'Midrise Apartment',
-                         'Medium Office',
-                         'Large Office',
-                         'Large Hotel',
-                         'Laboratory',
-                         'Hospital',
-                         'Highrise Apartment',
-                         'Full Service Restaurant',
-                         'Courthouse',
-                         'College'
+                         'College',
+						 'Courthouse',
+						 'Full Service Restaurant',
+						 'Highrise Apartment',
+						 'Hospital',
+						 'Laboratory',
+						 'Large Hotel',
+						 'Large Office',
+						 'Medium Office',
+						 'Midrise Apartment',
+						 'Outpatient Medical Office',
+						 'Primary School',
+						 'Quick Service Restaurant',
+						 'Retail Stripmall',
+						 'Secondary School',
+						 'Small Hotel',
+						 'Small Office'
+
   ]
 
   GEOMETRY_FILES_HASH ={
@@ -46,7 +47,8 @@ module CreateTypicalBldgConstants
     'College' => 'ASHRAECollege.osm'
   }
 
-  HVAC_TYPES = ['Inferred',
+  HVAC_TYPES = ['Existing HVAC',
+                'Inferred',
                 'JSON specified',
                 'Baseboard central air source heat pump',
                 'Baseboard district hot water',
@@ -189,5 +191,7 @@ module CreateTypicalBldgConstants
   STANDARD_ENERGY_CODES = ['DOE Ref 1980-2004', 'DOE Ref Pre-1980',
                            '90.1-2004', '90.1-2007', '90.1-2010',
                            '90.1-2013', '90.1-2016', '90.1-2019']
+
+  WALL_CONSTRUCTIONS = ['Inferred', 'Mass', 'Metal Building', 'SteelFramed', 'WoodFramed']
 
 end

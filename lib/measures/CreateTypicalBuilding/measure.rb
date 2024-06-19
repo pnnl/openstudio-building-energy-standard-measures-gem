@@ -60,27 +60,37 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
       hvac_types << hvac_type
     end
 
+    wall_constructions = OpenStudio::StringVector.new
+    wall_type_list = CreateTypicalBldgConstants::WALL_CONSTRUCTIONS
+    wall_type_list.each do |wall_construction|
+      wall_constructions << wall_construction
+    end
+
+    true_false_os_vector = OpenStudio::StringVector.new
+    true_false_os_vector << 'TRUE'
+    true_false_os_vector << 'FALSE'
+
     #END--------- Assign enumerations for inputs
 
     # Add input elements
     geometry_file_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('geometry', geom_types, true)
-    geometry_file_choice.setDisplayName("Geometry")
-    geometry_file_choice.setDefaultValue("Existing Geometry")
+    geometry_file_choice.setDisplayName('Geometry')
+    geometry_file_choice.setDefaultValue('Existing Geometry')
     args << geometry_file_choice
 
     climate_zone_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('climate_zone', climate_zones, true)
-    climate_zone_choice.setDisplayName("Climate Zone")
-    climate_zone_choice.setDefaultValue("Lookup From Model")
+    climate_zone_choice.setDisplayName('Climate Zone')
+    climate_zone_choice.setDefaultValue('Lookup From Model')
     args << climate_zone_choice
 
     template_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('template', templates, true)
-    template_choice.setDisplayName("Building Energy Code")
-    template_choice.setDefaultValue("90.1-2004")
+    template_choice.setDisplayName('Building Energy Code')
+    template_choice.setDefaultValue('90.1-2004')
     args << template_choice
 
     hvac_type_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('hvac_type', hvac_types, true)
-    hvac_type_choice.setDisplayName("HVAC Type")
-    hvac_type_choice.setDefaultValue("Inferred")
+    hvac_type_choice.setDisplayName('HVAC Type')
+    hvac_type_choice.setDefaultValue('Existing HVAC')
     args << hvac_type_choice
 
     # Path to HVAC-to-Zone mapping
@@ -91,6 +101,33 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     hvac_json_path.setDefaultValue('path/to/my/hvac_mapping.json')
     args << hvac_json_path
 
+    add_constructions_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_constructions', true_false_os_vector, true)
+    add_constructions_choice.setDisplayName('Add Constructions')
+    add_constructions_choice.setDefaultValue('TRUE')
+    args << add_constructions_choice
+
+    wall_constructions_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('wall_construction', wall_constructions, true)
+    wall_constructions_choice.setDisplayName('Wall Construction')
+    wall_constructions_choice.setDefaultValue('Inferred')
+    args << wall_constructions_choice
+
+    add_space_types_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_space_type_loads', true_false_os_vector, true)
+    add_space_types_choice.setDisplayName('Add Space Type Loads')
+    add_space_types_choice.setDescription('Utlilize Space Type objects StandardSpaceType to inform modeling'\
+                                          ' for equipment and lighting.')
+    add_space_types_choice.setDefaultValue('TRUE')
+    args << add_space_types_choice
+
+    add_daylighting_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_daylighting', true_false_os_vector, true)
+    add_daylighting_choice.setDisplayName('Add Daylighting')
+    add_daylighting_choice.setDefaultValue('FALSE')
+    args << add_daylighting_choice
+
+    add_service_hot_water_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_shw', true_false_os_vector, true)
+    add_service_hot_water_choice.setDisplayName('Add Service Hot Water')
+    add_service_hot_water_choice.setDefaultValue('FALSE')
+    args << add_service_hot_water_choice
+
     return args
   end
 
@@ -98,7 +135,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
   def run(model, runner, user_arguments)
     super(model, runner, user_arguments)  # Do **NOT** remove this line
 
-    runner.registerInfo("Starting create typical")
+    runner.registerInfo('Starting create typical')
 
     # use the built-in error checking
     if !runner.validateUserArguments(arguments(model), user_arguments)
@@ -111,6 +148,21 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     template = runner.getStringArgumentValue('template', user_arguments)
     hvac_type = runner.getStringArgumentValue('hvac_type', user_arguments)
     user_hvac_json_path = runner.getStringArgumentValue('user_hvac_json_path', user_arguments)
+    add_constructions = runner.getStringArgumentValue('add_constructions', user_arguments)
+    wall_construction = runner.getStringArgumentValue('wall_construction', user_arguments)
+    add_space_type_loads = runner.getStringArgumentValue('add_space_type_loads', user_arguments)
+    add_daylighting = runner.getStringArgumentValue('add_daylighting', user_arguments)
+    add_shw = runner.getStringArgumentValue('add_shw', user_arguments)
+
+    # Convert strings to booleans
+    add_constructions = add_constructions == 'TRUE'
+    add_space_type_loads = add_space_type_loads == 'TRUE'
+    add_daylighting = add_daylighting == 'TRUE'
+    add_shw = add_shw == 'TRUE'
+	
+    # Convert CZ7 and CZ8 to values that OSSTD will understand (dropdown and OSSTD are different)
+    climate_zone = 'ASHRAE 169-2013-7A' if climate_zone == 'ASHRAE 169-2013-7'
+    climate_zone = 'ASHRAE 169-2013-8A' if climate_zone == 'ASHRAE 169-2013-8'
 
     # Load geometry file, if specified. NOTE, this will overwrite the existing OS model object
     if geometry != 'Existing Geometry'
@@ -126,11 +178,19 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
       runner.registerInfo("Model geometry overwritten with #{geometry_file}.")
     end
 
-    runner.registerInfo("Model loaded, attempting Create Typical Building from model with parameters:")
+    runner.registerInfo('Model loaded, attempting Create Typical Building from model with parameters:')
     runner.registerInfo("Geometry Selection: #{geometry}")
     runner.registerInfo("Building Code: #{template}")
     runner.registerInfo("Climate Zone: #{climate_zone}")
     runner.registerInfo("HVAC System Type: #{hvac_type}")
+    runner.registerInfo("Add Constructions?: #{add_constructions}")
+    runner.registerInfo("Wall Construction: #{wall_construction}")
+    runner.registerInfo("Add Space Type Loads?: #{add_space_type_loads}")
+    runner.registerInfo("Add Daylighting?: #{add_daylighting}")
+    runner.registerInfo("Add Service Hot Water?: #{add_shw}")
+
+    # Toggle whether or not to add hvac
+    add_hvac = hvac_type != 'Existing HVAC'
 
     # If using an HVAC-to-Zone mapping defined in a user's JSON
     if hvac_type == 'JSON specified'
@@ -143,15 +203,15 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     end
 
     @create = OpenstudioStandards::CreateTypical
-    runner.registerInfo("Begin typical model generation...")
+    runner.registerInfo('Begin typical model generation...')
 
     # If "Lookup From Model" is used, check that a climate zone was found in model. If not, return Error
     if climate_zone == 'Lookup From Model'
       climate_zone = standard.model_standards_climate_zone(model)
       if climate_zone == '' or climate_zone.nil?
-        error_message = "Error when looking up climate zone from model. Ensure the model has a valid ClimateZone"\
+        error_message = 'Error when looking up climate zone from model. Ensure the model has a valid ClimateZone'\
         " or ClimateZones objects with climate zone information present. \n**NOTE**: Geometry files typically do not"\
-        " have this information"
+        ' have this information'
         runner.registerError(error_message)
         return false
       end
@@ -159,8 +219,18 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     end
 
     # Fire off CreateTypical method
-    @create.create_typical_building_from_model(model, template, climate_zone: climate_zone,
-                                               hvac_system_type: hvac_type, user_hvac_mapping: hvac_mapping_hash)
+    @create.create_typical_building_from_model(model, template, climate_zone: climate_zone, add_hvac: add_hvac,
+                                               add_constructions: add_constructions,
+                                               wall_construction_type: wall_construction,
+                                               add_space_type_loads: add_space_type_loads,
+                                               add_daylighting_controls: add_daylighting,
+                                               add_swh: add_shw,
+                                               hvac_system_type: hvac_type,
+                                               add_elevators: false,
+                                               add_exterior_lights: false,
+                                               add_exhaust: false,
+                                               add_refrigeration: false,
+                                               user_hvac_mapping: hvac_mapping_hash)
 
     # If no weather file assigned, assign it based on the climate zone
     if model.weatherFile.empty?
@@ -179,7 +249,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     end
 
     # report final condition of model
-    runner.registerFinalCondition("Typical building generation complete.")
+    runner.registerFinalCondition('Typical building generation complete.')
 
     return true
   end
@@ -225,7 +295,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
 
     # Try to extract and aggregate thermal_zones from JSON
     begin
-      zone_names_json = hvac_mapping_hash["systems"].flat_map { |system| system["thermal_zones"] }
+      zone_names_json = hvac_mapping_hash['systems'].flat_map { |system| system['thermal_zones'] }
     rescue NoMethodError
       runner.registerError("Error in ''#{user_hvac_json_path}''. Ensure JSON follows the format specified under"\
                            " 'systems'.[].'thermal_zones'")
@@ -260,7 +330,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     unless nonexistant_zones.empty?
       runner.registerError("Error in the #{user_hvac_json_path}. The following zones don't exist in building "\
                            "'#{model.building.get.name.to_s}': #{nonexistant_zones.join(', ')}. NOTE, zone names are "\
-                           "case sensitive.")
+                           'case sensitive.')
       return {}
     end
 
