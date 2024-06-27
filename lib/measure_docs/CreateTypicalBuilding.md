@@ -125,7 +125,6 @@ The HVAC system applied to the building model. NOTE-- the 'JSON specified' optio
 - Default: 'Existing HVAC'
 - Options:
   - 'Existing HVAC',
-  - 'Inferred',
   - 'JSON specified',
   - 'Baseboard central air source heat pump',
   - 'Baseboard district hot water',
