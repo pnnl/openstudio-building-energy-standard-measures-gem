@@ -125,10 +125,6 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     add_daylighting_choice.setDefaultValue('FALSE')
     args << add_daylighting_choice
 
-    add_service_hot_water_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_shw', true_false_os_vector, true)
-    add_service_hot_water_choice.setDisplayName('Add Service Hot Water')
-    add_service_hot_water_choice.setDefaultValue('FALSE')
-    args << add_service_hot_water_choice
 
     return args
   end
@@ -154,13 +150,11 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     wall_construction = runner.getStringArgumentValue('wall_construction', user_arguments)
     add_space_type_loads = runner.getStringArgumentValue('add_space_type_loads', user_arguments)
     add_daylighting = runner.getStringArgumentValue('add_daylighting', user_arguments)
-    add_shw = runner.getStringArgumentValue('add_shw', user_arguments)
 
     # Convert strings to booleans
     add_constructions = add_constructions == 'TRUE'
     add_space_type_loads = add_space_type_loads == 'TRUE'
     add_daylighting = add_daylighting == 'TRUE'
-    add_shw = add_shw == 'TRUE'
 	
     # Convert CZ7 and CZ8 to values that OSSTD will understand (dropdown and OSSTD are different)
     climate_zone = 'ASHRAE 169-2013-7A' if climate_zone == 'ASHRAE 169-2013-7'
@@ -189,7 +183,6 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     runner.registerInfo("Wall Construction: #{wall_construction}")
     runner.registerInfo("Add Space Type Loads?: #{add_space_type_loads}")
     runner.registerInfo("Add Daylighting?: #{add_daylighting}")
-    runner.registerInfo("Add Service Hot Water?: #{add_shw}")
 
     # Toggle whether or not to add hvac
     add_hvac = hvac_type != 'Existing HVAC'
@@ -226,7 +219,6 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
                                                wall_construction_type: wall_construction,
                                                add_space_type_loads: add_space_type_loads,
                                                add_daylighting_controls: add_daylighting,
-                                               add_swh: add_shw,
                                                hvac_system_type: hvac_type,
                                                add_elevators: false,
                                                add_exterior_lights: false,
