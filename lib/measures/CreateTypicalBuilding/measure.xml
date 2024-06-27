@@ -2,14 +2,14 @@
 <measure>
   <schema_version>3.1</schema_version>
   <name>create_typical_building</name>
-  <uid>3ecef6eb-ae4e-48da-b955-594e44b546bf</uid>
-  <version_id>a74d53b6-6d8b-4b99-940e-008923731568</version_id>
-  <version_modified>2024-05-10T20:23:44Z</version_modified>
+  <uid>fa93dfc5-9f4f-4f8f-9db7-3aa5ccf38e5d</uid>
+  <version_id>57ae1469-01ed-4d84-9d70-86ae11df35e0</version_id>
+  <version_modified>2024-06-27T21:00:44Z</version_modified>
   <xml_checksum>6CE0A70A</xml_checksum>
   <class_name>CreateTypicalBuilding</class_name>
   <display_name>Create Typical Building</display_name>
-  <description>The "Create Typical Building" OpenStudio measures empowers users to effortlessly generate OpenStudio and EnergyPlus models by making a few select choices. Users can input preferences such as the building energy code year (e.g., ASHRAE 90.1-2013), climate zone, and desired heating, ventilation, and air conditioning (HVAC) system.</description>
-  <modeler_description>This OpenStudio Measure analyzes and generates a standard building model using either the current geometry or a pre-established geometry file. It considers the selected building energy standard, the HVAC system, and the specific climate zone to create a standardized building model within OpenStudio. Please note that choosing any option other than "Existing Geometry" will replace the current OSM file. Selecting "JSON-specified" under "HVAC Type" allows users to map CBECS HVAC Systems to specific zones in the OSM model. An example file can be found at under this measure's tests at .\tests\source\hvac_mapping_path\hvac_zone_mapping.json</modeler_description>
+  <description>The "Create Typical Building" OpenStudio measures empowers users to effortlessly generate OpenStudio and EnergyPlus models by making a few select choices. Users can input preferences such as the building energy code year (e.g., ASHRAE 90.1-2013), climate zone, and desired heating, ventilation, and air conditioning (HVAC) system. Detailed documentation can be found at&lt;a href='https://github.com/pnnl/openstudio-building-energy-standard-measures-gem/tree/master/lib/measure_docs/CreateTypicalBuilding.md'&gt; https://github.com/pnnl/openstudio-building-energy-standard-measures-gem/tree/master/lib/measure_docs/CreateTypicalBuilding.md.&lt;/a&gt;</description>
+  <modeler_description>This OpenStudio Measure analyzes and generates a standard building model using either the current geometry or a pre-established geometry file. It considers the selected building energy standard, the HVAC system, and the specific climate zone to create a standardized building model within OpenStudio. Please note that choosing any option other than "Existing Geometry" will replace the current OSM file. Selecting "JSON-specified" under "HVAC Type" allows users to map HVAC Systems to specific zones in the OSM model. An example file can be found at under this measure's tests at .\tests\source\hvac_mapping_path\hvac_zone_mapping.json</modeler_description>
   <arguments>
     <argument>
       <name>geometry</name>
@@ -220,10 +220,6 @@
         <choice>
           <value>Existing HVAC</value>
           <display_name>Existing HVAC</display_name>
-        </choice>
-        <choice>
-          <value>Inferred</value>
-          <display_name>Inferred</display_name>
         </choice>
         <choice>
           <value>JSON specified</value>
@@ -873,24 +869,6 @@
         </choice>
       </choices>
     </argument>
-    <argument>
-      <name>add_shw</name>
-      <display_name>Add Service Hot Water</display_name>
-      <type>Choice</type>
-      <required>true</required>
-      <model_dependent>false</model_dependent>
-      <default_value>FALSE</default_value>
-      <choices>
-        <choice>
-          <value>TRUE</value>
-          <display_name>TRUE</display_name>
-        </choice>
-        <choice>
-          <value>FALSE</value>
-          <display_name>FALSE</display_name>
-        </choice>
-      </choices>
-    </argument>
   </arguments>
   <outputs />
   <provenances />
@@ -930,7 +908,7 @@
       <filename>README.md</filename>
       <filetype>md</filetype>
       <usage_type>readme</usage_type>
-      <checksum>710785DA</checksum>
+      <checksum>5208BBA1</checksum>
     </file>
     <file>
       <filename>README.md.erb</filename>
@@ -953,19 +931,19 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>711BE2FE</checksum>
+      <checksum>A52F4719</checksum>
     </file>
     <file>
       <filename>create_typical_resources.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>A5A57BEA</checksum>
+      <checksum>1E789C5E</checksum>
     </file>
     <file>
       <filename>create_typical_building_test.rb</filename>
       <filetype>rb</filetype>
       <usage_type>test</usage_type>
-      <checksum>CF074031</checksum>
+      <checksum>0962E7CB</checksum>
     </file>
     <file>
       <filename>source/ASHRAERetailStripmall.osm</filename>

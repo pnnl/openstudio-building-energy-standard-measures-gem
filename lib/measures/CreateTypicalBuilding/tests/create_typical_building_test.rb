@@ -43,7 +43,6 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['wall_construction'] = 'Inferred'
     args_hash['add_space_type_loads'] = 'FALSE'
     args_hash['add_daylighting'] = 'TRUE'
-    args_hash['add_shw'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -106,7 +105,6 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['wall_construction'] = 'Inferred'
     args_hash['add_space_type_loads'] = 'FALSE'
     args_hash['add_daylighting'] = 'TRUE'
-    args_hash['add_shw'] = 'TRUE'
 
 
     # populate argument with specified hash value if specified
@@ -171,7 +169,6 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['wall_construction'] = 'Inferred'
     args_hash['add_space_type_loads'] = 'FALSE'
     args_hash['add_daylighting'] = 'TRUE'
-    args_hash['add_shw'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -235,7 +232,6 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['wall_construction'] = 'Inferred'
     args_hash['add_space_type_loads'] = 'FALSE'
     args_hash['add_daylighting'] = 'TRUE'
-    args_hash['add_shw'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -303,7 +299,6 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['wall_construction'] = 'Inferred'
     args_hash['add_space_type_loads'] = 'FALSE'
     args_hash['add_daylighting'] = 'TRUE'
-    args_hash['add_shw'] = 'TRUE'
 
 
     # populate argument with specified hash value if specified
@@ -373,7 +368,6 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['wall_construction'] = 'Inferred'
     args_hash['add_space_type_loads'] = 'FALSE'
     args_hash['add_daylighting'] = 'TRUE'
-    args_hash['add_shw'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -435,7 +429,6 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['wall_construction'] = 'Inferred'
     args_hash['add_space_type_loads'] = 'FALSE'
     args_hash['add_daylighting'] = 'TRUE'
-    args_hash['add_shw'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -497,7 +490,6 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['wall_construction'] = 'Inferred'
     args_hash['add_space_type_loads'] = 'FALSE'
     args_hash['add_daylighting'] = 'TRUE'
-    args_hash['add_shw'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
