@@ -1,3 +1,14 @@
+## Overview
+
+The "Create Typical Building" OpenStudio measures empowers users to effortlessly generate OpenStudio and EnergyPlus models by making a few select choices. Users can input preferences such as the building energy code year (e.g., ASHRAE 90.1-2013), climate zone, and desired heating, ventilation, and air conditioning (HVAC) system. This OpenStudio Measure analyzes and generates a standard building model using either the current geometry or a pre-established geometry file. It considers the selected building energy standard, the HVAC system, and the specific climate zone to create a standardized building model within OpenStudio.
+
+While similar to the articulation gem's [Create Typical Building From Model](https://github.com/NREL/openstudio-model-articulation-gem/tree/develop/lib/measures/create_typical_building_from_model), this measure has additional functionality for starting with predefined geometry files, increased flexibility in allowing for custom mapping of HVAC systems to zones,  and utilizes the [OpenStudio Standards gem](https://github.com/NREL/openstudio-standards).
+
+ Please note that choosing any option other than "Existing Geometry" will replace the current OSM file. Selecting "JSON-specified" under "HVAC Type" allows users to map HVAC Systems to specific zones in the OSM model. An example file can be found [here](https://github.com/pnnl/openstudio-building-energy-standard-measures-gem/blob/master/lib/measures/CreateTypicalBuilding/tests/source/hvac_mapping_path/hvac_zone_mapping_psz_ac_ptac.json)
+
+
+## Table of Contents
+
 - [Overview](#overview)
 - [Measure Philosophy](#measure-philosophy)
    * [Pre-requisites](#pre-requisites)
@@ -20,13 +31,6 @@
       + [**Unmet Hour Tolerance:** ](#unmet-hour-tolerance)
       + [**Remove Objects:** ](#remove-objects)
 
-## Overview
-
-The "Create Typical Building" OpenStudio measures empowers users to effortlessly generate OpenStudio and EnergyPlus models by making a few select choices. Users can input preferences such as the building energy code year (e.g., ASHRAE 90.1-2013), climate zone, and desired heating, ventilation, and air conditioning (HVAC) system. This OpenStudio Measure analyzes and generates a standard building model using either the current geometry or a pre-established geometry file. It considers the selected building energy standard, the HVAC system, and the specific climate zone to create a standardized building model within OpenStudio.
-
-While similar to the articulation gem's [Create Typical Building From Model](https://github.com/NREL/openstudio-model-articulation-gem/tree/develop/lib/measures/create_typical_building_from_model), this measure has additional functionality for starting with predefined geometry files, increased flexibility in allowing for custom mapping of HVAC systems to zones,  and utilizes the [OpenStudio Standards gem](https://github.com/NREL/openstudio-standards).
-
- Please note that choosing any option other than "Existing Geometry" will replace the current OSM file. Selecting "JSON-specified" under "HVAC Type" allows users to map HVAC Systems to specific zones in the OSM model. An example file can be found [here](https://github.com/pnnl/openstudio-building-energy-standard-measures-gem/blob/master/lib/measures/CreateTypicalBuilding/tests/source/hvac_mapping_path/hvac_zone_mapping_psz_ac_ptac.json)
 
 ## Measure Philosophy
 
