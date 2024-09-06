@@ -31,7 +31,7 @@
     "Type": "MethodCall",
     "MethodCall": "VerificationCase",
     "Parameters": {
-      "json_case_path": "./lib/measures/ConstrainSupplyAirTemperatureResetVerification/tests/outputverification_case.json"
+      "json_case_path": "./lib/measures/ConstrainSupplyAirTemperatureResetVerification/tests/output/supply_air_temperature_reset_verification_case.json"
     },
     "Payloads": {
       "verification_case_obj": "$"
@@ -129,7 +129,7 @@
     "Type": "MethodCall",
     "MethodCall": "print",
     "Parameters": [
-      "Congratulations! the demo workflow is executed with expected results and no error!"
+      "Congratulations! The supply air temperature reset verification workflow is executed with expected results and no error!"
     ],
     "End": "True"
   },

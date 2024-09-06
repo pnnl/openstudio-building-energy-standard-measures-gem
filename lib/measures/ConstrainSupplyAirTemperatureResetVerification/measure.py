@@ -83,7 +83,7 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
             "load_verification_case": {
                 "Type": "MethodCall",
                 "MethodCall": "VerificationCase",
-                "Parameters": {"json_case_path": f"{output_dir}verification_case.json"},
+                "Parameters": {"json_case_path": f"{output_dir}/supply_air_temperature_verification_case.json"},
                 "Payloads": {
                     "verification_case_obj": "$",
                 },
@@ -168,7 +168,7 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
                 "Type": "MethodCall",
                 "MethodCall": "print",
                 "Parameters": [
-                    "Congratulations! the demo workflow is executed with expected results and no error!"
+                    "Congratulations! The supply air temperature reset verification workflow is executed with expected results and no error!"
                 ],
                 "End": "True",
             },
@@ -253,10 +253,6 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
         output_variable.setName(f"{air_loop.name} Supply Outlet Temperature")
         output_variable.setKeyValue(f"{supply_outlet_node.name}")
 
-        output_variables = model.getOutputVariables()
-
-        # raise Exception(len(output_variables))
-        # model.outputVariable("System Node Temperature", supply_outlet_node.handle)
         runner.registerInfo("Added OutputVariable for supply outlet node temperature")
 
         verification_cases = self.get_verification_case(
