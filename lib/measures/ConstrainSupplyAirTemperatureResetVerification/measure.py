@@ -262,7 +262,7 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
             air_loop,
             design_zone_cooling_air_temp,
         )
-        with open(f"{output_dir}/supply_air_temperature_verification_case.json", "w") as f:
+        with open(f"{output_dir}/supply_air_temperature_reset_verification_case.json", "w") as f:
             json.dump(verification_cases, f, indent=2)
 
         workflow = self.get_workflow(idf_file_path, output_dir)

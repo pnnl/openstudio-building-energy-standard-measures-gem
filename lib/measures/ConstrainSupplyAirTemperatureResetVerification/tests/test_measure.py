@@ -1,7 +1,5 @@
 import pytest
 import openstudio
-import pathlib
-import sys
 from measure import ConstrainSupplyAirTemperatureResetVerification
 
 
@@ -67,7 +65,6 @@ class TestConstrainSupplyAirTemperatureResetVerification:
             temp_arg_var = arg.clone()
             if arg.name() in args_dict:
                 temp_arg_var.setValue(args_dict[arg.name()])
-                # if arg.name() != "chiller_name":
                 assert temp_arg_var.setValue(args_dict[arg.name()])
                 argument_map[arg.name()] = temp_arg_var
 
