@@ -22,6 +22,17 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
   # Define the arguments that the user will input.
   def arguments(model)
 
+    building_type_wwr_default = 'Grocery store'
+    building_type_swh_default = 'Automotive facility'
+    building_type_hvac_default = 'retail'
+    climate_zone_default = 'ASHRAE 169-2013-1A'
+    exempt_from_rotations_default = 'FALSE'
+    exempt_from_unmet_load_hours_check_default = 'FALSE'
+    user_data_default = 'FALSE'
+    user_data_path_default = 'User_Data_Path'
+    evaluation_package_default = 'FALSE'
+    evaluation_package_path_default = 'Evaluation_Package_Path'
+
     yaml_path = "#{File.dirname(__FILE__)}/../../files/config.yml"
     if File.exist?(yaml_path)
       config_data = YAML.load(File.read(yaml_path))
@@ -35,17 +46,6 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
       user_data_path_default = config_data['user_data_path']
       evaluation_package_default = config_data['evaluation_package']
       evaluation_package_path_default = config_data['evaluation_package_path']
-    else
-      building_type_wwr_default = 'Grocery store'
-      building_type_swh_default = 'Automotive facility'
-      building_type_hvac_default = 'retail'
-      climate_zone_default = 'ASHRAE 169-2013-1A'
-      exempt_from_rotations_default = 'FALSE'
-      exempt_from_unmet_load_hours_check_default = 'FALSE'
-      user_data_default = 'FALSE'
-      user_data_path_default = 'User_Data_Path'
-      evaluation_package_default = 'FALSE'
-      evaluation_package_path_default = 'Evaluation_Package_Path'
     end
 
 

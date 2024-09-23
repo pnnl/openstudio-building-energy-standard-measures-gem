@@ -8,7 +8,6 @@ require 'fileutils'
 
 class CreateTypicalBuildingTest < Minitest::Test
 
-
   def test_existing_geometry_w_conventional_values
     # create an instance of the measure
     measure = CreateTypicalBuilding.new
@@ -40,6 +39,10 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'PSZ-AC with gas coil'
     args_hash['user_hvac_mapping'] = 'FALSE'
+    args_hash['add_constructions'] = 'TRUE'
+    args_hash['wall_construction'] = 'Inferred'
+    args_hash['add_space_type_loads'] = 'FALSE'
+    args_hash['add_daylighting'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -96,7 +99,13 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['geometry'] = 'Retail Stripmall'
     args_hash['climate_zone'] = 'ASHRAE 169-2013-4A'
     args_hash['template'] = '90.1-2019'
+    args_hash['hvac_type'] = 'PSZ-AC with gas coil'
     args_hash['user_hvac_mapping'] = 'FALSE'
+    args_hash['add_constructions'] = 'TRUE'
+    args_hash['wall_construction'] = 'Inferred'
+    args_hash['add_space_type_loads'] = 'FALSE'
+    args_hash['add_daylighting'] = 'TRUE'
+
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -156,6 +165,10 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
     args_hash['user_hvac_json_path'] = File.join("#{current_dir}",'source','hvac_mapping_path','hvac_zone_mapping.json')
+    args_hash['add_constructions'] = 'TRUE'
+    args_hash['wall_construction'] = 'Inferred'
+    args_hash['add_space_type_loads'] = 'FALSE'
+    args_hash['add_daylighting'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -215,6 +228,10 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
     args_hash['user_hvac_json_path'] = File.join("#{current_dir}",'source','hvac_mapping_path','hvac_zone_mapping_2_vav_hw_rh.json')
+    args_hash['add_constructions'] = 'TRUE'
+    args_hash['wall_construction'] = 'Inferred'
+    args_hash['add_space_type_loads'] = 'FALSE'
+    args_hash['add_daylighting'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -278,6 +295,10 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
     args_hash['user_hvac_json_path'] = File.join("#{current_dir}",'source','hvac_mapping_path','hvac_zone_mapping_2_psz_ac.json')
+    args_hash['add_constructions'] = 'TRUE'
+    args_hash['wall_construction'] = 'Inferred'
+    args_hash['add_space_type_loads'] = 'FALSE'
+    args_hash['add_daylighting'] = 'TRUE'
 
 
     # populate argument with specified hash value if specified
@@ -343,6 +364,10 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
     args_hash['user_hvac_json_path'] = File.join("#{current_dir}",'source','hvac_mapping_path','hvac_zone_mapping_invalid_json.json')
+    args_hash['add_constructions'] = 'TRUE'
+    args_hash['wall_construction'] = 'Inferred'
+    args_hash['add_space_type_loads'] = 'FALSE'
+    args_hash['add_daylighting'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -400,6 +425,10 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
     args_hash['user_hvac_json_path'] = File.join("#{current_dir}",'source','hvac_mapping_path','hvac_zone_mapping_broken.json')
+    args_hash['add_constructions'] = 'TRUE'
+    args_hash['wall_construction'] = 'Inferred'
+    args_hash['add_space_type_loads'] = 'FALSE'
+    args_hash['add_daylighting'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
@@ -457,6 +486,10 @@ class CreateTypicalBuildingTest < Minitest::Test
     args_hash['template'] = '90.1-2019'
     args_hash['hvac_type'] = 'JSON specified'
     args_hash['user_hvac_json_path'] = File.join("#{current_dir}",'source','hvac_mapping_path','hvac_zone_mapping.json')
+    args_hash['add_constructions'] = 'TRUE'
+    args_hash['wall_construction'] = 'Inferred'
+    args_hash['add_space_type_loads'] = 'FALSE'
+    args_hash['add_daylighting'] = 'TRUE'
 
     # populate argument with specified hash value if specified
     arguments.each do |arg|
