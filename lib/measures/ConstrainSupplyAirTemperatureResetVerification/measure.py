@@ -32,7 +32,6 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
         """
         args = openstudio.measure.OSArgumentVector()
 
-        idf_path = openstudio.measure.OSArgument.makeStringArgument("idf_path", True)
         output_dataset_path = openstudio.measure.OSArgument.makeStringArgument(
             "output_dataset_path", True
         )
@@ -50,14 +49,12 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
 
         args.append(air_loop_name)
         args.append(design_zone_cooling_air_temp)
-        args.append(idf_path)
         args.append(output_dataset_path)
         args.append(output_dir)
-        # TODO: If the user doesn't provide a design_zone_cooling_air_temp, we can infer it from other modeling inputs
 
         return args
 
-    def get_workflow(self, idf_file_path, output_dir):
+    def get_workflow(self, output_dataset_path, output_dir):
         workflow = {
             "workflow_name": "Supply Air Temperature Reset Verification",
             "meta": {
@@ -72,7 +69,7 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
                     "Type": "MethodCall",
                     "MethodCall": "DataProcessing",
                     "Parameters": {
-                        "data_path": idf_file_path,
+                        "data_path": output_dataset_path,
                         "data_source": "EnergyPlus",
                     },
                     "Payloads": {"data_processing_obj": "$"},
@@ -184,7 +181,6 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
 
     def get_verification_case(
         self,
-        idf_file_path,
         output_dataset_path,
         supply_outlet_node,
         air_loop,
@@ -194,7 +190,7 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
             "no": 1,
             "run_simulation": False,
             "expected_result": "pass",
-            "simulation_IO": {"idf": idf_file_path, "output": output_dataset_path},
+            "simulation_IO": {"output": output_dataset_path},
             "datapoints_source": {
                 "idf_output_variables": {
                     "T_sa_set": {
@@ -228,7 +224,6 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
         design_zone_cooling_air_temp = runner.getDoubleArgumentValue(
             "design_zone_cooling_air_temp", user_arguments
         )
-        idf_file_path = runner.getStringArgumentValue("idf_path", user_arguments)
         output_dataset_path = runner.getStringArgumentValue(
             "output_dataset_path", user_arguments
         )
@@ -250,13 +245,12 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
         output_variable = openstudio.model.OutputVariable(
             "System Node Temperature", model
         )
-        output_variable.setName(f"{air_loop.name} Supply Outlet Temperature")
-        output_variable.setKeyValue(f"{supply_outlet_node.name}")
+        output_variable.setName(f"{air_loop.name().get()} Supply Outlet Temperature")
+        output_variable.setKeyValue(f"{supply_outlet_node.name().get()}")
 
         runner.registerInfo("Added OutputVariable for supply outlet node temperature")
 
         verification_cases = self.get_verification_case(
-            idf_file_path,
             output_dataset_path,
             supply_outlet_node,
             air_loop,
@@ -265,7 +259,7 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
         with open(f"{output_dir}/supply_air_temperature_reset_verification_case.json", "w") as f:
             json.dump(verification_cases, f, indent=2)
 
-        workflow = self.get_workflow(idf_file_path, output_dir)
+        workflow = self.get_workflow(output_dataset_path, output_dir)
         with open(f"{output_dir}/constrain_workflow.json", "w") as f:
             json.dump(workflow, f, indent=2)
 

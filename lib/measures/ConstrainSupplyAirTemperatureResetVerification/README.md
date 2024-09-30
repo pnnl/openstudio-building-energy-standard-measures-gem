@@ -6,8 +6,6 @@ This is a ModelMeasure that generates a ConStrain Supply Air Temperature Reset V
 ModelMeasure
 ## Taxonomy
 ## Arguments
-### IDF Path
-**Name:** idf_path,
 **Type:** string,
 **Required:** true
 ### Output Dataset Path

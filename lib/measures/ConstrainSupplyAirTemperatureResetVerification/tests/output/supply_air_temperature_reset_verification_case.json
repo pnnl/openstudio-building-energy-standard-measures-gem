@@ -5,8 +5,7 @@
       "run_simulation": false,
       "expected_result": "pass",
       "simulation_IO": {
-        "idf": "./lib/measures/ConstrainSupplyAirTemperatureResetVerification/tests/input/test.idf",
-        "output": "./lib/measures/ConstrainSupplyAirTemperatureResetVerification/tests/input/test.csv"
+        "output": "./tests/input/test.csv"
       },
       "datapoints_source": {
         "idf_output_variables": {
@@ -17,7 +16,7 @@
           }
         },
         "parameters": {
-          "T_z_coo": 40.0
+          "T_z_coo": 24.0
         }
       },
       "verification_class": "SupplyAirTempReset"

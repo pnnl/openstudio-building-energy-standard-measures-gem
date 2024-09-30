@@ -24,12 +24,11 @@ class TestConstrainSupplyAirTemperatureResetVerification:
 
         # get arguments and test that they are what we are expecting
         arguments = measure.arguments(model)
-        assert arguments.size() == 5
+        assert arguments.size() == 4
         assert arguments[0].name() == "air_loop_name"
         assert arguments[1].name() == "design_zone_cooling_air_temp"
-        assert arguments[2].name() == "idf_path"
-        assert arguments[3].name() == "output_dataset_path"
-        assert arguments[4].name() == "output_dir"
+        assert arguments[2].name() == "output_dataset_path"
+        assert arguments[3].name() == "output_dir"
 
     def test_good_argument_values(self):
         """
@@ -55,10 +54,9 @@ class TestConstrainSupplyAirTemperatureResetVerification:
 
         args_dict = {
             "air_loop_name": "Test Air Loop",
-            "design_zone_cooling_air_temp": 40,
-            "idf_path": "./lib/measures/ConstrainSupplyAirTemperatureResetVerification/tests/input/test.idf",
-            "output_dataset_path": "./lib/measures/ConstrainSupplyAirTemperatureResetVerification/tests/input/test.csv",
-            "output_dir": "./lib/measures/ConstrainSupplyAirTemperatureResetVerification/tests/output"
+            "design_zone_cooling_air_temp": 24,
+            "output_dataset_path": "./tests/input/test.csv",
+            "output_dir": "./tests/output"
         }
 
         for arg in arguments:
@@ -71,6 +69,17 @@ class TestConstrainSupplyAirTemperatureResetVerification:
         measure.run(model, runner, argument_map)
         result = runner.result()
         assert result.value().valueName() == "Success"
+
+        output_var_found = False
+        expected_var_name = "Test Air Loop Supply Outlet Temperature"
+        
+        for output_variable in model.getOutputVariables():
+            if output_variable.name().get() == expected_var_name and output_variable.keyValue() == "Node 2":
+                output_var_found = True
+                break
+
+        assert output_var_found, f"Expected OutputVariable '{expected_var_name}' not found in the model"
+
 
 if __name__ == "__main__":
     pytest.main()
