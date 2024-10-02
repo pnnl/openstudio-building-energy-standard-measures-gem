@@ -14,11 +14,10 @@ class TestConstrainSupplyAirTemperatureResetVerification:
         # make an empty model
         model = openstudio.model.Model()
 
-        # get arguments and test that they are expecting a failure
-        # because the model doesn't have a chiller
+        # get arguments
         arguments = measure.arguments(model)
 
-        # Create dummy chiller object
+        # Create dummy air loop object
         air_loop = openstudio.model.AirLoopHVAC(model)
         air_loop.setName("Test Air Loop")
 
