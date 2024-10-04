@@ -2,6 +2,7 @@ import openstudio
 import logging
 import datetime
 import json
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -256,6 +257,8 @@ class ConstrainSupplyAirTemperatureResetVerification(openstudio.measure.ModelMea
             air_loop,
             design_zone_cooling_air_temp,
         )
+
+        os.makedirs(output_dir, exist_ok=True)
         with open(f"{output_dir}/supply_air_temperature_reset_verification_case.json", "w") as f:
             json.dump(verification_cases, f, indent=2)
 
