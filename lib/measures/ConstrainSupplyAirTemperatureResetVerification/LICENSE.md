@@ -1,6 +1,6 @@
 BSD 2-Clause License
 
-Generate ConStrain Report Copyright (c) 2024, Battelle Memorial Institute
+Generate ConStrain Supply Air Temperature Reset Verification Case Copyright (c) 2024, Battelle Memorial Institute
 All rights reserved.
 1. Battelle Memorial Institute (hereinafter Battelle) hereby grants permission to any person or entity lawfully obtaining a copy of this software and associated documentation files (hereinafter “the Software”) to redistribute and use the Software in source and binary forms, with or without modification.  Such person or entity may use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and may permit others to do so, subject to the following conditions:
    - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimers. 
