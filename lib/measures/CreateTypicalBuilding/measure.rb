@@ -202,7 +202,12 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
 
     # If "Lookup From Model" is used, check that a climate zone was found in model. If not, return Error
     if climate_zone == 'Lookup From Model'
-      climate_zone = standard.model_standards_climate_zone(model)
+      if OpenstudioStandards::VERSION.to_f < 0.6
+        climate_zone = standard.model_standards_climate_zone(model)
+      else
+        climate_zone = OpenstudioStandards::Weather.model_get_climate_zone(model)
+      end
+
       if climate_zone == '' or climate_zone.nil?
         error_message = 'Error when looking up climate zone from model. Ensure the model has a valid ClimateZone'\
         " or ClimateZones objects with climate zone information present. \n**NOTE**: Geometry files typically do not"\
