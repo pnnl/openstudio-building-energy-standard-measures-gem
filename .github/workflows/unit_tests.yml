@@ -1,0 +1,37 @@
+on:
+  push:
+    branches: [ '*' ]
+
+jobs:
+  run-python-unit-tests:
+    name: Run python unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install openstudio
+
+      - name: Find directories containing measure.py
+        id: find_python_measure_dirs
+        run: |
+          python_measure_dirs=$(find . -type f -name 'measure.py' -exec dirname {} \; | uniq)
+          echo "::set-output name=python_measure_dirs::$python_measure_dirs"
+
+      - name: Run tests
+        run: |
+          for dir in ${{ steps.find_python_measure_dirs.outputs.python_measure_dirs }}; do
+            PYTHONPATH=./lib pytest $dir
+          done
+        env:
+          PYTHONPATH: ./lib
