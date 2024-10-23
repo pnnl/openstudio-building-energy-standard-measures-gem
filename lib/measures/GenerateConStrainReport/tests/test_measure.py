@@ -1,7 +1,7 @@
 import pytest
 import openstudio
 import pathlib
-from ..measure import GenerateConStrainReport
+from measure import GenerateConStrainReport
 import logging
 
 
