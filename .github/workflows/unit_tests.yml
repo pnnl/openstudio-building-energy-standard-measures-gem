@@ -25,7 +25,7 @@ jobs:
       - name: Find directories containing measure.py
         id: find_python_measure_dirs
         run: |
-          python_measure_dirs=$(find . -type f -name 'measure.py' -exec dirname {} \; | uniq)
+          python_measure_dirs=$(find . -type f -name 'measure.py' -exec dirname {} \; | uniq | tr '\n' ' ')
           echo "python_measure_dirs=$python_measure_dirs" >> $GITHUB_OUTPUT
 
       - name: Run tests
