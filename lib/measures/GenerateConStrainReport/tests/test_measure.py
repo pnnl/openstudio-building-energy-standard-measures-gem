@@ -31,8 +31,8 @@ class TestGenerateConStrainReport:
         argument_map = openstudio.measure.convertOSArgumentVectorToMap(arguments)
 
         args_dict = {}
-        args_dict["workflow_path"] = (
-            "tests/test_files/G36_demo_workflow.json"
+        args_dict["workflow_path"] = str(
+            pathlib.Path(__file__).parent.absolute() / "test_files" / "G36_demo_workflow.json"
         )
 
         for arg in arguments:
