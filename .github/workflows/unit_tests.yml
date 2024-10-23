@@ -26,7 +26,7 @@ jobs:
         id: find_python_measure_dirs
         run: |
           python_measure_dirs=$(find . -type f -name 'measure.py' -exec dirname {} \; | uniq)
-          echo "::set-output name=python_measure_dirs::$python_measure_dirs"
+          echo "python_measure_dirs=$python_measure_dirs" >> $GITHUB_OUTPUT
 
       - name: Run tests
         run: |
