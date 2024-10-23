@@ -69,6 +69,68 @@ class CreateTypicalBuildingTest < Minitest::Test
     model.save(output_file_path, true)
   end
 
+  def test_climate_zone_look_up
+    # create an instance of the measure
+    measure = CreateTypicalBuilding.new
+
+    # create runner with empty OSW
+    osw = OpenStudio::WorkflowJSON.new
+    runner = OpenStudio::Measure::OSRunner.new(osw)
+
+    # load the test model
+    translator = OpenStudio::OSVersion::VersionTranslator.new
+    path = File.join("#{File.dirname(__FILE__)}",'source','ASHRAESmallOffice_weather.osm')
+    ospath = OpenStudio::Path.new(path)
+    model = translator.loadModel(ospath)
+    if model.empty?
+      raise "Path '#{path}' is not a valid path to an OpenStudio Model"
+    else
+      model = model.get
+    end
+
+    # get arguments
+    arguments = measure.arguments(model)
+    argument_map = OpenStudio::Measure.convertOSArgumentVectorToMap(arguments)
+
+    # create hash of argument values.
+    # If the argument has a default that you want to use, you don't need it in the hash
+    args_hash = {}
+    args_hash['geometry'] = 'Existing Geometry'
+    args_hash['climate_zone'] = 'Lookup From Model'
+    args_hash['template'] = '90.1-2019'
+    args_hash['hvac_type'] = 'PSZ-AC with gas coil'
+    args_hash['user_hvac_mapping'] = 'FALSE'
+    args_hash['add_constructions'] = 'TRUE'
+    args_hash['wall_construction'] = 'Inferred'
+    args_hash['add_space_type_loads'] = 'FALSE'
+    args_hash['add_daylighting'] = 'TRUE'
+
+    # populate argument with specified hash value if specified
+    arguments.each do |arg|
+      temp_arg_var = arg.clone
+      if args_hash.key?(arg.name)
+        assert(temp_arg_var.setValue(args_hash[arg.name]))
+      end
+      argument_map[arg.name] = temp_arg_var
+    end
+
+    # run the measure
+    measure.run(model, runner, argument_map)
+    result = runner.result
+
+    # show the output
+    show_output(result)
+
+    # assert that it ran correctly
+    assert_equal('Success', result.value.valueName)
+    assert(result.warnings.empty?)
+
+    # save the model to test output directory
+    output_file_path = File.join("#{File.dirname(__FILE__)}",'output','test_climate_zone_look_up.osm')
+    model.save(output_file_path, true)
+  end
+
+
   def test_using_geometry_file_w_conventional_values
     # create an instance of the measure
     measure = CreateTypicalBuilding.new
