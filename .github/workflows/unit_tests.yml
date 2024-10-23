@@ -22,6 +22,7 @@ jobs:
           pip install pytest
           pip install openstudio
           pip install copper-bem
+          pip install constrain
 
       - name: Find directories containing measure.py
         id: find_python_measure_dirs
