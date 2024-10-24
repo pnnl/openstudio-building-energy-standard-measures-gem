@@ -33,7 +33,5 @@ jobs:
       - name: Run tests
         run: |
           for dir in ${{ steps.find_python_measure_dirs.outputs.python_measure_dirs }}; do
-            PYTHONPATH=./lib pytest $dir
+            pytest $dir
           done
-        env:
-          PYTHONPATH: ./lib
