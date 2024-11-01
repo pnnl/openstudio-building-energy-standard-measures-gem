@@ -22,13 +22,24 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '~> 2.5.0'
+  spec.required_ruby_version = '>= 2.5.0'
+  if RUBY_VERSION < '3.2'
+    spec.add_development_dependency 'bundler', '~> 2.1'
+    spec.add_development_dependency 'rake', '~> 13.0'
+    spec.add_development_dependency 'rspec', '~> 3.9'
+    spec.add_development_dependency 'rubocop', '~> 0.54.0'
 
-  spec.add_development_dependency 'bundler', '~> 2.1'
-  spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rspec', '~> 3.9'
-  spec.add_development_dependency 'rubocop', '~> 0.54.0'
+    spec.add_dependency 'openstudio-extension', '~> 0.3.1'
+    spec.add_dependency 'openstudio-standards', '~> 0.2.12'
+    spec.add_dependency 'openstudio_measure_tester', '~> 0.2.3'
+  else
+    spec.add_development_dependency 'bundler', '~> 2.4.10'
+    spec.add_development_dependency 'rake', '~> 13.0.6'
+    spec.add_development_dependency 'rspec', '~> 3.9'
+    spec.add_development_dependency 'rubocop', '~> 1.50'
 
-  spec.add_dependency 'openstudio-extension', '~> 0.3.1'
-  spec.add_dependency 'openstudio-standards', '~> 0.2.12'
+    spec.add_dependency 'openstudio-extension', '~> 0.8.1'
+    spec.add_dependency 'openstudio-standards', '~> 0.6.3'
+    spec.add_dependency 'openstudio_measure_tester', '~> 0.4.0'
+  end
 end

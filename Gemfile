@@ -12,8 +12,9 @@ allow_local = ENV['FAVOR_LOCAL_GEMS']
 
 if allow_local && File.exist?('../OpenStudio-extension-gem')
   gem 'openstudio-extension', path: '../OpenStudio-extension-gem'
-elsif allow_local
-  gem 'openstudio-extension', github: 'NREL/OpenStudio-extension-gem', branch: 'develop'
+  # elsif allow_local
+  # gem 'openstudio-extension', github: 'NREL/OpenStudio-extension-gem', branch: 'develop'
 end
 
-gem 'openstudio_measure_tester', '~> 0.2.3' # This includes the dependencies for running unit tests, coverage, and rubocop
+# move this code to gemspec for ruby version specific installation.
+# gem 'openstudio_measure_tester', '~> 0.2.3' # This includes the dependencies for running unit tests, coverage, and rubocop
