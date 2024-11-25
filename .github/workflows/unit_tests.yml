@@ -30,6 +30,22 @@ jobs:
           python_measure_dirs=$(find . -type f -name 'measure.py' -exec dirname {} \; | uniq | tr '\n' ' ')
           echo "python_measure_dirs=$python_measure_dirs" >> $GITHUB_OUTPUT
 
+      - name: Run OpenStudio measure check
+        run: |
+          for dir in ${{ steps.find_python_measure_dirs.outputs.python_measure_dirs }}; do
+            echo "Running OpenStudio measure check for $dir"
+            openstudio measure -t $dir > measure_check_output.txt
+
+            cat measure_check_output.txt
+            # grep -v -E "" measure_check_output.txt > filtered_output.txt
+
+            # if grep -q -i "error" filtered_output.txt; then
+            #   echo "Unexpected errors found in $dir:"
+            #   cat filtered_output.txt
+            #   exit 1
+            # fi
+          done
+
       - name: Run tests
         run: |
           for dir in ${{ steps.find_python_measure_dirs.outputs.python_measure_dirs }}; do
