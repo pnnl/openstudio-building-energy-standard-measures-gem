@@ -23,6 +23,7 @@ jobs:
 
       - name: Check for FAILURE in pytest_output.txt
         run: |
+          ls test_results
           cat test_results/pytest_output.txt
           if grep -q 'FAILURE' test_results/pytest_output.txt; then
             exit 1
