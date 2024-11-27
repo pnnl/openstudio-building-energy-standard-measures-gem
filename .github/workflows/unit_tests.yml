@@ -16,6 +16,7 @@ jobs:
       
       - name: Build Docker image
         run: |
+          docker build -t python_measure_test .
           docker run --rm \
             -v ${{ github.workspace }}/test-results:/app/test-results \
             python_measure_test
