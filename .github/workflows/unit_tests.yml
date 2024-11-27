@@ -23,8 +23,8 @@ jobs:
 
       - name: Check for FAILURE in pytest_output.txt
         run: |
-          cat test-results/pytest_output.txt
-          if grep -q 'FAILURE' test-results/pytest_output.txt; then
+          cat ${{ github.workspace }}/test-results/pytest_output.txt
+          if grep -q 'FAILURE' ${{ github.workspace }}/test-results/pytest_output.txt; then
             exit 1
           fi
 
