@@ -18,13 +18,13 @@ jobs:
         run: |
           docker build -t python_measure_test .
           docker run --rm \
-            -v ${{ github.workspace }}/test-results:/app/test-results \
+            -v ${{ github.workspace }}/test_results:/app/test_results \
             python_measure_test
 
       - name: Check for FAILURE in pytest_output.txt
         run: |
-          cat ${{ github.workspace }}/test-results/pytest_output.txt
-          if grep -q 'FAILURE' ${{ github.workspace }}/test-results/pytest_output.txt; then
+          cat ${{ github.workspace }}/test_results/pytest_output.txt
+          if grep -q 'FAILURE' ${{ github.workspace }}/test_results/pytest_output.txt; then
             exit 1
           fi
 
