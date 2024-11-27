@@ -5,6 +5,8 @@ RUN wget https://github.com/NREL/OpenStudio/releases/download/v3.9.0/OpenStudio-
     
 RUN tar -xvzf OpenStudio-3.9.0+c77fbb9569-Ubuntu-22.04-arm64.tar.gz
 
+RUN cp -r OpenStudio-3.9.0+c77fbb9569-Ubuntu-22.04-arm64 /usr/local/openstudio
+
 RUN ls -l
 
 # Set Python 3 as the default Python
