@@ -21,8 +21,7 @@ COPY . /app
 
 # Find directories containing measure.py and run tests
 RUN bash -c "\
-    mkdir test_results && \
-    openstudio measure -t ./lib/measures > test_results/measure_check_output.txt && \
+    openstudio measure -t ./lib/measures > /github/workspace/measure_check_output.txt && \
     for dir in \$(find . -type f -name 'measure.py' -exec dirname {} \; | sort -u); do \
-        pytest \$dir >> test_results/pytest_output.txt; \
+        pytest \$dir >> /github/workspace/pytest_output.txt; \
     done"

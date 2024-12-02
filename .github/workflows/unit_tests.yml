@@ -17,13 +17,11 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t python_measure_test .
-          docker run --rm \
-            -v ${{ github.workspace }}/test_results:/app/test_results \
-            python_measure_test
+          docker run --rm python_measure_test
 
       - name: Check for FAILURE in pytest_output.txt
         run: |
-          ls test_results
+          ls ${{ github.workspace }}
           # cat test_results/pytest_output.txt
           # if grep -q 'FAILURE' test_results/pytest_output.txt; then
           #   exit 1
@@ -33,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test_results
-          path: test_results/
+          path: ${{ github.workspace }}/pytest_output.txt
