@@ -19,11 +19,10 @@ WORKDIR /app
 # Copy the current directory contents into the container
 COPY . /app
 
-# Find directories containing measure.py and run tests
-RUN ls
-RUN mkdir -p /github /github/workspace
-RUN openstudio measure -t ./lib/measures >> /github/workspace/measure_check_output.txt
+# Find directories containing measure.py and run tests'
+RUN echo $GITHUB_WORKSPACE
+RUN openstudio measure -t ./lib/measures >> $GITHUB_WORKSPACE/measure_check_output.txt
 RUN bash -c "\
     for dir in \$(find . -type f -name 'measure.py' -exec dirname {} \; | sort -u); do \
-        pytest \$dir >> /github/workspace/pytest_output.txt; \
+        pytest \$dir >> $GITHUB_WORKSPACE/pytest_output.txt; \
     done"
