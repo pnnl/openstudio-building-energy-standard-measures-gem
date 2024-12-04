@@ -18,8 +18,17 @@ WORKDIR /github/workspace
 
 # Copy the current directory contents into the container
 COPY $GITHUB_WORKSPACE /github/workspace
+RUN ls /github/workspace
 
+RUN mkdir /app
+COPY . /app
+RUN ls /app
+
+RUN mkdir /test
+COPY ../../.. /test
+RUN ls /test
 # Find directories containing measure.py and run tests
+RUN ls
 RUN mkdir test_results
 RUN openstudio measure -t ./lib/measures > test_results/measure_check_output.txt
 RUN bash -c "\
