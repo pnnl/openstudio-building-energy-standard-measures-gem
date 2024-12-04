@@ -20,4 +20,4 @@ WORKDIR /app
 COPY . /app
 
 # Find directories containing measure.py and run tests'
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
