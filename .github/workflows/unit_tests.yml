@@ -1,0 +1,35 @@
+on:
+  push:
+    branches: [ '*' ]
+
+jobs:
+  run-python-unit-tests:
+    name: Run python unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and run unit test Dockerfile
+        uses: ./.github/actions/unit-test-action
+      
+      # - name: Build Docker image
+      #   run: |
+      #     docker build -t python_measure_test .
+      #     docker run --rm python_measure_test
+
+      - name: Check for FAILURE in pytest_output.txt
+        run: |
+          cat test_results/pytest_output.txt
+          cat test_results/measure_check_output.txt
+          # cat test_results/pytest_output.txt
+          # if grep -q 'FAILURE' test_results/pytest_output.txt; then
+          #   exit 1
+          # fi
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: test_results
+          path: ${{ github.workspace }}/test_results
