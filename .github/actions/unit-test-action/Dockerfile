@@ -17,12 +17,12 @@ RUN pip install --no-cache-dir pytest openstudio copper-bem constrain
 WORKDIR /github/workspace
 
 # Copy the current directory contents into the container
-COPY . /github/workspace
+COPY $GITHUB_WORKSPACE /github/workspace
 
 # Find directories containing measure.py and run tests
+RUN mkdir test_results
+RUN openstudio measure -t ./lib/measures > test_results/measure_check_output.txt
 RUN bash -c "\
-    mkdir test_results && \
-    openstudio measure -t ./lib/measures > test_results/measure_check_output.txt && \
     for dir in \$(find . -type f -name 'measure.py' -exec dirname {} \; | sort -u); do \
         pytest \$dir >> test_results/pytest_output.txt; \
     done"
