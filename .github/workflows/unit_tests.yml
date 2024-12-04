@@ -11,18 +11,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Build and run unit test Dockerfile
+        uses: ./.github/actions/unit-test-action
       
-      - name: Build Docker image
-        run: |
-          docker build -t python_measure_test .
-          docker run --rm python_measure_test
+      # - name: Build Docker image
+      #   run: |
+      #     docker build -t python_measure_test .
+      #     docker run --rm python_measure_test
 
       - name: Check for FAILURE in pytest_output.txt
         run: |
           pwd
-          ls $GITHUB_WORKSPACE
+          ls -la $GITHUB_WORKSPACE
           ls $GITHUB_WORKSPACE/test_results
           # cat test_results/pytest_output.txt
           # if grep -q 'FAILURE' test_results/pytest_output.txt; then
