@@ -21,7 +21,9 @@ jobs:
 
       - name: Check for FAILURE in pytest_output.txt
         run: |
-          ls ${{ GITHUB_WORKSPACE }}/test_results
+          pwd
+          ls $GITHUB_WORKSPACE
+          ls $GITHUB_WORKSPACE/test_results
           # cat test_results/pytest_output.txt
           # if grep -q 'FAILURE' test_results/pytest_output.txt; then
           #   exit 1
@@ -31,4 +33,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test_results
-          path: ${{ GITHUB_WORKSPACE }}/test_results/
+          path: $GITHUB_WORKSPACE/test_results/
