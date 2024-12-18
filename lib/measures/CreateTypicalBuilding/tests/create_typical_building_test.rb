@@ -309,7 +309,7 @@ class CreateTypicalBuildingTest < Minitest::Test
     # assert that it ran incorrectly
     assert_equal('Fail', result.value.valueName)
 
-    # Ensure the error message communicates the zones that don't exist in the OSM
+    # Ensure the error message communicates that no zones exist in the OSM
     assert(result.errors[0].logMessage.include? "No zones specified under")
 
   end
@@ -370,7 +370,7 @@ class CreateTypicalBuildingTest < Minitest::Test
     # assert that it ran incorrectly
     assert_equal('Fail', result.value.valueName)
 
-    # Ensure the error message communicates the zones that don't exist in the OSM
+    # Ensure the error message communicates that duplicate zones exist in the OSM
     assert(result.errors[0].logMessage.include? "Duplicate zones found")
 
   end
