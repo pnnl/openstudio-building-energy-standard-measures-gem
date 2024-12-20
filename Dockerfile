@@ -1,4 +1,3 @@
-# Start with the OpenStudio image
 FROM python:3.10
 
 RUN wget https://github.com/NREL/OpenStudio/releases/download/v3.9.0/OpenStudio-3.9.0+c77fbb9569-Ubuntu-22.04-x86_64.tar.gz && \

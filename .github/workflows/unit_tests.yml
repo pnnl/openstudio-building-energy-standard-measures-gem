@@ -10,26 +10,34 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and run unit test Dockerfile
         uses: ./.github/actions/unit-test-action
       
-      # - name: Build Docker image
-      #   run: |
-      #     docker build -t python_measure_test .
-      #     docker run --rm python_measure_test
-
-      - name: Check for FAILURE in pytest_output.txt
-        run: |
-          cat test_results/pytest_output.txt
-          cat test_results/measure_check_output.txt
-          # cat test_results/pytest_output.txt
-          # if grep -q 'FAILURE' test_results/pytest_output.txt; then
-          #   exit 1
-          # fi
-
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: test_results
           path: ${{ github.workspace }}/test_results
+
+      - name: Check test results
+        run: |
+          cat test_results/pytest_output.txt
+          if grep -q "FAILURES" test_results/pytest_output.txt; then
+            exit 1
+          fi
+
+      - name: Update measure.xmls
+        run: |
+          cat test_results/measure_check_output.txt
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add **/measure.xml
+          if git diff --cached --quiet; then
+            echo "No changes to measure.xml files. Skipping commit."
+          else
+            git commit -m "Auto-update measure.xml files by GitHub Actions"
+            git push origin HEAD
+          fi
