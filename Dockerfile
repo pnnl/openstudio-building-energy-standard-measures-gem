@@ -7,10 +7,8 @@ RUN wget https://github.com/NREL/OpenStudio/releases/download/v3.9.0/OpenStudio-
 
 ENV PATH="/usr/local/openstudio/bin:${PATH}"
 
-# Create and activate the virtual environment, then install Python dependencies
-RUN python3.12 -m venv /opt/venv && \
-    /opt/venv/bin/pip install --upgrade pip && \
-    /opt/venv/bin/pip install --no-cache-dir constrain copper-bem
+# Install Python dependencies
+RUN pip install --no-cache-dir copper-bem constrain
 
 # Set the working directory within the container
 WORKDIR /app

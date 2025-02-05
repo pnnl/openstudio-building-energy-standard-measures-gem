@@ -25,7 +25,7 @@ jobs:
       - name: Check test results
         run: |
           cat test_results/test_output.txt
-          if [ -f test_results/tests_failed.txt ]; then
+          if [ -f test_results/test_failed.txt ]; then
             echo "Some tests failed. Check the test output files for details."
           else
             echo "All tests passed successfully."
