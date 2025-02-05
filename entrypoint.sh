@@ -15,7 +15,7 @@ openstudio measure -t ./lib/measures >> $GITHUB_WORKSPACE/test_results/measure_c
 
 
 for dir in $(find . -type f \( -name 'measure.rb' -o -name 'measure.py' \) -exec dirname {} \;); do
-    openstudio --python_path "$python_lib" --python_path "$python_site_packages" measure --run_tests $dir >> $GITHUB_WORKSPACE/test_results/test_output_${dir_name}.txt
+    openstudio --python_path "$python_lib" --python_path "$python_site_packages" measure --run_tests $dir >> $GITHUB_WORKSPACE/test_results/test_output.txt
     if [ $? -ne 0 ]; then
         echo $dir >> $GITHUB_WORKSPACE/test_results/test_failed.txt
     fi
