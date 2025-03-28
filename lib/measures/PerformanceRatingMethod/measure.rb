@@ -411,6 +411,19 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
           # if the user data path is valid
         else
           runner.registerInfo("Use the user data files in the path #{user_data_path}.")
+          # Get a list of all files in the directory
+          all_files = Dir.entries(user_data_path).reject { |f| File.directory? f }
+          json_files = all_files.select { |file| File.extname(file) == '.json' }
+          csv_files = all_files.select { |file| File.extname(file) == '.csv' }
+          if csv_files.size == all_files.size
+            json_path = std.convert_userdata_csv_to_json(user_data_path, user_data_path)
+            std.load_userdata_to_standards_database(json_path)
+          else
+            if json_files.size != all_files.size
+              runner.registerInfo("Find mixed .csv and .json files in the user_data_path, only process jsons.")
+            end
+            std.load_userdata_to_standards_database(user_data_path)
+          end
           json_path = std.convert_userdata_csv_to_json(user_data_path, user_data_path)
           std.load_userdata_to_standards_database(json_path)
         end
