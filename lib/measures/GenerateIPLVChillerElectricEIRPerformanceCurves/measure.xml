@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 <measure>
   <schema_version>3.1</schema_version>
-  <error>Failed to query information from measure 'GenerateIPLVChillerElectricEIRPerformanceCurves' from '/github/workspace/./lib/measures/GenerateIPLVChillerElectricEIRPerformanceCurves/measure.py': SWIG director type mismatch in output value of type 'std::vector&lt; openstudio::measure::OSArgument,std::allocator&lt; openstudio::measure::OSArgument &gt; &gt;'
-</error>
+  <error>Failed to infer measure name from '/github/workspace/./lib/measures/GenerateIPLVChillerElectricEIRPerformanceCurves/measure.py'</error>
   <name>generate_iplv_specific_chiller_performance_curves_for_chillers</name>
   <uid>5cd98b4e-ddfe-44ab-9dca-d9885f57a216</uid>
-  <version_id>32f1d301-3551-4920-8413-342302d20dbe</version_id>
-  <version_modified>2025-02-05T17:14:01Z</version_modified>
+  <version_id>8a2c4fb7-accf-4ee2-a182-efeedc49edbb</version_id>
+  <version_modified>2025-04-09T15:22:38Z</version_modified>
   <xml_checksum>905C4D50</xml_checksum>
   <class_name>GenerateIPLVChillerElectricEIRPerformanceCurves</class_name>
   <display_name>Generate IPLV-specific Chiller Performance Curves for Chillers (Chiller:Electric:EIR).</display_name>
