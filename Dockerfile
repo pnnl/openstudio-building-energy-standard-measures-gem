@@ -7,14 +7,14 @@ RUN wget https://github.com/NREL/OpenStudio/releases/download/v3.9.0/OpenStudio-
 
 ENV PATH="/usr/local/openstudio/bin:${PATH}"
 
-# Install Python dependencies
-RUN pip install --no-cache-dir copper-bem constrain
-
 # Set the working directory within the container
 WORKDIR /app
 
 # Copy the current directory contents into the container
 COPY . /app
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r ./requirements.txt
 
 # Find directories containing measure.py and run tests'
 ENTRYPOINT ["./entrypoint.sh"]
