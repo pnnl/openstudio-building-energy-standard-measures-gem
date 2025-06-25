@@ -28,6 +28,7 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
     climate_zone_default = 'ASHRAE 169-2013-1A'
     exempt_from_rotations_default = 'FALSE'
     exempt_from_unmet_load_hours_check_default = 'FALSE'
+    run_in_parallel_default = 'TRUE'
     user_data_default = 'FALSE'
     user_data_path_default = 'User_Data_Path'
     evaluation_package_default = 'FALSE'
@@ -42,6 +43,7 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
       climate_zone_default = config_data['climate_zone']
       exempt_from_rotations_default = config_data['exempt_from_rotations']
       exempt_from_unmet_load_hours_check_default = config_data['exempt_from_unmet_load_hours_check']
+      run_in_parallel_default = config_data['run_in_parallel']
       user_data_default = config_data['user_data']
       user_data_path_default = config_data['user_data_path']
       evaluation_package_default = config_data['evaluation_package']
@@ -199,6 +201,16 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
     exempt_from_unmet_load_hours_check.setDefaultValue(exempt_from_unmet_load_hours_check_default)
     args << exempt_from_unmet_load_hours_check
 
+    # Make an argument for running in parallel
+    run_in_parallel_chs = OpenStudio::StringVector.new
+    run_in_parallel_chs << 'TRUE'
+    run_in_parallel_chs << 'FALSE'
+    run_in_parallel = OpenStudio::Measure::OSArgument.makeChoiceArgument('run_in_parallel', run_in_parallel_chs, true)
+    run_in_parallel.setDisplayName('Run in Parallel')
+    run_in_parallel.setDescription('Set to True the measure will run all orientations in parallel.')
+    run_in_parallel.setDefaultValue(run_in_parallel_default)
+    args << run_in_parallel
+
     # Make an argument for the user data path input
     user_data_chs = OpenStudio::StringVector.new
     user_data_chs << 'TRUE'
@@ -262,6 +274,9 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
     runner.registerInfo("Project is exempted from rotations: #{exempt_from_rotations}")
     exempt_from_unmet_load_hours_check = runner.getStringArgumentValue('exempt_from_unmet_load_hours_check', user_arguments)
     runner.registerInfo("Project is exempted from unmet load hours: #{exempt_from_unmet_load_hours_check}")
+    # True if run in parallel, False otherwise.
+    run_in_parallel = runner.getStringArgumentValue('run_in_parallel', user_arguments)
+    runner.registerInfo("Run all orientations in parallel: #{run_in_parallel}")
     debug = runner.getBoolArgumentValue('debug', user_arguments)
     runner.registerInfo("Debug: #{debug}")
     user_data = runner.getStringArgumentValue('user_data', user_arguments)
@@ -304,6 +319,15 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
       unmet_load_hours_check = false
     else
       unmet_load_hours_check = true
+    end
+
+    # Set run_in_parallel variable based on run_in_parallel
+    if run_in_parallel == 'TRUE'
+      # if run in parallel, then set run_in_parallel to true.
+      # Otherwise, set it to false.
+      parallel = true
+    else
+      parallel = false
     end
 
 
@@ -438,6 +462,7 @@ class CreateBaselineBuilding < OpenStudio::Measure::ModelMeasure
                                                  sizing_run_dir=build_dir,
                                                  run_all_orients=run_all_orients,
                                                  unmet_load_hours_check=unmet_load_hours_check,
+                                                 use_parallel=parallel
                                                  debug=debug)
     end
     runner.registerInfo("Total Time = #{(Time.new - @start_time).round}sec.")
