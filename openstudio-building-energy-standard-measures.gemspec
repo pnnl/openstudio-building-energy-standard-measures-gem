@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency 'rubocop', '~> 1.50'
 
     spec.add_dependency 'openstudio-extension', '~> 0.8.1'
-    spec.add_dependency 'openstudio-standards', '~> 0.6.3'
+    spec.add_dependency 'openstudio-standards', '~> 0.8.2'
     spec.add_dependency 'openstudio_measure_tester', '~> 0.4.0'
   end
 end
