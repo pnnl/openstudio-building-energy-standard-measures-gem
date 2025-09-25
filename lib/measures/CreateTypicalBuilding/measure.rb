@@ -120,6 +120,12 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     add_space_types_choice.setDefaultValue('TRUE')
     args << add_space_types_choice
 
+    add_swh_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_swh', true_false_os_vector, true)
+    add_swh_choice.setDisplayName('Add Service Water Heating')
+    add_swh_choice.setDescription('Add typical service water heating systems based on space types and building characteristics.')
+    add_swh_choice.setDefaultValue('FALSE')
+    args << add_swh_choice
+
     add_daylighting_choice = OpenStudio::Measure::OSArgument::makeChoiceArgument('add_daylighting', true_false_os_vector, true)
     add_daylighting_choice.setDisplayName('Add Daylighting')
     add_daylighting_choice.setDefaultValue('FALSE')
@@ -149,13 +155,15 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     add_constructions = runner.getStringArgumentValue('add_constructions', user_arguments)
     wall_construction = runner.getStringArgumentValue('wall_construction', user_arguments)
     add_space_type_loads = runner.getStringArgumentValue('add_space_type_loads', user_arguments)
+    add_swh = runner.getStringArgumentValue('add_swh', user_arguments)
     add_daylighting = runner.getStringArgumentValue('add_daylighting', user_arguments)
 
     # Convert strings to booleans
     add_constructions = add_constructions == 'TRUE'
     add_space_type_loads = add_space_type_loads == 'TRUE'
+    add_swh = add_swh == 'TRUE'
     add_daylighting = add_daylighting == 'TRUE'
-	
+
     # Convert CZ7 and CZ8 to values that OSSTD will understand (dropdown and OSSTD are different)
     climate_zone = 'ASHRAE 169-2013-7A' if climate_zone == 'ASHRAE 169-2013-7'
     climate_zone = 'ASHRAE 169-2013-8A' if climate_zone == 'ASHRAE 169-2013-8'
@@ -182,6 +190,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
     runner.registerInfo("Add Constructions?: #{add_constructions}")
     runner.registerInfo("Wall Construction: #{wall_construction}")
     runner.registerInfo("Add Space Type Loads?: #{add_space_type_loads}")
+    runner.registerInfo("Add Service Water Heating?: #{add_swh}")
     runner.registerInfo("Add Daylighting?: #{add_daylighting}")
 
     # Toggle whether or not to add hvac
@@ -218,19 +227,6 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
 
     end
 
-    # Fire off CreateTypical method
-    @create.create_typical_building_from_model(model, template, climate_zone: climate_zone, add_hvac: add_hvac,
-                                               add_constructions: add_constructions,
-                                               wall_construction_type: wall_construction,
-                                               add_space_type_loads: add_space_type_loads,
-                                               add_daylighting_controls: add_daylighting,
-                                               hvac_system_type: hvac_type,
-                                               add_elevators: false,
-                                               add_exterior_lights: false,
-                                               add_exhaust: false,
-                                               add_refrigeration: false,
-                                               user_hvac_mapping: hvac_mapping_hash)
-
     # If no weather file assigned, assign it based on the climate zone
     if model.weatherFile.empty?
 
@@ -246,6 +242,22 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
       runner.registerInfo("Weather file and design days for #{climate_zone} assigned to '#{location_name}'")
 
     end
+
+    # Fire off CreateTypical method
+    @create.create_typical_building_from_model(model, template, climate_zone: climate_zone, add_hvac: add_hvac,
+                                               add_constructions: add_constructions,
+                                               wall_construction_type: wall_construction,
+                                               add_space_type_loads: add_space_type_loads,
+                                               add_swh: add_swh,
+                                               add_daylighting_controls: add_daylighting,
+                                               hvac_system_type: hvac_type,
+                                               add_elevators: false,
+                                               add_exterior_lights: false,
+                                               add_exhaust: false,
+                                               add_refrigeration: false,
+                                               user_hvac_mapping: hvac_mapping_hash)
+
+
 
     # report final condition of model
     runner.registerFinalCondition('Typical building generation complete.')
@@ -273,7 +285,7 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
   def process_hvac_to_zone_mapping_json(model, user_hvac_json_path, runner)
 
     # if user data path not valid
-    unless File.exists?(user_hvac_json_path)
+    unless File.exist?(user_hvac_json_path)
       runner.registerError("The input user data path #{user_hvac_json_path} is not a valid file path! Please provide a valid file path.")
       return {}
     end
@@ -294,7 +306,9 @@ class CreateTypicalBuilding < OpenStudio::Measure::ModelMeasure
 
     # Try to extract and aggregate thermal_zones from JSON
     begin
-      zone_names_json = hvac_mapping_hash['systems'].flat_map { |system| system['thermal_zones'] }
+      zone_names_json = hvac_mapping_hash['systems'].flat_map do |system|
+        system['thermal_zones'] || [] # Use an empty array if thermal_zones is nil
+      end
     rescue NoMethodError
       runner.registerError("Error in ''#{user_hvac_json_path}''. Ensure JSON follows the format specified under"\
                            " 'systems'.[].'thermal_zones'")
